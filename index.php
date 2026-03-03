@@ -98,8 +98,9 @@ function formatPriceDisplay($amount) {
 </div>
 </header>
 <!-- Hero Section -->
-<section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 bg-white" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 bg-white">
+<div class="absolute inset-0 pointer-events-none" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-repeat: repeat; background-size: 280px 280px; opacity: 0.08;"></div>
+<div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex flex-col lg:flex-row items-center gap-16">
 <div class="w-full lg:w-3/5 space-y-8">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
