@@ -102,7 +102,7 @@ function formatPriceDisplay($amount) {
 <div class="absolute inset-0 pointer-events-none" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-repeat: repeat; background-size: 280px 280px; opacity: 0.08;"></div>
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex flex-col lg:flex-row items-center gap-16">
-<div class="w-full lg:w-3/5 space-y-8">
+<div class="w-full lg:w-2/5 space-y-8 order-2 lg:order-1">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
 <span class="relative flex h-2 w-2">
 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -126,22 +126,22 @@ function formatPriceDisplay($amount) {
 </div>
 <div class="pt-4 flex items-center gap-4 text-sm text-slate-500 font-medium border-t border-slate-100">
 <div class="flex -space-x-2">
-<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-200 overflow-hidden">
-<img src="https://our-menu.online/uploads/logos/698ee78360beb.jpg" alt="Restaurant logo 1" class="w-full h-full object-cover"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary overflow-hidden flex items-center justify-center">
+<img src="https://our-menu.online/uploads/logos/698ee78360beb.jpg" alt="Restaurant logo 1" class="w-full h-full object-contain"/>
 </div>
-<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-300 overflow-hidden">
-<img src="https://our-menu.online/uploads/logos/69459eb555362.jpg" alt="Restaurant logo 2" class="w-full h-full object-cover"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary overflow-hidden flex items-center justify-center">
+<img src="https://our-menu.online/uploads/logos/69459eb555362.jpg" alt="Restaurant logo 2" class="w-full h-full object-contain"/>
 </div>
-<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-400 overflow-hidden">
-<img src="https://our-menu.online/uploads/logos/69a76f2ad31b1.png" alt="Restaurant logo 3" class="w-full h-full object-cover"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary overflow-hidden flex items-center justify-center">
+<img src="https://our-menu.online/uploads/logos/69a76f2ad31b1.png" alt="Restaurant logo 3" class="w-full h-full object-contain"/>
 </div>
 </div>
                         Join <?php echo $restaurantCountDisplay; ?>+ restaurants growing with <?php echo htmlspecialchars($brandLast); ?>
                     </div>
 </div>
-<div class="w-full lg:w-2/5 relative">
-<div class="relative z-10 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden bg-slate-900/90 aspect-video">
-<img src="<?php echo $baseUrl; ?>/assets/images/3-devices-black.png" alt="Digital menu on multiple devices" class="w-full h-full object-cover"/>
+<div class="w-full lg:w-3/5 relative order-1 lg:order-2">
+<div class="relative z-10 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden bg-transparent aspect-video">
+<img src="<?php echo $baseUrl; ?>/assets/images/3-devices-black.png" alt="Digital menu on multiple devices" class="w-full h-full object-contain"/>
 </div>
 </div>
 </div>
