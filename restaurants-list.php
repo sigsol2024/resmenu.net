@@ -1,8 +1,9 @@
 <?php
 /**
- * Restaurants Listing Page
- * Dynamic page that fetches restaurants from API
+ * Restaurants Listing Page - resmenu.net
+ * Fetches restaurants from backend API (our-menu.online); View Menu links to backend.
  */
+require_once __DIR__ . '/config/config.php';
 $breadcrumbs = [
     ['label' => 'Home', 'url' => '/'],
     ['label' => 'Restaurants']
@@ -47,11 +48,11 @@ $breadcrumbs = [
     <?php include __DIR__ . '/includes/footer.php'; ?>
     
     <script>
-        // Fetch restaurants from API
+        var backendUrl = <?php echo json_encode(rtrim(BACKEND_URL, '/')); ?>;
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.getElementById('restaurantsContainer');
             
-            fetch('/api/restaurants.php')
+            fetch(backendUrl + '/api/restaurants.php')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -111,7 +112,7 @@ $breadcrumbs = [
                                         </div>
                                     ` : ''}
                                 </div>
-                                <a href="/restaurant/${slug}" class="btn btn-primary" style="width: 100%; margin-top: 20px; text-align: center;">
+                                <a href="${backendUrl}/restaurant/${slug}" class="btn btn-primary" style="width: 100%; margin-top: 20px; text-align: center;">
                                     View Menu →
                                 </a>
                             `;

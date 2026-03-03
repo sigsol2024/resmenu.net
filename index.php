@@ -8,6 +8,7 @@ require_once __DIR__ . '/includes/subscription.php';
 $siteSettings = getSiteSettings();
 $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
+$authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
 
 global $pdo;
 $pdo = getDBConnection();
@@ -89,7 +90,7 @@ function formatPriceDisplay($amount) {
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo $baseUrl; ?>/contact.php">Contact</a>
 </nav>
 <div class="flex items-center gap-4">
-<a href="<?php echo $baseUrl; ?>/admin/login.php" class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
+<a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
                         Get Started
                     </a>
 </div>
@@ -115,7 +116,7 @@ function formatPriceDisplay($amount) {
                         Trusted by restaurants, cafés, and hospitality brands. Streamline your operations with our professional digital menu solution.
                     </p>
 <div class="flex flex-wrap gap-4">
-<a href="<?php echo $baseUrl; ?>/admin/login.php" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all shadow-xl shadow-primary/20">
+<a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all shadow-xl shadow-primary/20">
                             Get Started Free
                         </a>
 <a href="<?php echo $baseUrl; ?>/templates.php" class="bg-slate-100 hover:bg-slate-200 text-dark-slate px-8 py-4 rounded-xl text-lg font-bold transition-all">
@@ -378,7 +379,7 @@ foreach ($plans as $plan):
 <?php if (($plan['slug'] ?? '') === 'enterprise'): ?>
 <a href="<?php echo $baseUrl; ?>/contact.php" class="w-full py-4 px-6 rounded-xl border-2 border-slate-200 text-dark-slate font-bold hover:bg-slate-50 transition-colors block text-center">Contact Sales</a>
 <?php else: ?>
-<a href="<?php echo $baseUrl; ?>/admin/login.php" class="w-full py-4 px-6 rounded-xl <?php echo $isFeatured ? 'bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20' : 'border-2 border-slate-200 text-dark-slate font-bold hover:bg-slate-50 transition-colors'; ?> block text-center">Choose <?php echo htmlspecialchars($plan['name']); ?></a>
+<a href="<?php echo htmlspecialchars($authUrl); ?>" class="w-full py-4 px-6 rounded-xl <?php echo $isFeatured ? 'bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20' : 'border-2 border-slate-200 text-dark-slate font-bold hover:bg-slate-50 transition-colors'; ?> block text-center">Choose <?php echo htmlspecialchars($plan['name']); ?></a>
 <?php endif; ?>
 </div>
 <?php endforeach; ?>
@@ -396,7 +397,7 @@ foreach ($plans as $plan):
 <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 2 QR Code Themes</li>
 <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Basic Analytics</li>
 </ul>
-<a href="<?php echo $baseUrl; ?>/admin/login.php" class="w-full py-4 px-6 rounded-xl border-2 border-slate-200 text-dark-slate font-bold hover:bg-slate-50 transition-colors block text-center">Choose Starter</a>
+<a href="<?php echo htmlspecialchars($authUrl); ?>" class="w-full py-4 px-6 rounded-xl border-2 border-slate-200 text-dark-slate font-bold hover:bg-slate-50 transition-colors block text-center">Choose Starter</a>
 </div>
 <div class="p-10 rounded-3xl border-2 border-primary bg-white shadow-2xl scale-105 relative z-10">
 <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Most Popular</div>
@@ -412,7 +413,7 @@ foreach ($plans as $plan):
 <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Advanced Analytics</li>
 <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Priority Support</li>
 </ul>
-<a href="<?php echo $baseUrl; ?>/admin/login.php" class="w-full py-4 px-6 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 block text-center">Choose Professional</a>
+<a href="<?php echo htmlspecialchars($authUrl); ?>" class="w-full py-4 px-6 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 block text-center">Choose Professional</a>
 </div>
 <div class="p-10 rounded-3xl border border-slate-200 bg-white hover:shadow-xl transition-all">
 <div class="text-dark-slate font-bold uppercase tracking-widest text-sm mb-4">Enterprise</div>
@@ -474,7 +475,7 @@ foreach ($plans as $plan):
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 <h2 class="text-4xl lg:text-5xl font-black text-white mb-8 leading-tight">Ready to Transform Your <br/>Restaurant Menu?</h2>
 <div class="flex flex-wrap justify-center gap-4">
-<a href="<?php echo $baseUrl; ?>/admin/login.php" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl">
+<a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl">
                     Get Started Now
                 </a>
 <a href="<?php echo $baseUrl; ?>/contact.php" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all">
@@ -520,13 +521,13 @@ foreach ($plans as $plan):
 <li><a class="hover:text-primary transition-colors" href="<?php echo $baseUrl; ?>/faq.php">FAQ</a></li>
 <li><a class="hover:text-primary transition-colors" href="<?php echo $baseUrl; ?>/terms.php">Terms of Service</a></li>
 <li><a class="hover:text-primary transition-colors" href="<?php echo $baseUrl; ?>/contact.php">Contact Us</a></li>
-<li><a class="hover:text-primary transition-colors" href="<?php echo $baseUrl; ?>/admin/login.php">Login</a></li>
+<li><a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($authUrl); ?>">Login</a></li>
 </ul>
 </div>
 <div>
 <h4 class="text-lg font-bold mb-6">Get Started</h4>
 <p class="text-slate-400 text-sm mb-4">Ready to create your digital menu?</p>
-<a href="<?php echo $baseUrl; ?>/admin/login.php" class="inline-block bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold transition-colors">Sign Up Free</a>
+<a href="<?php echo htmlspecialchars($authUrl); ?>" class="inline-block bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold transition-colors">Sign Up Free</a>
 </div>
 </div>
 <div class="pt-8 border-t border-white/10 text-center text-slate-500 text-sm">
