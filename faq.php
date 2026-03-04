@@ -1,22 +1,24 @@
 <?php
 /**
- * FAQ - resmenu.net
- * Design matches Contact page: hero with gradient, Poppins headings, card layout.
+ * FAQ / Knowledge Base - resmenu.net
+ * Merchant Help Center layout: shared header/footer, hero, sidebar nav, card grid sections.
+ * FAQ content is aligned with actual site features: templates, QR, ordering (Professional+),
+ * reservations, multi-branch, plan limits (Starter/Professional/Enterprise), dashboard at our-menu.online.
  */
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/includes/functions.php';
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
 $siteSettings = getSiteSettings();
-$siteName = htmlspecialchars($siteSettings['site_name'] ?? 'Resmenu');
+$siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 ?>
 <!DOCTYPE html>
 <html class="light" lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>FAQ - <?php echo $siteName; ?></title>
-    <meta name="description" content="Frequently asked questions about <?php echo $siteName; ?> digital menu platform"/>
+    <title><?php echo $siteName; ?> - Knowledge Base</title>
+    <meta name="description" content="Merchant help center and frequently asked questions for <?php echo $siteName; ?> digital menu platform"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -25,108 +27,394 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'Resmenu');
             darkMode: "class",
             theme: {
                 extend: {
-                    colors: { "primary": "#f97415", "background-light": "#f8f7f5", "background-dark": "#23170f" },
-                    fontFamily: { "display": ["Inter", "sans-serif"], "poppins": ["Poppins", "sans-serif"] },
+                    colors: {
+                        "primary": "#f97415",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#111827",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "heading": ["Poppins", "sans-serif"]
+                    },
                     borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
                 },
             },
         }
     </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        }
+        .knowledge-sidebar-link.active {
+            @apply bg-primary/10 text-primary border-r-4 border-primary;
+        }
+    </style>
     <style>
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3 { font-family: 'Poppins', sans-serif; }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
-        .faq-item.active .faq-answer { max-height: 600px; }
-        .faq-item.active .faq-chevron { transform: rotate(180deg); }
     </style>
 </head>
-<body class="bg-background-light text-slate-900 dark:text-slate-100">
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
 <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
     <?php include __DIR__ . '/includes/header.php'; ?>
 
-    <!-- Hero Breadcrumb Header -->
-    <section class="relative w-full min-h-[400px] flex flex-col justify-center px-6 md:px-20 py-16 overflow-hidden">
+    <!-- Hero -->
+    <section class="relative w-full h-[320px] flex flex-col justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/80 to-primary/40 z-10"></div>
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/kabab-template.jpg');"></div>
+            <img alt="Restaurant Interior" class="w-full h-full object-cover" src="<?php echo htmlspecialchars($baseUrl); ?>/assets/images/kabab-template.jpg"/>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#111827] via-[#111827]/85 to-[#f97316]/40"></div>
         </div>
-        <div class="relative z-20 max-w-2xl">
-            <nav class="flex items-center gap-2 mb-4 text-primary/90 text-sm font-medium">
-                <a class="hover:underline hover:text-white transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
-                <span class="material-symbols-outlined text-xs">chevron_right</span>
-                <span class="text-white">FAQ</span>
+        <div class="relative z-10 px-6 md:px-20">
+            <nav class="flex items-center gap-2 mb-4">
+                <a class="text-slate-300 text-sm hover:text-white" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
+                <span class="text-slate-400 text-sm">/</span>
+                <span class="text-primary text-sm font-medium uppercase tracking-wider">Knowledge Base</span>
             </nav>
-            <h1 class="text-white text-5xl md:text-6xl font-bold mb-6 leading-tight">Frequently Asked Questions</h1>
-            <p class="text-slate-200 text-lg md:text-xl leading-relaxed max-w-xl">Find answers to common questions about <?php echo $siteName; ?> and how we help restaurants go digital.</p>
+            <h1 class="text-white text-4xl md:text-5xl font-heading font-bold mb-4">Merchant Help Center</h1>
+            <p class="text-slate-200 text-lg max-w-2xl leading-relaxed">
+                A comprehensive resource for detail-oriented restaurant owners looking to master their digital dining experience.
+            </p>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="max-w-[1200px] mx-auto px-6 py-16 md:py-24">
-        <div class="grid grid-cols-1 lg:grid-cols-1 gap-12">
-            <div class="bg-white dark:bg-slate-900 p-8 md:p-10 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800">
-                <h3 class="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Common Questions</h3>
-                <div class="space-y-4">
-                    <?php
-                    $faqs = [
-                        ['q' => 'What is ' . $siteName . '?', 'a' => $siteName . ' is a professional digital menu platform that helps restaurants, cafés, and hospitality businesses create beautiful, customizable online menus. Our platform is mobile-responsive, easy to manage, and designed to elevate your guests\' experience while reducing printing costs.'],
-                        ['q' => 'Do I need technical skills to use ' . $siteName . '?', 'a' => 'No. Our platform is built to be intuitive. You can create and update your menu in minutes from any device. If you need help, our support team is available via email and we offer step-by-step guides for every feature.'],
-                        ['q' => 'How do I get started?', 'a' => 'Click "Get Started" to create your account. You\'ll choose a template, add your restaurant details, then build your menu with categories and items. Your digital menu and QR code are ready to share as soon as you publish.'],
-                        ['q' => 'Is there a free trial?', 'a' => 'Yes. You can start with a free trial to explore all features—no credit card required. When you\'re ready, choose a plan that fits your size and needs.'],
-                        ['q' => 'Can I customize my menu design?', 'a' => 'Yes. You can customize colors, fonts, images, and layout. Choose from our professional templates, then adjust to match your brand. Each template is optimized for readability and conversion.'],
-                        ['q' => 'Is my menu mobile-friendly?', 'a' => 'All menus created with ' . $siteName . ' are fully responsive. They look and work great on phones, tablets, and desktops, so customers can browse and order from any device.'],
-                        ['q' => 'How many menu items and categories can I add?', 'a' => 'It depends on your plan. Starter plans include generous limits; Professional and Enterprise plans support more categories and items. Check our Pricing page for exact limits per plan.'],
-                        ['q' => 'Can I update my menu anytime?', 'a' => 'Yes. You can update your menu anytime from the dashboard. Changes go live immediately—update prices, add or remove items, change descriptions, or reorder categories with a few clicks.'],
-                        ['q' => 'How much does it cost?', 'a' => 'We offer Starter, Professional, and Enterprise plans. Pricing is on a monthly or annual basis; annual billing saves 20%. Visit our Pricing page for full details and to compare features.'],
-                        ['q' => 'What payment methods do you accept?', 'a' => 'We accept major credit and debit cards, and support local payment options where available. Invoices are sent by email; Enterprise customers can arrange custom billing.'],
-                        ['q' => 'Can I cancel or change my plan later?', 'a' => 'Yes. You can upgrade or downgrade your plan from your account. If you cancel, you keep access until the end of your billing period. We do not lock you into long-term contracts on standard plans.'],
-                        ['q' => 'What are QR code menus and how do they work?', 'a' => 'We generate a unique QR code for your restaurant. Customers scan it with their phone camera to open your digital menu—no app download. You can print the QR on table tents, posters, or business cards.'],
-                        ['q' => 'Can my customers order food through the menu?', 'a' => 'Yes, on supported templates. You can enable ordering so guests add items to a cart and submit orders (e.g. for table service or takeaway). Orders appear in your dashboard for fulfillment.'],
-                        ['q' => 'Do you support table reservations?', 'a' => 'Yes. Our reservation feature (on selected plans) lets guests book tables. You can set availability, deposit rules, and manage bookings from one place.'],
-                        ['q' => 'Is my data secure?', 'a' => 'We take security seriously. Data is transmitted over HTTPS and stored securely. We do not sell your data. You retain ownership of your menu content and customer data.'],
-                        ['q' => 'Can I use my own domain?', 'a' => 'Higher-tier plans support custom domains (e.g. menu.yourrestaurant.com). Contact our team or check the Pricing page for availability and setup support.'],
-                        ['q' => 'Do you offer customer support?', 'a' => 'Yes. All plans include email support. Professional and Enterprise plans get priority support. We also provide help articles and onboarding guidance so you can get the most out of the platform.'],
-                        ['q' => 'Can I have multiple locations or menus?', 'a' => 'Depending on your plan, you can manage multiple locations or separate menus. Enterprise plans offer the most flexibility for chains and multi-venue brands.'],
-                        ['q' => 'How do I get my menu in front of customers?', 'a' => 'Share your menu link and QR code on social media, your website, and in-house. Print the QR on table cards and posters. Many restaurants also add the link to email signatures and delivery platforms.'],
-                        ['q' => 'Who do I contact for partnerships or enterprise needs?', 'a' => 'For partnerships, custom requirements, or enterprise pricing, use our Contact page or email sales@sigsolresmenu.com. We\'ll respond quickly to discuss your needs.'],
-                    ];
-                    foreach ($faqs as $i => $faq):
-                    ?>
-                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden <?php echo $i === 0 ? 'active' : ''; ?>">
-                        <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors font-semibold text-slate-900 dark:text-white text-sm md:text-base">
-                            <span><?php echo htmlspecialchars($faq['q']); ?></span>
-                            <span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span>
-                        </button>
-                        <div class="faq-answer">
-                            <div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed text-sm border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"><?php echo htmlspecialchars($faq['a']); ?></div>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
+    <div class="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-72 lg:w-80 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 md:sticky md:top-20 md:h-[calc(100vh-80px)] overflow-y-auto no-scrollbar">
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Getting Started</h3>
+                    <nav class="flex flex-col gap-1">
+                        <a class="knowledge-sidebar-link active flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all" href="#general">
+                            <span class="material-symbols-outlined text-xl">rocket_launch</span> General Setup
+                        </a>
+                        <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all" href="#account">
+                            <span class="material-symbols-outlined text-xl">manage_accounts</span> Account Management
+                        </a>
+                    </nav>
                 </div>
-                <div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-700 text-center">
-                    <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Still have questions?</p>
-                    <a href="<?php echo htmlspecialchars($authUrl); ?>" class="inline-block py-4 px-8 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">Get Started</a>
-                    <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="inline-block ml-4 py-4 px-8 border-2 border-slate-200 dark:border-slate-700 font-bold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Contact Us</a>
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Menu Engineering</h3>
+                    <nav class="flex flex-col gap-1">
+                        <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all" href="#design">
+                            <span class="material-symbols-outlined text-xl">palette</span> Design &amp; Branding
+                        </a>
+                        <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all" href="#items">
+                            <span class="material-symbols-outlined text-xl">fastfood</span> Items &amp; Categories
+                        </a>
+                        <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all" href="#modifiers">
+                            <span class="material-symbols-outlined text-xl">tune</span> Add-ons &amp; Modifiers
+                        </a>
+                    </nav>
+                </div>
+                <div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Technical Operations</h3>
+                    <nav class="flex flex-col gap-1">
+                        <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all" href="#hardware">
+                            <span class="material-symbols-outlined text-xl">print</span> QR &amp; Hardware
+                        </a>
+                        <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all" href="#integrations">
+                            <span class="material-symbols-outlined text-xl">hub</span> Integrations &amp; Extras
+                        </a>
+                        <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900 transition-all" href="#payments">
+                            <span class="material-symbols-outlined text-xl">payments</span> Billing &amp; Payments
+                        </a>
+                    </nav>
                 </div>
             </div>
+        </aside>
+
+        <main class="flex-1 bg-white dark:bg-background-dark p-6 md:p-12">
+            <div class="sticky top-[80px] z-30 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md pb-8 mb-8">
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+                    <input class="w-full h-16 pl-14 pr-6 rounded-2xl border-2 border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-primary focus:ring-0 text-lg transition-all shadow-sm" placeholder="Search knowledge base articles, tutorials, and documentation..." type="text"/>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="general">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-primary/10 rounded-lg">
+                        <span class="material-symbols-outlined text-primary text-3xl">rocket_launch</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">General Setup</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I create my first digital menu?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Choose a template from our library, add your categories and menu items with descriptions and high-res photos, then hit publish to generate your unique QR code.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I update prices in real-time?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes, any changes you make in the dashboard reflect instantly. During peak hours, you can update availability or pricing without reprinting QR codes.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do customers access the menu?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Customers simply scan a unique QR code placed at their table using their phone camera. No app download is required; it opens in their mobile browser.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Do you support multiple locations?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. Our platform includes multi-branch support so you can manage more than one location from a single account. Enterprise plans offer the most flexibility for chains.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I have a menu in another language?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">You can add your menu content in any language—item names, descriptions, and categories. The menu opens in the customer’s browser, so they view it in the language you enter.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Is my data secure?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">We use industry-standard SSL encryption and AWS cloud infrastructure to ensure your restaurant data and customer analytics are protected.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="account">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-primary/10 rounded-lg">
+                        <span class="material-symbols-outlined text-primary text-3xl">manage_accounts</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Account Management</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I sign up?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Click Get Started, enter your email and restaurant details, then choose a template. You can publish your first menu within minutes.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I change my plan later?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. You can upgrade or downgrade from your account dashboard. Changes take effect at the next billing cycle; prorated credits apply where applicable.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I reset my password?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Use the “Forgot password” link on the login page. You’ll receive an email with a secure link to set a new password.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I invite team members?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Multi-user and role-based access are available on select plans. Contact us or check your plan details in the dashboard to see if your account supports inviting staff.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="design">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-primary/10 rounded-lg">
+                        <span class="material-symbols-outlined text-primary text-3xl">palette</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Design &amp; Branding</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I use my own logo and colors?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. Upload your logo and set primary and accent colors in the theme settings. All templates adapt to your brand for a consistent look.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Are templates mobile-friendly?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Every template is built to be fully responsive. Menus look and perform great on phones, tablets, and desktops with no extra setup.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I switch templates after publishing?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">You can change templates at any time. Your content (categories, items, and media) is preserved; only the layout and styling update.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">What image formats and sizes work best?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">We support JPG, PNG, and WebP. For best quality, use at least 800px on the longest side. The dashboard can crop and resize for you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="items">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-primary/10 rounded-lg">
+                        <span class="material-symbols-outlined text-primary text-3xl">fastfood</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Items &amp; Categories</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Is there a limit to menu items and categories?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Limits depend on your plan: Starter includes up to 5 categories and 50 items; Professional offers more categories and items; Enterprise supports unlimited. You can organize items into categories in your dashboard.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I add dietary or allergen info?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. Use the item description to note dietary info (e.g. Vegan, Gluten-Free) or allergens. This helps guests choose safely and matches how many restaurants display this on digital menus.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I add item descriptions and photos?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">In the dashboard, each menu item has fields for name, description, and image. Upload high-resolution photos and clear descriptions so customers know exactly what they’re ordering.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I reorder categories and items?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. From your dashboard you can drag-and-drop or reorder categories and items so the menu appears exactly as you want to customers.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="modifiers">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-primary/10 rounded-lg">
+                        <span class="material-symbols-outlined text-primary text-3xl">tune</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Add-ons &amp; Modifiers</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can customers customize orders (e.g. size, extras)?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">On plans that include food ordering, you can set up options like size or add-ons so guests customize their order. Configure these in your dashboard under menu items.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I add optional extras or special instructions?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Where ordering is available, you can add modifier options and prices. Customers see them when adding an item to the cart and can leave special instructions if the template supports it.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Does the platform support contactless ordering?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. Our food ordering feature lets guests order directly from your digital menu—ideal for table service and contactless dining. Available on Professional and higher plans.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Do I get notified when someone places an order?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. The platform sends real-time email notifications for new orders and reservations so you can respond quickly. You can also view orders in your dashboard.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="hardware">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-primary/10 rounded-lg">
+                        <span class="material-symbols-outlined text-primary text-3xl">print</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">QR &amp; Hardware</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Do I need special hardware?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">No special hardware needed. The dashboard works on any browser, and you can print QR codes using any standard inkjet or laser printer.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How long do QR codes last?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Our QR codes are static and never expire. You can change your entire menu content without ever having to replace the printed QR code stickers.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I download the QR as an image?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. From the dashboard you can download your QR code in PNG or SVG for table tents, posters, or signage at any size.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">What if a table doesn’t have a QR code?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">You can share your menu link directly (e.g. via SMS or verbally). Customers can also search for your restaurant name if you’re listed in our directory.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="integrations">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-primary/10 rounded-lg">
+                        <span class="material-symbols-outlined text-primary text-3xl">hub</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Integrations &amp; Extras</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Do you integrate with POS or other systems?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Custom integrations and API access are available for Enterprise or specific setups. Contact us to discuss POS sync, APIs, or other technical requirements.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I take table reservations?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. Our platform includes a reservation system so guests can book tables online. You can manage availability and reduce no-shows from your dashboard.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I use my own domain for my menu?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Custom domain (e.g. menu.yourrestaurant.com) is available on Enterprise plans. Contact us for setup and we’ll guide you through linking your domain.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Where do I manage my menu and orders?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">After signing up, you’ll use the dashboard (our-menu.online) to manage your restaurant, menu items, orders, reservations, and QR code. Everything is in one place.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="payments">
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-primary/10 rounded-lg">
+                        <span class="material-symbols-outlined text-primary text-3xl">payments</span>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Billing &amp; Payments</h2>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">What payment methods do you accept?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">We accept major credit and debit cards. Pricing is in Naira (₦); see the Pricing page for current plan amounts. Enterprise customers can arrange custom billing.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">What plans are available?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Starter (single location, limited categories/items, one template), Professional (more items, all templates, food ordering), and Enterprise (unlimited, custom domain). Details are on our Pricing page.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">When am I charged?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Subscriptions are charged at the start of each billing period (monthly or annually). You’ll receive an email receipt and can view invoices in your dashboard.</p>
+                    </div>
+                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I update my plan or billing?</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Log in at our-menu.online and go to your account or billing settings. You can update your card, change plan, or contact support for refunds (see Terms of Service).</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- CTA -->
+    <section class="bg-primary/5 dark:bg-slate-900 py-20 px-6 mt-12">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white mb-4">Can't find what you're looking for?</h2>
+            <p class="text-slate-600 dark:text-slate-400 text-lg mb-10">Our dedicated success team is available to help you optimize your digital experience.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="w-full sm:w-auto min-w-[220px] h-14 bg-primary text-white font-bold rounded-xl flex items-center justify-center gap-3 hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+                    <span class="material-symbols-outlined">mail</span> Contact Support
+                </a>
+                <button type="button" class="w-full sm:w-auto min-w-[220px] h-14 bg-white dark:bg-transparent text-primary border-2 border-primary font-bold rounded-xl flex items-center justify-center gap-3 hover:bg-primary/10 transition-all">
+                    <span class="material-symbols-outlined">chat</span> Live Chat
+                </button>
+            </div>
         </div>
-    </main>
+    </section>
 
     <?php include __DIR__ . '/includes/footer.php'; ?>
 </div>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    var items = document.querySelectorAll('.faq-item');
-    items.forEach(function(item) {
-        var btn = item.querySelector('.faq-question');
-        if (!btn) return;
-        btn.addEventListener('click', function() {
-            var wasActive = item.classList.contains('active');
-            items.forEach(function(i) { i.classList.remove('active'); });
-            if (!wasActive) item.classList.add('active');
+(function() {
+    var searchInput = document.querySelector('main input[type="text"]');
+    if (searchInput) {
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                var q = this.value.trim().toLowerCase();
+                if (!q) return;
+                var sections = document.querySelectorAll('main [id]');
+                for (var i = 0; i < sections.length; i++) {
+                    var section = sections[i];
+                    var text = (section.innerText || '').toLowerCase();
+                    if (text.indexOf(q) !== -1) {
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        return;
+                    }
+                }
+            }
         });
-    });
-});
+    }
+    var sidebarLinks = document.querySelectorAll('.knowledge-sidebar-link');
+    var sectionIds = ['general','account','design','items','modifiers','hardware','integrations','payments'];
+    function updateActiveLink() {
+        var top = window.scrollY + 100;
+        var current = '';
+        sectionIds.forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el && el.offsetTop <= top) current = id;
+        });
+        sidebarLinks.forEach(function(link) {
+            var href = link.getAttribute('href');
+            var id = href ? href.replace('#', '') : '';
+            link.classList.toggle('active', id === current);
+            link.classList.toggle('font-semibold', id === current);
+            link.classList.toggle('font-medium', id !== current);
+        });
+    }
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', updateActiveLink);
+})();
 </script>
 </body>
 </html>
