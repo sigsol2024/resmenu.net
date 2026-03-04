@@ -181,7 +181,7 @@ function formatPriceDisplay($amount) {
 <section class="py-24 bg-slate-50 border-y border-slate-100">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16">
 <div class="w-full lg:w-1/2">
-<img src="<?php echo $baseUrl; ?>/assets/images/Dashboard-image-view.png" alt="Dashboard view" class="w-full h-auto max-w-2xl mx-auto about-image-entrance"/>
+<img src="<?php echo $baseUrl; ?>/assets/images/Dashboard-image-view.png" alt="Dashboard view" class="w-full h-auto max-w-xl lg:max-w-2xl mx-auto about-image-entrance"/>
 </div>
 <div class="w-full lg:w-1/2 space-y-6">
 <h2 class="text-4xl font-black text-dark-slate leading-tight">Built for Restaurants. <br/><span class="text-primary">Designed for Growth.</span></h2>
@@ -467,10 +467,9 @@ foreach ($plans as $plan):
 </div>
 </section>
 <!-- Final CTA -->
-<section class="py-24 bg-primary">
-<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center overflow-hidden rounded-[2rem]">
+<section class="py-24 bg-primary relative overflow-hidden">
 <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
-<div class="relative z-10">
+<div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 <h2 class="text-4xl lg:text-5xl font-black text-white mb-8 leading-tight">Ready to Transform Your <br/>Restaurant Menu?</h2>
 <div class="flex flex-wrap justify-center gap-4">
 <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl">
