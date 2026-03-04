@@ -50,7 +50,7 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
     
     <!-- Hero Header -->
     <section class="relative w-full h-[360px] sm:h-[400px] flex items-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAxa9XfqZr7s0sfhcjKk4GGcMumemXXUn47EW7kW1X3A5YuPH79-J80xe47NemKWo7pYmqrd8uCz6KfC5mpH2wBKVvfgTAMmly6i4GvgdSMhBxbdffvQBbwwT00kSA2SN41NgHu5iWWjwDQX3h164SP57TqG1W-BUImgw-USBhDx_QSMQQqOJaFvHeQkDfCSWqKLEdRi1Q00Hmex18tIsi8GbUzoeqZidlv4MQS118iM4DxJ-SQIwQ7Xvw0cDuDZWL6YGAnyDjbl9tr');"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/restaurant-interior.jpg');"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white w-full">
             <nav class="flex items-center gap-2 text-sm font-medium text-slate-300 mb-6">
