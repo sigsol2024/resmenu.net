@@ -50,6 +50,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list.php">Restaurants</a>
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php">Templates</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing.php">Pricing</a>
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/faq.php">FAQ</a>
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php">Contact</a>
 </nav>
@@ -79,6 +80,7 @@ Get Started
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list.php">Restaurants</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php">Templates</a>
+<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing.php">Pricing</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/faq.php">FAQ</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php">Contact</a>
 <a class="mobile-menu-link mt-2 px-4 py-3.5 rounded-xl bg-primary text-white font-bold text-center hover:bg-primary/90 transition-colors" href="<?php echo htmlspecialchars($authUrl); ?>">Get Started</a>

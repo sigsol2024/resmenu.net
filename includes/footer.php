@@ -40,7 +40,7 @@ Leading the digital transformation of the hospitality industry with innovative, 
 <ul class="space-y-4 text-slate-400">
 <li><a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list.php">Restaurants</a></li>
 <li><a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php">Templates</a></li>
-<li><a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/#pricing">Pricing</a></li>
+<li><a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing.php">Pricing</a></li>
 <li><a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php">Contact</a></li>
 </ul>
 </div>
