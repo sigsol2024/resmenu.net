@@ -58,7 +58,7 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
                 <span class="material-symbols-outlined text-xs">chevron_right</span>
                 <span class="text-white">Our Partner Restaurants</span>
             </nav>
-            <h1 class="text-4xl sm:text-5xl font-heading font-extrabold mb-4 max-w-2xl leading-tight">Our Partner Restaurants</h1>
+            <h1 class="text-4xl sm:text-5xl font-heading font-extrabold mb-4 max-w-2xl leading-tight text-white">Our Partner Restaurants</h1>
             <p class="text-lg text-slate-200 max-w-xl leading-relaxed">
                 Powering forward-thinking businesses with digital menu solutions that enhance guest experience and streamline operations.
             </p>
@@ -148,9 +148,7 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
     <!-- Final CTA -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="bg-slate-900 rounded-[2rem] p-8 md:p-16 text-center relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDbacx2uBlnNwzJHso66wJy57zS-x3T_RCGKOFUO3Y50heEL_3KXHeCUmkrBL9WNvs3DsFKbiTbvMGG7BUvqvPPLZhPoGXU0_VLoyxsjZV8j5b60FJhh4Rn8_l-PIy1MP_-0qO06pFXv6Z3Ee7kHBAVso5B9vj0mJeOXZO3H9tneYj6UcY-sYZEm-IZmmhG5t2agMOIsCqwOzoGk_XUMUMjq5eUsEAWDB_0zQYZifrieMynRf2aHyN8f4oH8wSr18txrXbYtOTKReZS');"></div>
-            <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
+            <div class="absolute inset-0 opacity-10" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/bh_pattern-orange.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
             <div class="relative z-10">
                 <h2 class="text-3xl md:text-5xl font-heading font-extrabold text-white mb-6">Join Our Growing Network of Restaurants</h2>
                 <p class="text-slate-300 max-w-2xl mx-auto mb-10 text-lg">
@@ -200,7 +198,7 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
                             var logo = restaurant.logo ? escapeHtml(restaurant.logo) : '';
 
                             var card = document.createElement('div');
-                            card.className = 'bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group';
+                            card.className = 'bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-xl transition-all group flex flex-col h-full';
 
                             var logoWrapper = document.createElement('div');
                             logoWrapper.className = 'h-20 w-20 bg-slate-50 rounded-lg flex items-center justify-center mb-6 overflow-hidden border border-slate-100';
@@ -227,21 +225,15 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 
                             if (description) {
                                 var p = document.createElement('p');
-                                p.className = 'text-slate-600 text-sm mb-6';
+                                p.className = 'text-slate-600 text-sm mb-2 line-clamp-3';
                                 var shortDesc = description.length > 160 ? description.substring(0, 160) + '…' : description;
                                 p.textContent = shortDesc;
                                 card.appendChild(p);
+                            } else {
+                                var spacer = document.createElement('div');
+                                spacer.className = 'h-6';
+                                card.appendChild(spacer);
                             }
-
-                            var btn = document.createElement('button');
-                            btn.type = 'button';
-                            btn.className = 'w-full flex items-center justify-center gap-2 py-3 rounded-lg border-2 border-primary text-primary font-bold text-sm hover:bg-primary hover:text-white transition-all';
-                            btn.innerHTML = 'View Menu <span class="material-symbols-outlined text-sm">open_in_new</span>';
-                            btn.addEventListener('click', function() {
-                                window.open(backendUrl + '/restaurant/' + slug, '_blank');
-                            });
-
-                            card.appendChild(btn);
                             grid.appendChild(card);
                         });
                     } else {
