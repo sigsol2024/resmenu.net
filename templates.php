@@ -86,13 +86,13 @@ if (empty($templates)) {
 <!-- Template grid -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <?php foreach ($templates as $t): ?>
+        <?php foreach ($templates as $t):
+            $previewUrl = htmlspecialchars($backendUrl . '/template' . (int)$t['id'] . '-preview');
+        ?>
         <div class="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
-            <div class="aspect-[16/10] overflow-hidden bg-slate-200 relative">
-                <?php if (!empty($t['preview_bg'])): ?>
-                <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('<?php echo htmlspecialchars($t['preview_bg']); ?>');"></div>
-                <?php endif; ?>
-                <div class="absolute inset-0 bg-black/5"></div>
+            <div class="overflow-hidden bg-slate-100 relative rounded-t-xl border-b border-slate-200">
+                <iframe src="<?php echo $previewUrl; ?>" title="Preview: <?php echo htmlspecialchars($t['name']); ?>" class="w-full border-0 block" style="height: 520px;"></iframe>
+                <p class="absolute bottom-2 left-3 right-3 text-center text-slate-500 text-xs">Scroll above to explore · <a href="<?php echo $previewUrl; ?>" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">Open full preview</a></p>
             </div>
             <div class="p-8 flex flex-col h-full">
                 <div class="flex justify-between items-start mb-2">
