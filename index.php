@@ -78,8 +78,7 @@ function formatPriceDisplay($amount) {
 <div class="flex justify-between items-center h-20">
 <div class="flex items-center gap-2">
 <a href="<?php echo htmlspecialchars($baseUrl); ?>/" class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-4xl">restaurant_menu</span>
-<span class="text-xl font-black tracking-tight text-dark-slate"><?php echo $brandFirst ? htmlspecialchars($brandFirst) . ' ' : ''; ?><span class="text-primary"><?php echo htmlspecialchars($brandLast); ?></span></span>
+<img src="<?php echo htmlspecialchars($baseUrl); ?>/assets/images/resmen_logo.png" alt="<?php echo htmlspecialchars($siteName); ?> logo" class="h-10 w-auto object-contain"/>
 </a>
 </div>
 <nav class="hidden md:flex items-center gap-8">
@@ -102,7 +101,7 @@ function formatPriceDisplay($amount) {
 <div class="absolute inset-0 pointer-events-none" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-repeat: repeat; background-size: 280px 280px; opacity: 0.08;"></div>
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex flex-col lg:flex-row items-center gap-16">
-<div class="w-full lg:w-2/5 space-y-8 order-2 lg:order-1">
+<div class="w-full lg:w-1/2 space-y-8 order-2 lg:order-1">
 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
 <span class="relative flex h-2 w-2">
 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -139,10 +138,8 @@ function formatPriceDisplay($amount) {
                         Join <?php echo $restaurantCountDisplay; ?>+ restaurants growing with <?php echo htmlspecialchars($brandLast); ?>
                     </div>
 </div>
-<div class="w-full lg:w-3/5 relative order-1 lg:order-2">
-<div class="relative z-10 rounded-2xl shadow-2xl border border-slate-200 overflow-hidden bg-transparent aspect-video">
-<img src="<?php echo $baseUrl; ?>/assets/images/3-devices-black.png" alt="Digital menu on multiple devices" class="w-full h-full object-contain"/>
-</div>
+<div class="w-full lg:w-1/2 relative order-1 lg:order-2">
+<img src="<?php echo $baseUrl; ?>/assets/images/3-devices-black.png" alt="Digital menu on multiple devices" class="w-full h-auto"/>
 </div>
 </div>
 </div>
@@ -471,8 +468,7 @@ foreach ($plans as $plan):
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 <div class="space-y-6">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-3xl">restaurant_menu</span>
-<span class="text-xl font-black tracking-tight"><?php echo $brandFirst ? htmlspecialchars($brandFirst) . ' ' : ''; ?><span class="text-primary"><?php echo htmlspecialchars($brandLast); ?></span></span>
+<img src="<?php echo htmlspecialchars($baseUrl); ?>/assets/images/resmen_logo.png" alt="<?php echo htmlspecialchars($siteName); ?> logo" class="h-10 w-auto object-contain"/>
 </div>
 <p class="text-slate-400 leading-relaxed">
                         Leading the digital transformation of the hospitality industry with innovative, user-friendly menu solutions.
