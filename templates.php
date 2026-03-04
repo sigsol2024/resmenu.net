@@ -90,16 +90,14 @@ if (empty($templates)) {
             $previewUrl = htmlspecialchars($backendUrl . '/template' . (int)$t['id'] . '-preview');
         ?>
         <div class="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
-            <div class="overflow-hidden bg-slate-100 relative rounded-t-xl border-b border-slate-200">
-                <iframe src="<?php echo $previewUrl; ?>" title="Preview: <?php echo htmlspecialchars($t['name']); ?>" class="w-full border-0 block" style="height: 520px;"></iframe>
-                <p class="absolute bottom-2 left-3 right-3 text-center text-slate-500 text-xs">Scroll above to explore · <a href="<?php echo $previewUrl; ?>" target="_blank" rel="noopener" class="text-primary font-medium hover:underline">Open full preview</a></p>
+            <div class="overflow-hidden bg-slate-100 relative rounded-t-xl border-b border-slate-200 shrink-0">
+                <iframe src="<?php echo $previewUrl; ?>" title="Preview: <?php echo htmlspecialchars($t['name']); ?>" class="w-full border-0 block" style="height: 420px;"></iframe>
             </div>
-            <div class="p-8 flex flex-col h-full">
-                <div class="flex justify-between items-start mb-2">
-                    <h3 class="text-2xl font-bold text-slate-900"><?php echo htmlspecialchars($t['name']); ?></h3>
-                </div>
-                <p class="text-slate-600 mb-8 flex-grow"><?php echo htmlspecialchars($t['description']); ?></p>
-                <div class="flex flex-wrap gap-4">
+            <div class="p-6 flex flex-col flex-1 min-h-0">
+                <h3 class="text-xl font-bold text-slate-900 mb-2"><?php echo htmlspecialchars($t['name']); ?></h3>
+                <p class="text-slate-600 text-sm leading-relaxed"><?php echo htmlspecialchars($t['description']); ?></p>
+                <div class="flex-grow min-h-4"></div>
+                <div class="flex flex-wrap gap-4 pt-4">
                     <a href="<?php echo htmlspecialchars($authUrl); ?>" class="flex-1 bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">Use This Template</a>
                     <a href="<?php echo htmlspecialchars($backendUrl); ?>/template<?php echo (int)$t['id']; ?>-preview" target="_blank" rel="noopener" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 px-6 rounded-lg font-bold transition-colors text-center">Preview Demo</a>
                 </div>
