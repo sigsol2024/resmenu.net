@@ -77,6 +77,17 @@ function formatPriceDisplay($amount) {
         @keyframes heroImageIn {
             to { opacity: 1; transform: translateX(0); }
         }
+        .product-card-entrance {
+            opacity: 0;
+            transform: translateY(28px);
+            animation: productCardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .product-card-entrance:nth-child(1) { animation-delay: 0.1s; }
+        .product-card-entrance:nth-child(2) { animation-delay: 0.25s; }
+        .product-card-entrance:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes productCardIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-background-light text-slate-900 selection:bg-primary/30">
@@ -137,24 +148,18 @@ function formatPriceDisplay($amount) {
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="grid md:grid-cols-3 gap-8">
-<div class="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-<div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-<span class="material-symbols-outlined text-3xl">palette</span>
-</div>
+<div class="product-card-entrance bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
+<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">palette</span>
 <h3 class="text-xl font-bold text-dark-slate mb-4">Create Stunning Menus</h3>
 <p class="text-slate-600 leading-relaxed">Choose from professional templates designed specifically for gastronomy. Customize to match your brand identity.</p>
 </div>
-<div class="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-<div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-<span class="material-symbols-outlined text-3xl">sync</span>
-</div>
+<div class="product-card-entrance bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
+<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">sync</span>
 <h3 class="text-xl font-bold text-dark-slate mb-4">Update Instantly</h3>
 <p class="text-slate-600 leading-relaxed">Change prices, update daily specials, and mark items as "sold out" in real-time without costly reprints.</p>
 </div>
-<div class="bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-<div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:bg-primary group-hover:text-white transition-colors">
-<span class="material-symbols-outlined text-3xl">smartphone</span>
-</div>
+<div class="product-card-entrance bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
+<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">smartphone</span>
 <h3 class="text-xl font-bold text-dark-slate mb-4">Mobile-First Experience</h3>
 <p class="text-slate-600 leading-relaxed">Perfectly optimized for every smartphone screen. No app download required for your hungry guests.</p>
 </div>
@@ -165,7 +170,7 @@ function formatPriceDisplay($amount) {
 <section class="py-24 bg-slate-50 border-y border-slate-100">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16">
 <div class="w-full lg:w-1/2 rounded-3xl overflow-hidden shadow-2xl aspect-video bg-slate-300">
-<img src="<?php echo $baseUrl; ?>/assets/images/5zm3C5SMKk7sgdYHRUP5eAlb86fe9.jpg" alt="Restaurant staff using digital menu" class="w-full h-full object-cover"/>
+<img src="<?php echo $baseUrl; ?>/assets/images/Dashboard-image-view.png" alt="Dashboard view" class="w-full h-full object-cover"/>
 </div>
 <div class="w-full lg:w-1/2 space-y-6">
 <h2 class="text-4xl font-black text-dark-slate leading-tight">Built for Restaurants. <br/><span class="text-primary">Designed for Growth.</span></h2>
@@ -198,6 +203,21 @@ function formatPriceDisplay($amount) {
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">shopping_bag</span>
+<h3 class="font-bold text-dark-slate mb-2">Food Ordering System</h3>
+<p class="text-sm text-slate-600">Let guests order directly from your digital menu. Streamlined ordering and kitchen flow.</p>
+</div>
+<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">event_available</span>
+<h3 class="font-bold text-dark-slate mb-2">Reservation System</h3>
+<p class="text-sm text-slate-600">Accept table reservations online. Reduce no-shows and manage your floor with ease.</p>
+</div>
+<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">mail</span>
+<h3 class="font-bold text-dark-slate mb-2">Real-Time Email Notification</h3>
+<p class="text-sm text-slate-600">Get instant email alerts for new orders, reservations, and important updates.</p>
+</div>
 <div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
 <span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">dashboard_customize</span>
 <h3 class="font-bold text-dark-slate mb-2">Beautiful Templates</h3>
