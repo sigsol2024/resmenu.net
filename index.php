@@ -71,22 +71,33 @@ function formatPriceDisplay($amount) {
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .hero-image-entrance {
             opacity: 0;
-            transform: translateX(2.5rem);
-            animation: heroImageIn 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transform: translateX(2.75rem);
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        @keyframes heroImageIn {
-            to { opacity: 1; transform: translateX(0); }
+        .hero-image-entrance.is-visible {
+            opacity: 1;
+            transform: translateX(0);
         }
         .product-card-entrance {
             opacity: 0;
             transform: translateY(28px);
-            animation: productCardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .product-card-entrance:nth-child(1) { animation-delay: 0.1s; }
-        .product-card-entrance:nth-child(2) { animation-delay: 0.25s; }
-        .product-card-entrance:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes productCardIn {
-            to { opacity: 1; transform: translateY(0); }
+        .product-card-entrance:nth-child(1) { transition-delay: 0.15s; }
+        .product-card-entrance:nth-child(2) { transition-delay: 0.35s; }
+        .product-card-entrance:nth-child(3) { transition-delay: 0.55s; }
+        .product-card-entrance.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .about-image-entrance {
+            opacity: 0;
+            transform: translateX(-2.75rem);
+            transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .about-image-entrance.is-visible {
+            opacity: 1;
+            transform: translateX(0);
         }
     </style>
 </head>
@@ -170,7 +181,7 @@ function formatPriceDisplay($amount) {
 <section class="py-24 bg-slate-50 border-y border-slate-100">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16">
 <div class="w-full lg:w-1/2 rounded-3xl overflow-hidden shadow-2xl aspect-video bg-slate-300">
-<img src="<?php echo $baseUrl; ?>/assets/images/Dashboard-image-view.png" alt="Dashboard view" class="w-full h-full object-cover"/>
+<img src="<?php echo $baseUrl; ?>/assets/images/Dashboard-image-view.png" alt="Dashboard view" class="w-full h-full object-contain about-image-entrance"/>
 </div>
 <div class="w-full lg:w-1/2 space-y-6">
 <h2 class="text-4xl font-black text-dark-slate leading-tight">Built for Restaurants. <br/><span class="text-primary">Designed for Growth.</span></h2>
@@ -468,5 +479,36 @@ foreach ($plans as $plan):
 </div>
 </section>
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<script>
+(function() {
+    var animatedSelectors = '.hero-image-entrance, .product-card-entrance, .about-image-entrance';
+    var elements = document.querySelectorAll(animatedSelectors);
+    if (!elements.length) return;
+
+    // Fallback for very old browsers
+    if (!('IntersectionObserver' in window)) {
+        elements.forEach(function(el) {
+            el.classList.add('is-visible');
+        });
+        return;
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.25,
+        rootMargin: '0px 0px -10% 0px'
+    });
+
+    elements.forEach(function(el) {
+        observer.observe(el);
+    });
+})();
+</script>
 </body>
 </html>
