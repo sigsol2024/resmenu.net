@@ -72,7 +72,7 @@ function formatPriceDisplay($amount) {
         .hero-image-entrance {
             opacity: 0;
             transform: translateX(2.75rem);
-            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 2s cubic-bezier(0.22, 1, 0.36, 1), transform 2s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .hero-image-entrance.is-visible {
             opacity: 1;
@@ -81,11 +81,11 @@ function formatPriceDisplay($amount) {
         .product-card-entrance {
             opacity: 0;
             transform: translateY(28px);
-            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1), transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        .product-card-entrance:nth-child(1) { transition-delay: 0.15s; }
-        .product-card-entrance:nth-child(2) { transition-delay: 0.35s; }
-        .product-card-entrance:nth-child(3) { transition-delay: 0.55s; }
+        .product-card-entrance:nth-child(1) { transition-delay: 0.2s; }
+        .product-card-entrance:nth-child(2) { transition-delay: 0.5s; }
+        .product-card-entrance:nth-child(3) { transition-delay: 0.8s; }
         .product-card-entrance.is-visible {
             opacity: 1;
             transform: translateY(0);
@@ -93,7 +93,7 @@ function formatPriceDisplay($amount) {
         .about-image-entrance {
             opacity: 0;
             transform: translateX(-2.75rem);
-            transition: opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1), transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1), transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .about-image-entrance.is-visible {
             opacity: 1;
@@ -275,7 +275,9 @@ function formatPriceDisplay($amount) {
 <!-- Why Choose Us -->
 <section class="py-24 bg-background-light">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="bg-dark-slate rounded-[2rem] p-12 lg:p-20 flex flex-col lg:flex-row gap-12 items-center">
+<div class="relative bg-dark-slate rounded-[2rem] p-12 lg:p-20 flex flex-col lg:flex-row gap-12 items-center overflow-hidden">
+<div class="pointer-events-none absolute inset-0 opacity-5" style="background-image: url('<?php echo $baseUrl; ?>/assets/images/bh_pattern-orange.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
+<div class="relative z-10 flex flex-col lg:flex-row gap-12 items-center w-full">
 <div class="lg:w-1/2 text-white">
 <h2 class="text-4xl font-bold mb-8">Why Restaurants Choose <br/>Our Platform</h2>
 <div class="space-y-6">
@@ -317,6 +319,7 @@ function formatPriceDisplay($amount) {
 <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10 text-center col-span-2">
 <div class="text-4xl font-black text-primary mb-1"><?php echo $restaurantCountDisplay; ?>+</div>
 <div class="text-sm text-white/70 uppercase tracking-widest font-bold">Active Venues</div>
+</div>
 </div>
 </div>
 </div>
