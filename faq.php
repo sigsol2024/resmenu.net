@@ -31,6 +31,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
                         "primary": "#f97415",
                         "background-light": "#f8f7f5",
                         "background-dark": "#111827",
+                        "dark-slate": "#111827",
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"],
@@ -59,7 +60,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
-<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col">
     <?php include __DIR__ . '/includes/header.php'; ?>
 
     <!-- Hero -->
@@ -82,7 +83,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
     </section>
 
     <div class="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row min-h-screen">
-        <aside class="w-full md:w-72 lg:w-80 shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 md:sticky md:top-20 md:h-[calc(100vh-80px)] md:overflow-y-auto no-scrollbar">
+        <aside class="w-full md:w-72 lg:w-80 shrink-0 md:self-start border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 md:sticky md:top-20 md:h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] md:overflow-y-auto no-scrollbar">
             <div class="space-y-8">
                 <div>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Getting Started</h3>
@@ -160,7 +161,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
                             </div>
                             <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
                                 <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Can I have a menu in another language?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
-                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">You can add your menu content in any language—item names, descriptions, and categories. The menu opens in the customer’s browser, so they view it in the language you enter.</div></div>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">You can add your menu content in any language—item names, descriptions, and categories. The menu opens in the customer's browser, so they view it in the language you enter.</div></div>
                             </div>
                             <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
                                 <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Is my data secure?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
@@ -189,7 +190,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
                             </div>
                             <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
                                 <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">How do I reset my password?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
-                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Use the “Forgot password” link on the login page. You’ll receive an email with a secure link to set a new password.</div></div>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Use the “Forgot password” link on the login page. You'll receive an email with a secure link to set a new password.</div></div>
                             </div>
                             <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
                                 <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Can I invite team members?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
@@ -237,145 +238,159 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
                             <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Items &amp; Categories</h2>
                         </div>
                         <div class="space-y-2">
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Is there a limit to menu items and categories?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Limits depend on your plan: Starter includes up to 5 categories and 50 items; Professional offers more categories and items; Enterprise supports unlimited. You can organize items into categories in your dashboard.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I add dietary or allergen info?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. Use the item description to note dietary info (e.g. Vegan, Gluten-Free) or allergens. This helps guests choose safely and matches how many restaurants display this on digital menus.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I add item descriptions and photos?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">In the dashboard, each menu item has fields for name, description, and image. Upload high-resolution photos and clear descriptions so customers know exactly what they’re ordering.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I reorder categories and items?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. From your dashboard you can drag-and-drop or reorder categories and items so the menu appears exactly as you want to customers.</p>
-                    </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Is there a limit to menu items and categories?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Limits depend on your plan: Starter includes up to 5 categories and 50 items; Professional offers more categories and items; Enterprise supports unlimited. You can organize items into categories in your dashboard.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Can I add dietary or allergen info?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Yes. Use the item description to note dietary info (e.g. Vegan, Gluten-Free) or allergens. This helps guests choose safely and matches how many restaurants display this on digital menus.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">How do I add item descriptions and photos?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">In the dashboard, each menu item has fields for name, description, and image. Upload high-resolution photos and clear descriptions so customers know exactly what they are ordering.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Can I reorder categories and items?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Yes. From your dashboard you can drag-and-drop or reorder categories and items so the menu appears exactly as you want to customers.</div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="scroll-mt-40 mb-16" id="modifiers">
-                <div class="flex items-center gap-3 mb-8 group">
-                    <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">tune</span>
-                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Add-ons &amp; Modifiers</h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can customers customize orders (e.g. size, extras)?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">On plans that include food ordering, you can set up options like size or add-ons so guests customize their order. Configure these in your dashboard under menu items.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I add optional extras or special instructions?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Where ordering is available, you can add modifier options and prices. Customers see them when adding an item to the cart and can leave special instructions if the template supports it.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Does the platform support contactless ordering?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. Our food ordering feature lets guests order directly from your digital menu—ideal for table service and contactless dining. Available on Professional and higher plans.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Do I get notified when someone places an order?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. The platform sends real-time email notifications for new orders and reservations so you can respond quickly. You can also view orders in your dashboard.</p>
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-8 group">
+                            <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">tune</span>
+                            <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Add-ons &amp; Modifiers</h2>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Can customers customize orders (e.g. size, extras)?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">On plans that include food ordering, you can set up options like size or add-ons so guests customize their order. Configure these in your dashboard under menu items.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">How do I add optional extras or special instructions?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Where ordering is available, you can add modifier options and prices. Customers see them when adding an item to the cart and can leave special instructions if the template supports it.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Does the platform support contactless ordering?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Yes. Our food ordering feature lets guests order directly from your digital menu—ideal for table service and contactless dining. Available on Professional and higher plans.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Do I get notified when someone places an order?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Yes. The platform sends real-time email notifications for new orders and reservations so you can respond quickly. You can also view orders in your dashboard.</div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="scroll-mt-40 mb-16" id="hardware">
-                <div class="flex items-center gap-3 mb-8 group">
-                    <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">print</span>
-                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">QR &amp; Hardware</h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Do I need special hardware?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">No special hardware needed. The dashboard works on any browser, and you can print QR codes using any standard inkjet or laser printer.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How long do QR codes last?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Our QR codes are static and never expire. You can change your entire menu content without ever having to replace the printed QR code stickers.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I download the QR as an image?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. From the dashboard you can download your QR code in PNG or SVG for table tents, posters, or signage at any size.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">What if a table doesn’t have a QR code?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">You can share your menu link directly (e.g. via SMS or verbally). Customers can also search for your restaurant name if you’re listed in our directory.</p>
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-8 group">
+                            <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">print</span>
+                            <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">QR &amp; Hardware</h2>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Do I need special hardware?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">No special hardware needed. The dashboard works on any browser, and you can print QR codes using any standard inkjet or laser printer.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">How long do QR codes last?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Our QR codes are static and never expire. You can change your entire menu content without ever having to replace the printed QR code stickers.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Can I download the QR as an image?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Yes. From the dashboard you can download your QR code in PNG or SVG for table tents, posters, or signage at any size.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">What if a table doesn't have a QR code?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">You can share your menu link directly (e.g. via SMS or verbally). Customers can also search for your restaurant name if you're listed in our directory.</div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="scroll-mt-40 mb-16" id="integrations">
-                <div class="flex items-center gap-3 mb-8 group">
-                    <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">hub</span>
-                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Integrations &amp; Extras</h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Do you integrate with POS or other systems?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Custom integrations and API access are available for Enterprise or specific setups. Contact us to discuss POS sync, APIs, or other technical requirements.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I take table reservations?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Yes. Our platform includes a reservation system so guests can book tables online. You can manage availability and reduce no-shows from your dashboard.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Can I use my own domain for my menu?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Custom domain (e.g. menu.yourrestaurant.com) is available on Enterprise plans. Contact us for setup and we’ll guide you through linking your domain.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">Where do I manage my menu and orders?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">After signing up, you’ll use the dashboard (our-menu.online) to manage your restaurant, menu items, orders, reservations, and QR code. Everything is in one place.</p>
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-8 group">
+                            <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">hub</span>
+                            <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Integrations &amp; Extras</h2>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Do you integrate with POS or other systems?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Custom integrations and API access are available for Enterprise or specific setups. Contact us to discuss POS sync, APIs, or other technical requirements.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Can I take table reservations?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Yes. Our platform includes a reservation system so guests can book tables online. You can manage availability and reduce no-shows from your dashboard.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Can I use my own domain for my menu?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Custom domain (e.g. menu.yourrestaurant.com) is available on Enterprise plans. Contact us for setup and we'll guide you through linking your domain.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">Where do I manage my menu and orders?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">After signing up, you'll use the dashboard (our-menu.online) to manage your restaurant, menu items, orders, reservations, and QR code. Everything is in one place.</div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="scroll-mt-40 mb-16" id="payments">
-                <div class="flex items-center gap-3 mb-8 group">
-                    <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">payments</span>
-                    <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Billing &amp; Payments</h2>
-                </div>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">What payment methods do you accept?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">We accept major credit and debit cards. Pricing is in Naira (₦); see the Pricing page for current plan amounts. Enterprise customers can arrange custom billing.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">What plans are available?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Starter (single location, limited categories/items, one template), Professional (more items, all templates, food ordering), and Enterprise (unlimited, custom domain). Details are on our Pricing page.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">When am I charged?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Subscriptions are charged at the start of each billing period (monthly or annually). You’ll receive an email receipt and can view invoices in your dashboard.</p>
-                    </div>
-                    <div class="p-6 border border-slate-200 dark:border-slate-800 rounded-xl hover:shadow-lg transition-all group cursor-pointer bg-slate-50/50 dark:bg-slate-900/30">
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3 group-hover:text-primary transition-colors">How do I update my plan or billing?</h3>
-                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Log in at our-menu.online and go to your account or billing settings. You can update your card, change plan, or contact support for refunds (see Terms of Service).</p>
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-8 group">
+                            <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">payments</span>
+                            <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Billing &amp; Payments</h2>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">What payment methods do you accept?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">We accept major credit and debit cards. Pricing is in Naira (₦); see the Pricing page for current plan amounts. Enterprise customers can arrange custom billing.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">What plans are available?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Starter (single location, limited categories/items, one template), Professional (more items, all templates, food ordering), and Enterprise (unlimited, custom domain). Details are on our Pricing page.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">When am I charged?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Subscriptions are charged at the start of each billing period (monthly or annually). You'll receive an email receipt and can view invoices in your dashboard.</div></div>
+                            </div>
+                            <div class="faq-accordion-item border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden">
+                                <button type="button" class="faq-question w-full flex items-center justify-between gap-4 text-left px-5 py-4 bg-slate-50/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-slate-900 dark:text-white text-sm md:text-base">How do I update my plan or billing?<span class="faq-chevron material-symbols-outlined text-primary shrink-0 transition-transform">expand_more</span></button>
+                                <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Log in at our-menu.online and go to your account or billing settings. You can update your card, change plan, or contact support for refunds (see Terms of Service).</div></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- CTA (same design system as homepage: bg-primary rounded-3xl) -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <div class="bg-primary rounded-3xl p-10 md:p-20 relative overflow-hidden">
-            <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
-            <div class="relative">
-                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Can't find what you're looking for?</h2>
-                <p class="text-white/90 text-lg mb-10 max-w-2xl mx-auto">Our dedicated success team is available to help you optimize your digital experience.</p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="w-full sm:w-auto min-w-[220px] h-14 bg-[#111827] text-white font-bold rounded-xl flex items-center justify-center gap-3 hover:bg-[#111827]/90 transition-all shadow-lg">
-                        <span class="material-symbols-outlined">mail</span> Contact Support
-                    </a>
-                    <button type="button" class="w-full sm:w-auto min-w-[220px] h-14 bg-white/10 text-white border-2 border-white/30 font-bold rounded-xl flex items-center justify-center gap-3 hover:bg-white/20 transition-all">
-                        <span class="material-symbols-outlined">chat</span> Live Chat
-                    </button>
-                </div>
+    <!-- CTA (full-width like homepage: section.py-24.bg-primary) -->
+    <section class="py-24 bg-primary relative overflow-hidden">
+        <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl lg:text-5xl font-black text-white mb-8 leading-tight">Can't find what you're looking for?</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="bg-[#111827] text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-[#111827]/90 transition-all shadow-2xl flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined">mail</span> Contact Support
+                </a>
+                <button type="button" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined">chat</span> Live Chat
+                </button>
             </div>
+            <p class="mt-8 text-white/80 font-medium">Our dedicated success team is available to help you optimize your digital experience.</p>
         </div>
     </section>
 

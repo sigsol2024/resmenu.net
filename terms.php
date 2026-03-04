@@ -28,6 +28,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'Resmenu');
                         "primary": "#f97415",
                         "background-light": "#f8f7f5",
                         "background-dark": "#23170f",
+                        "dark-slate": "#111827",
                     },
                     fontFamily: { "display": ["Inter", "sans-serif"] },
                     borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
@@ -48,7 +49,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'Resmenu');
     </style>
 </head>
 <body class="bg-background-light text-slate-900 font-display">
-<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col">
     <?php include __DIR__ . '/includes/header.php'; ?>
 
     <!-- Hero Section -->

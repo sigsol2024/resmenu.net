@@ -20,7 +20,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'Resmenu');
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
-        tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#f97415", "background-light": "#f8f7f5", "background-dark": "#23170f" }, fontFamily: { "display": ["Inter", "sans-serif"] }, borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" } } } }
+        tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#f97415", "background-light": "#f8f7f5", "background-dark": "#23170f", "dark-slate": "#111827" }, fontFamily: { "display": ["Inter", "sans-serif"] }, borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" } } } }
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
@@ -28,7 +28,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'Resmenu');
     </style>
 </head>
 <body class="bg-background-light text-slate-900 font-display">
-<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col">
     <?php include __DIR__ . '/includes/header.php'; ?>
 
     <!-- Hero -->
