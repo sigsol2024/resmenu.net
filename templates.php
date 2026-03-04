@@ -150,6 +150,7 @@ if (empty($templates)) {
 <!-- CTA -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
     <div class="bg-primary rounded-3xl p-10 md:p-20 relative overflow-hidden">
+        <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/bh_pattern-black.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
         <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 relative z-10">Start Building Your Digital Menu Today</h2>
         <p class="text-white/90 text-lg mb-10 max-w-2xl mx-auto relative z-10">
             Join thousands of restaurants worldwide that are modernizing their guest experience with SigSol Resmenu.
