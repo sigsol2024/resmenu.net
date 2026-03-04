@@ -15,8 +15,8 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $siteSettings = getSiteSettings();
 $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 ?>
-<!-- Footer (same as home page) -->
-<footer class="bg-dark-slate text-white py-20">
+<!-- Footer (same as home page) - dark background #111827 on all pages -->
+<footer class="bg-[#111827] text-white py-20">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
 <div class="space-y-6">
