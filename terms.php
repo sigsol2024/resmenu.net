@@ -1,143 +1,170 @@
+<?php
+/**
+ * Terms and Conditions - resmenu.net
+ */
+require_once __DIR__ . '/config/config.php';
+$baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
+$authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Terms and Conditions - SigSol Resmenu</title>
-    <meta name="description" content="Terms and conditions for using SigSol Resmenu platform">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
-    
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="/assets/css/marketing.css">
-    <!-- Tailwind for shared header/footer (same as home page) -->
+    <meta name="description" content="Terms and conditions for using SigSol Resmenu digital menu platform"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#f97415","background-light":"#f8f7f5","background-dark":"#23170f","dark-slate":"#111827"}}}};</script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97415",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#23170f",
+                    },
+                    fontFamily: { "display": ["Inter", "sans-serif"] },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-gradient {
+            background: linear-gradient(90deg, rgba(35, 23, 15, 0.9) 0%, rgba(249, 116, 21, 0.4) 100%);
+        }
+    </style>
 </head>
-<body class="bg-background-light text-slate-900">
-    <?php 
-    $breadcrumbs = [
-        ['label' => 'Home', 'url' => '/'],
-        ['label' => 'Terms and Conditions']
-    ];
-    include __DIR__ . '/includes/header.php'; 
-    include __DIR__ . '/includes/breadcrumb.php'; 
-    ?>
-    
-    <section class="section">
-        <div style="max-width: 800px; margin: 0 auto;">
-            <h1 style="margin-bottom: 24px;">Terms and Conditions</h1>
-            <p style="color: #6b7280; margin-bottom: 40px;">Last updated: <?php echo date('F j, Y'); ?></p>
-            
-            <div style="line-height: 1.8; color: #374151;">
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">1. Acceptance of Terms</h2>
-                    <p>
-                        By accessing and using SigSol Resmenu ("the Platform"), you accept and agree to be bound by the terms 
-                        and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+<body class="bg-background-light text-slate-900 font-display">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+    <?php include __DIR__ . '/includes/header.php'; ?>
+
+    <!-- Hero Section -->
+    <div class="relative w-full h-[320px] overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/kabab-template.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative h-full flex flex-col justify-center px-6 md:px-20 max-w-[1200px] mx-auto text-white">
+            <nav class="flex items-center gap-2 text-primary/80 mb-6 uppercase tracking-widest text-xs font-bold">
+                <a class="hover:text-white transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
+                <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                <span class="text-white">Terms and Conditions</span>
+            </nav>
+            <h1 class="text-4xl md:text-5xl font-black mb-4 tracking-tight">Terms and Conditions</h1>
+            <p class="text-lg md:text-xl text-slate-200 max-w-2xl font-light leading-relaxed">
+                Please read these terms carefully before using our digital menu platform. Your agreement to these terms is required to access SigSol Resmenu services.
+            </p>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <main class="bg-white py-12 md:py-20 px-6 md:px-20">
+        <div class="max-w-[800px] mx-auto">
+            <div class="prose prose-slate max-w-none">
+                <section class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg font-bold">1</span>
+                        Introduction
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Welcome to SigSol Resmenu. These Terms and Conditions govern your use of our website and services. By accessing or using our platform, you agree to be bound by these terms. If you do not agree with any part of these terms, you may not use our services.
                     </p>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">2. Use License</h2>
-                    <p>
-                        Permission is granted to temporarily use SigSol Resmenu for personal and commercial purposes. This is the 
-                        grant of a license, not a transfer of title, and under this license you may not:
+                    <p class="text-slate-600 leading-relaxed">
+                        Our platform provides digital menu solutions for restaurants and hospitality businesses. These terms apply to all visitors, users, and others who access or use the Service.
                     </p>
-                    <ul style="margin-left: 24px; margin-top: 12px; color: #6b7280;">
-                        <li>Modify or copy the materials</li>
-                        <li>Use the materials for any commercial purpose without written consent</li>
-                        <li>Attempt to decompile or reverse engineer any software</li>
-                        <li>Remove any copyright or other proprietary notations</li>
+                </section>
+
+                <section class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg font-bold">2</span>
+                        Use of License
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Permission is granted to temporarily download one copy of the materials on SigSol Resmenu's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2 text-slate-600">
+                        <li>Modify or copy the materials;</li>
+                        <li>Use the materials for any commercial purpose, or for any public display;</li>
+                        <li>Attempt to decompile or reverse engineer any software contained on the website;</li>
+                        <li>Remove any copyright or other proprietary notations from the materials.</li>
                     </ul>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">3. Account Registration</h2>
-                    <p>
-                        To access certain features of the Platform, you must register for an account. You agree to provide 
-                        accurate, current, and complete information during registration and to update such information to keep 
-                        it accurate, current, and complete.
+                </section>
+
+                <section class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg font-bold">3</span>
+                        User Obligations
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.
                     </p>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">4. User Content</h2>
-                    <p>
-                        You retain ownership of any content you submit to the Platform. By submitting content, you grant us a 
-                        worldwide, non-exclusive, royalty-free license to use, reproduce, and distribute your content solely for 
-                        the purpose of providing and improving the Platform.
+                </section>
+
+                <section class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg font-bold">4</span>
+                        Fees and Payments
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Some parts of the Service are billed on a subscription basis. You will be billed in advance on a recurring and periodic basis. Subscription periods are set either on a monthly or annual basis, depending on the type of subscription plan you select when purchasing a Subscription.
                     </p>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">5. Payment Terms</h2>
-                    <p>
-                        Subscription fees are billed in advance on a monthly or annual basis. All fees are non-refundable except 
-                        as required by law. You are responsible for any applicable taxes. We reserve the right to change our pricing 
-                        with 30 days' notice.
+                </section>
+
+                <section class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg font-bold">5</span>
+                        Intellectual Property
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        The Service and its original content, features, and functionality are and will remain the exclusive property of SigSol Resmenu and its licensors. The Service is protected by copyright, trademark, and other laws of both the country and foreign countries.
                     </p>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">6. Cancellation and Refunds</h2>
-                    <p>
-                        You may cancel your subscription at any time. Cancellation takes effect at the end of your current billing 
-                        period. Refunds are provided only as required by law or at our sole discretion.
+                </section>
+
+                <section class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg font-bold">6</span>
+                        Termination
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        We may terminate or suspend your account and bar access to the Service immediately, without prior notice or liability, under our sole discretion, for any reason whatsoever and without limitation, including but not limited to a breach of the Terms.
                     </p>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">7. Prohibited Uses</h2>
-                    <p>You agree not to use the Platform:</p>
-                    <ul style="margin-left: 24px; margin-top: 12px; color: #6b7280;">
-                        <li>For any unlawful purpose</li>
-                        <li>To transmit any viruses or malicious code</li>
-                        <li>To interfere with or disrupt the Platform</li>
-                        <li>To impersonate any person or entity</li>
-                        <li>To collect or store personal data about other users</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">8. Intellectual Property</h2>
-                    <p>
-                        The Platform and its original content, features, and functionality are owned by SigSol Resmenu and are 
-                        protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.
+                </section>
+
+                <section class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg font-bold">7</span>
+                        Limitation of Liability
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        In no event shall SigSol Resmenu, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
                     </p>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">9. Limitation of Liability</h2>
-                    <p>
-                        In no event shall SigSol Resmenu, its directors, employees, or agents be liable for any indirect, 
-                        incidental, special, consequential, or punitive damages resulting from your use or inability to use the Platform.
+                </section>
+
+                <section class="mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <span class="size-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center text-lg font-bold">8</span>
+                        Governing Law
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        These Terms shall be governed and construed in accordance with the laws of the jurisdiction in which SigSol Resmenu operates, without regard to its conflict of law provisions.
                     </p>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">10. Changes to Terms</h2>
-                    <p>
-                        We reserve the right to modify these terms at any time. We will notify users of any material changes by 
-                        posting the new terms on this page and updating the "Last updated" date.
-                    </p>
-                </div>
-                
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin-bottom: 16px; color: #111827;">11. Contact Information</h2>
-                    <p>
-                        If you have any questions about these Terms and Conditions, please contact us at 
-                        <a href="mailto:legal@sigsolresmenu.com" style="color: #667eea;">legal@sigsolresmenu.com</a>.
-                    </p>
+                </section>
+
+                <div class="mt-20 pt-10 border-t border-slate-200 text-center">
+                    <p class="text-sm text-slate-500 italic">Last Updated: <?php echo date('F j, Y'); ?></p>
+                    <div class="mt-8 flex flex-wrap justify-center gap-4">
+                        <a href="<?php echo htmlspecialchars($authUrl); ?>" class="px-8 py-3 bg-primary text-white font-bold rounded-lg hover:opacity-90 transition-all">Accept Terms</a>
+                        <a href="#" class="px-8 py-3 border border-slate-200 font-bold rounded-lg hover:bg-slate-50 transition-all">Download PDF</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
-    
+    </main>
+
     <?php include __DIR__ . '/includes/footer.php'; ?>
+</div>
 </body>
 </html>
