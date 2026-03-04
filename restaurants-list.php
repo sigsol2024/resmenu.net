@@ -24,8 +24,12 @@ $breadcrumbs = [
     
     <!-- Stylesheet -->
     <link rel="stylesheet" href="/assets/css/marketing.css">
+    <!-- Tailwind for shared header/footer (same as home page) -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary":"#f97415","background-light":"#f8f7f5","background-dark":"#23170f","dark-slate":"#111827"}}}};</script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-background-light text-slate-900">
     <?php include __DIR__ . '/includes/header.php'; ?>
     <?php include __DIR__ . '/includes/breadcrumb.php'; ?>
     
