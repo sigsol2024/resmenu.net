@@ -1,19 +1,38 @@
 <?php
 /**
  * Templates Page - resmenu.net
- * New design with shared header/footer. Preview links to backend templateN-preview.
+ * Fetches template data from backend API. Preview links to backend templateN-preview.
  */
 require_once __DIR__ . '/config/config.php';
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
 $backendUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') : 'https://our-menu.online';
 
-$templates = [
-    ['id' => 1, 'name' => 'Modern Classic', 'badge' => 'Popular', 'description' => 'Elegant and sophisticated fine dining style. Perfect for Signature Bistros featuring multi-course menus and wine pairings.', 'preview_bg' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuCvTZ2osPuK4-ItcHMziSEg7d0NA_fHOMP0RWS_Y_YuBXuEf81qjpNGLUFJEWVJ9NnFDCndE9yTIGpZJm_tmGOTqYgOUVTMhkYlQWuZGC8qxD_MI6tUsRNye6NZzpHzlhHWWDHcfIEmyafCu9GSCfxD2_5af73rJpZRD1cxoYbYv-OaxbQM-aeJg118YLhqnatKAbWMewESdcaH5bkyPIPgO2d-HdvPsNWdNQ9IeomcHSpmVt2BXIyqk4QGjbe0vGpIwutZ_82nfMmY'],
-    ['id' => 2, 'name' => 'Dark Luxury', 'badge' => null, 'description' => 'Premium lounge aesthetic with dark mode optimization. Ideal for Skyline Lounges, cocktail bars, and premium bottle service.', 'preview_bg' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuA26eME1JcD-BKiAR84Q5IR5Z9VVcJCB_SlXzbjngaVsYSrdg5mj4xhiFoHWAo4FkwXDUbEey7d6eMeB_RBJ9n6it4ltaM7lM3xohv8Vh_2a6QaefMg3O6Dfx5rbOnDZgwKZXWMK48AG5ASPVm8pSTh4I9xa8yEjtm5q7CcH7mdIaYeVpzWPV8a7mZ7XOgH5F7s41zmhIlA3IA7PgVCbc5EyeKHuteWGVKXaOTcAUVOhZ-AsN3CRa7qrmB5fyPZbwBcO9da03_DcEFe'],
-    ['id' => 3, 'name' => 'Café Minimal', 'badge' => null, 'description' => 'Clean, bright, and easy to navigate. Designed for coffee shops and bakeries looking for a fresh, modern aesthetic.', 'preview_bg' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuB2LiAwGspMnndSVVl3vqjF-XIjR2BH4fZNRyocf_tjGj2JlcdaTPB3JDyQtNeCzjU0se84KgJ_Fh-dNMSQhxOyYSWHlVjhD1tATTTXTVNI765PHrg-bZ53Awk3J-FbYqdj2bV-V3gPLJnkvLLzW5WLtowh3VcTtFKiC0F-72xBdO8oqBO0qlBI8TvUQfP-_F2FpWkwVVgmvdCx0G3VHWRD9egdPwganzLBZDAE9nq1McdJmjZr72TPAkhsc2Uqw_j8n43eZn4anL3m'],
-    ['id' => 4, 'name' => 'Rustic Charm', 'badge' => null, 'description' => 'Warm, wood-textured layout that evokes a cozy steakhouse or traditional pub atmosphere. Focuses on hearty meals.', 'preview_bg' => 'https://lh3.googleusercontent.com/aida-public/AB6AXuC-fyxHYs77-drzIkORSXRCxAiyqe0PcDujNLFjzD9VtKIL9ZGOkO2a9_hPcwou7onYD3HFLCSCNUhnoEWUslH0Gjhitkd7oCLNCT1RBwP7cF0PM2IWnTmln3ENoeZ7lRskFoxoWlFdBXcKAdKhN-BWoCtgPTOyEgapUrtBjFKSYsJkKij73r2mjDOLmVhWsjzPPk0GfbRVPf5N8ldCAanItWlj48rllL_tbTHx4gZSRp2P9bwunIPI_ioKsEYM39JrTnLgQ4rBzRSv'],
-];
+$templates = [];
+$apiUrl = $backendUrl . '/api/templates.php';
+$ctx = stream_context_create(['http' => ['timeout' => 5]]);
+$json = @file_get_contents($apiUrl, false, $ctx);
+if ($json !== false) {
+    $decoded = json_decode($json, true);
+    if (!empty($decoded['success']) && !empty($decoded['data']) && is_array($decoded['data'])) {
+        foreach ($decoded['data'] as $row) {
+            $templates[] = [
+                'id' => (int) ($row['id'] ?? 0),
+                'name' => $row['name'] ?? 'Template ' . ($row['id'] ?? 0),
+                'description' => $row['description'] ?? '',
+                'preview_bg' => $row['preview_image'] ?? '',
+            ];
+        }
+    }
+}
+if (empty($templates)) {
+    $templates = [
+        ['id' => 1, 'name' => 'Template 1', 'description' => '', 'preview_bg' => ''],
+        ['id' => 2, 'name' => 'Template 2', 'description' => '', 'preview_bg' => ''],
+        ['id' => 3, 'name' => 'Template 3', 'description' => '', 'preview_bg' => ''],
+        ['id' => 4, 'name' => 'Template 4', 'description' => '', 'preview_bg' => ''],
+    ];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,15 +89,14 @@ $templates = [
         <?php foreach ($templates as $t): ?>
         <div class="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
             <div class="aspect-[16/10] overflow-hidden bg-slate-200 relative">
+                <?php if (!empty($t['preview_bg'])): ?>
                 <div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('<?php echo htmlspecialchars($t['preview_bg']); ?>');"></div>
+                <?php endif; ?>
                 <div class="absolute inset-0 bg-black/5"></div>
             </div>
             <div class="p-8 flex flex-col h-full">
                 <div class="flex justify-between items-start mb-2">
                     <h3 class="text-2xl font-bold text-slate-900"><?php echo htmlspecialchars($t['name']); ?></h3>
-                    <?php if (!empty($t['badge'])): ?>
-                    <span class="bg-primary/10 text-primary text-xs font-bold px-2 py-1 rounded"><?php echo htmlspecialchars($t['badge']); ?></span>
-                    <?php endif; ?>
                 </div>
                 <p class="text-slate-600 mb-8 flex-grow"><?php echo htmlspecialchars($t['description']); ?></p>
                 <div class="flex flex-wrap gap-4">
