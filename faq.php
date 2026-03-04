@@ -83,8 +83,8 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
     </section>
 
     <div class="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row min-h-screen">
-        <aside class="w-full md:w-72 lg:w-80 shrink-0 md:self-start border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 md:sticky md:top-20 md:h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] md:overflow-y-auto no-scrollbar">
-            <div class="space-y-8">
+        <aside class="w-full md:w-72 lg:w-80 shrink-0 md:self-start border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-6 pb-24 md:sticky md:top-20 md:h-[calc(100vh-80px)] md:max-h-[calc(100vh-80px)] md:overflow-y-auto no-scrollbar">
+            <div class="space-y-8 pb-8">
                 <div>
                     <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Getting Started</h3>
                     <nav class="flex flex-col gap-1">
@@ -128,13 +128,6 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
         </aside>
 
         <main class="flex-1 bg-white dark:bg-background-dark p-6 md:p-12">
-            <div class="sticky top-[80px] z-30 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md pb-8 mb-8">
-                <div class="relative group">
-                    <span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
-                    <input class="w-full h-16 pl-14 pr-6 rounded-2xl border-2 border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:border-primary focus:ring-0 text-lg transition-all shadow-sm" placeholder="Search knowledge base articles, tutorials, and documentation..." type="text"/>
-                </div>
-            </div>
-
             <div class="scroll-mt-40 mb-16" id="general">
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
                     <div class="p-6 md:p-8">
@@ -398,32 +391,17 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 </div>
 <script>
 (function() {
-    var searchInput = document.querySelector('main input[type="text"]');
-    if (searchInput) {
-        searchInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                var q = this.value.trim().toLowerCase();
-                if (!q) return;
-                var sections = document.querySelectorAll('main [id]');
-                for (var i = 0; i < sections.length; i++) {
-                    var section = sections[i];
-                    var text = (section.innerText || '').toLowerCase();
-                    if (text.indexOf(q) !== -1) {
-                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        return;
-                    }
-                }
-            }
-        });
-    }
     var sidebarLinks = document.querySelectorAll('.knowledge-sidebar-link');
     var sectionIds = ['general','account','design','items','modifiers','hardware','integrations','payments'];
     function updateActiveLink() {
-        var top = window.scrollY + 100;
+        var trigger = window.scrollY + 120;
         var current = '';
         sectionIds.forEach(function(id) {
             var el = document.getElementById(id);
-            if (el && el.offsetTop <= top) current = id;
+            if (!el) return;
+            var rect = el.getBoundingClientRect();
+            var sectionTop = rect.top + window.scrollY;
+            if (sectionTop <= trigger) current = id;
         });
         sidebarLinks.forEach(function(link) {
             var href = link.getAttribute('href');
@@ -435,6 +413,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
     }
     window.addEventListener('scroll', updateActiveLink);
     window.addEventListener('load', updateActiveLink);
+    window.addEventListener('hashchange', updateActiveLink);
 
     document.querySelectorAll('.faq-accordion-item').forEach(function(item) {
         var btn = item.querySelector('.faq-question');
