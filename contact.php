@@ -132,49 +132,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
 
     <main class="max-w-[1400px] mx-auto px-6 py-16 md:py-24">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
             <!-- Structured Support -->
-            <div class="lg:col-span-3 space-y-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-6 text-slate-900 dark:text-white">Structured Support</h3>
-                    <div class="space-y-6">
-                        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
-                            <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
-                                <span class="material-symbols-outlined">payments</span>
-                            </div>
-                            <h4 class="font-bold text-slate-900 dark:text-white mb-2">Sales Inquiries</h4>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider font-semibold">New business &amp; pricing</p>
-                            <a class="block text-sm text-primary font-medium hover:underline mb-1" href="mailto:<?php echo htmlspecialchars($contactSalesEmail); ?>"><?php echo htmlspecialchars($contactSalesEmail); ?></a>
-                            <?php if (!empty($contactSalesPhone)): ?>
-                            <p class="text-sm text-slate-600 dark:text-slate-400"><?php echo htmlspecialchars($contactSalesPhone); ?></p>
-                            <?php endif; ?>
+            <div class="lg:col-span-3 h-full flex flex-col min-h-0">
+                <h3 class="text-xl font-bold mb-6 text-slate-900 dark:text-white flex-shrink-0">Structured Support</h3>
+                <div class="flex-1 flex flex-col gap-6 min-h-0">
+                    <div class="flex-1 min-h-0 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+                        <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 flex-shrink-0">
+                            <span class="material-symbols-outlined">payments</span>
                         </div>
-                        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
-                            <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
-                                <span class="material-symbols-outlined">handyman</span>
-                            </div>
-                            <h4 class="font-bold text-slate-900 dark:text-white mb-2">Technical Support</h4>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider font-semibold">Platform assistance</p>
-                            <a class="block text-sm text-primary font-medium hover:underline mb-1" href="mailto:<?php echo htmlspecialchars($contactSupportEmail); ?>"><?php echo htmlspecialchars($contactSupportEmail); ?></a>
-                            <?php if (!empty($contactSupportPhone)): ?>
-                            <p class="text-sm text-slate-600 dark:text-slate-400"><?php echo htmlspecialchars($contactSupportPhone); ?></p>
-                            <?php endif; ?>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-2">Sales Inquiries</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider font-semibold">New business &amp; pricing</p>
+                        <a class="block text-sm text-primary font-medium hover:underline mb-1" href="mailto:<?php echo htmlspecialchars($contactSalesEmail); ?>"><?php echo htmlspecialchars($contactSalesEmail); ?></a>
+                        <?php if (!empty($contactSalesPhone)): ?>
+                        <p class="text-sm text-slate-600 dark:text-slate-400"><?php echo htmlspecialchars($contactSalesPhone); ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="flex-1 min-h-0 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+                        <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 flex-shrink-0">
+                            <span class="material-symbols-outlined">handyman</span>
                         </div>
-                        <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
-                            <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
-                                <span class="material-symbols-outlined">hub</span>
-                            </div>
-                            <h4 class="font-bold text-slate-900 dark:text-white mb-2">Partnerships</h4>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider font-semibold">Collaborations</p>
-                            <a class="block text-sm text-primary font-medium hover:underline mb-1" href="mailto:<?php echo htmlspecialchars($contactPartnersEmail); ?>"><?php echo htmlspecialchars($contactPartnersEmail); ?></a>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-2">Technical Support</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider font-semibold">Platform assistance</p>
+                        <a class="block text-sm text-primary font-medium hover:underline mb-1" href="mailto:<?php echo htmlspecialchars($contactSupportEmail); ?>"><?php echo htmlspecialchars($contactSupportEmail); ?></a>
+                        <?php if (!empty($contactSupportPhone)): ?>
+                        <p class="text-sm text-slate-600 dark:text-slate-400"><?php echo htmlspecialchars($contactSupportPhone); ?></p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="flex-1 min-h-0 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
+                        <div class="size-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 flex-shrink-0">
+                            <span class="material-symbols-outlined">hub</span>
                         </div>
+                        <h4 class="font-bold text-slate-900 dark:text-white mb-2">Partnerships</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider font-semibold">Collaborations</p>
+                        <a class="block text-sm text-primary font-medium hover:underline mb-1" href="mailto:<?php echo htmlspecialchars($contactPartnersEmail); ?>"><?php echo htmlspecialchars($contactPartnersEmail); ?></a>
                     </div>
                 </div>
             </div>
 
             <!-- Send us a Message -->
-            <div class="lg:col-span-5">
-                <div class="bg-white dark:bg-slate-900 p-8 md:p-10 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800">
+            <div class="lg:col-span-5 flex flex-col min-h-0">
+                <div class="bg-white dark:bg-slate-900 p-8 md:p-10 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 h-full flex flex-col min-h-0">
                     <h3 class="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Send us a Message</h3>
                     <form id="contactForm" method="POST" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -224,68 +222,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
-            <!-- Global Presence & Follow -->
-            <div class="lg:col-span-4 space-y-10">
-                <div class="space-y-8">
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Global Presence</h3>
-                    <div class="flex items-start gap-4">
-                        <div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
-                            <span class="material-symbols-outlined">location_on</span>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900 dark:text-white mb-1"><?php echo htmlspecialchars($contactHqTitle); ?></h4>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                                <?php echo nl2br(htmlspecialchars($contactHqAddress)); ?>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-lg">
-                    <div class="bg-slate-100 dark:bg-slate-800 aspect-[4/5] relative">
-                        <?php if (!empty($contactMapEmbed)): ?>
-                        <div class="absolute inset-0">
-                            <?php echo $contactMapEmbed; ?>
-                        </div>
-                        <?php elseif (!empty(trim($contactHqAddress))): ?>
-                        <iframe
-                            title="Location map"
-                            class="absolute inset-0 w-full h-full border-0"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            src="<?php echo 'https://www.google.com/maps?q=' . urlencode($contactHqAddress) . '&output=embed'; ?>">
-                        </iframe>
-                        <?php else: ?>
-                        <img alt="World map with office locations" class="w-full h-full object-cover opacity-80 mix-blend-multiply dark:mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCbvpqapYLxS_Cb2s2cqOETY64XRb9rP6UrEMGmtSOslOTrjJLrUeirvGXXuarByDtEfYW_Io8529PwRnejTeoGxZeC2ncwvo1Nn4_9YrlawDJmlM0k8xmN4ktk6kP3jmXz0eFsKcV2ggVNwImSm9y1ts2_ETLLH1963DCTMPsf-Xajt1XBtjXg2zeJqRmHtCnH4tTfjDwFvuVpJDEnpeHxTU91KZxrWkcr83yz8ltQLXCo5pnWXuNB-dTDZmD4yI261yesTXawkhv"/>
-                        <div class="absolute top-1/2 left-1/3 group cursor-pointer">
-                            <div class="size-3 bg-primary rounded-full animate-ping absolute inset-0"></div>
-                            <div class="size-3 bg-primary rounded-full relative"></div>
-                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-slate-900 text-[10px] font-bold px-2 py-1 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">London Office</div>
-                        </div>
-                        <div class="absolute top-[65%] left-[51%] group cursor-pointer">
-                            <div class="size-4 bg-primary border-2 border-white rounded-full relative"></div>
-                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-slate-900 text-[10px] font-bold px-2 py-1 rounded shadow-lg whitespace-nowrap">Lagos HQ</div>
-                        </div>
-                        <div class="absolute top-[45%] left-[75%] group cursor-pointer">
-                            <div class="size-3 bg-primary/60 rounded-full relative"></div>
-                            <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-slate-900 text-[10px] font-bold px-2 py-1 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Dubai Partner</div>
-                        </div>
-                        <div class="absolute bottom-6 left-6 right-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm p-5 rounded-xl shadow-2xl border border-primary/20">
-                            <div class="flex items-center justify-between mb-3">
-                                <span class="text-[10px] font-bold text-primary uppercase tracking-widest">Our Network</span>
-                                <div class="flex gap-1">
-                                    <span class="size-1.5 rounded-full bg-primary"></span>
-                                    <span class="size-1.5 rounded-full bg-slate-300"></span>
-                                    <span class="size-1.5 rounded-full bg-slate-300"></span>
-                                </div>
+            <!-- Right: Map box + Follow us box (equal height row with left & form) -->
+            <div class="lg:col-span-4 h-full flex flex-col gap-6 min-h-0">
+                <!-- Global Presence + Map (own card, reduced map height) -->
+                <div class="flex-1 min-h-0 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+                    <div class="p-6 flex-shrink-0">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Global Presence</h3>
+                        <div class="flex items-start gap-4">
+                            <div class="size-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                <span class="material-symbols-outlined">location_on</span>
                             </div>
-                            <p class="text-sm font-bold text-slate-900 dark:text-white mb-1">Modernizing Hospitality Worldwide</p>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-0">Serving over 500+ restaurants across 3 continents.</p>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white mb-1"><?php echo htmlspecialchars($contactHqTitle); ?></h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                                    <?php echo nl2br(htmlspecialchars($contactHqAddress)); ?>
+                                </p>
+                            </div>
                         </div>
-                        <?php endif; ?>
+                    </div>
+                    <div class="h-56 px-6 pb-6 flex-shrink-0">
+                        <div class="relative w-full h-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow">
+                            <div class="absolute inset-0 bg-slate-100 dark:bg-slate-800">
+                                <?php if (!empty($contactMapEmbed)): ?>
+                                <div class="absolute inset-0">
+                                    <?php echo $contactMapEmbed; ?>
+                                </div>
+                                <?php elseif (!empty(trim($contactHqAddress))): ?>
+                                <iframe
+                                    title="Location map"
+                                    class="absolute inset-0 w-full h-full border-0"
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"
+                                    src="<?php echo 'https://www.google.com/maps?q=' . urlencode($contactHqAddress) . '&output=embed'; ?>">
+                                </iframe>
+                                <?php else: ?>
+                                <img alt="World map with office locations" class="w-full h-full object-cover opacity-80 mix-blend-multiply dark:mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCbvpqapYLxS_Cb2s2cqOETY64XRb9rP6UrEMGmtSOslOTrjJLrUeirvGXXuarByDtEfYW_Io8529PwRnejTeoGxZeC2ncwvo1Nn4_9YrlawDJmlM0k8xmN4ktk6kP3jmXz0eFsKcV2ggVNwImSm9y1ts2_ETLLH1963DCTMPsf-Xajt1XBtjXg2zeJqRmHtCnH4tTfjDwFvuVpJDEnpeHxTU91KZxrWkcr83yz8ltQLXCo5pnWXuNB-dTDZmD4yI261yesTXawkhv"/>
+                                <div class="absolute top-1/2 left-1/3 group cursor-pointer">
+                                    <div class="size-3 bg-primary rounded-full animate-ping absolute inset-0"></div>
+                                    <div class="size-3 bg-primary rounded-full relative"></div>
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-slate-900 text-[10px] font-bold px-2 py-1 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">London Office</div>
+                                </div>
+                                <div class="absolute top-[65%] left-[51%] group cursor-pointer">
+                                    <div class="size-4 bg-primary border-2 border-white rounded-full relative"></div>
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-slate-900 text-[10px] font-bold px-2 py-1 rounded shadow-lg whitespace-nowrap">Lagos HQ</div>
+                                </div>
+                                <div class="absolute top-[45%] left-[75%] group cursor-pointer">
+                                    <div class="size-3 bg-primary/60 rounded-full relative"></div>
+                                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white dark:bg-slate-900 text-[10px] font-bold px-2 py-1 rounded shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Dubai Partner</div>
+                                </div>
+                                <div class="absolute bottom-6 left-6 right-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm p-5 rounded-xl shadow-2xl border border-primary/20">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <span class="text-[10px] font-bold text-primary uppercase tracking-widest">Our Network</span>
+                                        <div class="flex gap-1">
+                                            <span class="size-1.5 rounded-full bg-primary"></span>
+                                            <span class="size-1.5 rounded-full bg-slate-300"></span>
+                                            <span class="size-1.5 rounded-full bg-slate-300"></span>
+                                        </div>
+                                    </div>
+                                    <p class="text-sm font-bold text-slate-900 dark:text-white mb-1">Modernizing Hospitality Worldwide</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-0">Serving over 500+ restaurants across 3 continents.</p>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="space-y-4 pt-4">
-                    <h4 class="font-bold text-slate-900 dark:text-white">Follow Us</h4>
+                <!-- Follow us (own card) -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex-shrink-0">
+                    <h4 class="font-bold text-slate-900 dark:text-white mb-4">Follow Us</h4>
                     <div class="flex gap-4">
                         <a class="size-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all" href="<?php echo htmlspecialchars($contactFacebook ?: '#'); ?>" aria-label="Facebook">
                             <svg class="size-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
