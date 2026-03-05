@@ -21,16 +21,17 @@ if ($json !== false) {
                 'name' => $row['name'] ?? 'Template ' . ($row['id'] ?? 0),
                 'description' => $row['description'] ?? '',
                 'preview_bg' => $row['preview_image'] ?? '',
+                'listing_image' => $row['listing_image'] ?? '',
             ];
         }
     }
 }
 if (empty($templates)) {
     $templates = [
-        ['id' => 1, 'name' => 'Template 1', 'description' => '', 'preview_bg' => ''],
-        ['id' => 2, 'name' => 'Template 2', 'description' => '', 'preview_bg' => ''],
-        ['id' => 3, 'name' => 'Template 3', 'description' => '', 'preview_bg' => ''],
-        ['id' => 4, 'name' => 'Template 4', 'description' => '', 'preview_bg' => ''],
+        ['id' => 1, 'name' => 'Template 1', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
+        ['id' => 2, 'name' => 'Template 2', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
+        ['id' => 3, 'name' => 'Template 3', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
+        ['id' => 4, 'name' => 'Template 4', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
     ];
 }
 ?>
@@ -83,23 +84,26 @@ if (empty($templates)) {
     </div>
 </section>
 
-<!-- Template grid -->
+<!-- Template timeline (listing image + title + description; no iframe) -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <?php foreach ($templates as $t):
-            $previewUrl = htmlspecialchars($backendUrl . '/template' . (int)$t['id'] . '-preview');
+    <div class="space-y-12">
+        <?php foreach ($templates as $index => $t):
+            $previewPageUrl = $backendUrl . '/template' . (int)$t['id'] . '-preview';
+            $listingImg = !empty($t['listing_image']) ? $t['listing_image'] : (!empty($t['preview_bg']) ? $t['preview_bg'] : $baseUrl . '/assets/images/kabab-template.jpg');
+            $isEven = ($index % 2) === 0;
         ?>
-        <div class="group flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all border border-slate-100">
-            <div class="overflow-hidden bg-slate-100 relative rounded-t-xl border-b border-slate-200 shrink-0">
-                <iframe src="<?php echo $previewUrl; ?>" title="Preview: <?php echo htmlspecialchars($t['name']); ?>" class="w-full border-0 block" style="height: 420px;"></iframe>
+        <div class="flex flex-col <?php echo $isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-8 lg:gap-12 items-center bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 p-0">
+            <div class="w-full lg:w-2/5 flex-shrink-0">
+                <div class="aspect-[4/3] lg:aspect-[3/2] bg-slate-100 rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
+                    <img src="<?php echo htmlspecialchars($listingImg); ?>" alt="<?php echo htmlspecialchars($t['name']); ?>" class="w-full h-full object-cover">
+                </div>
             </div>
-            <div class="p-6 flex flex-col flex-1 min-h-0">
-                <h3 class="text-xl font-bold text-slate-900 mb-2"><?php echo htmlspecialchars($t['name']); ?></h3>
-                <p class="text-slate-600 text-sm leading-relaxed"><?php echo htmlspecialchars($t['description']); ?></p>
-                <div class="flex-grow min-h-4"></div>
-                <div class="flex flex-wrap gap-4 pt-4">
-                    <a href="<?php echo htmlspecialchars($authUrl); ?>" class="flex-1 bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">Use This Template</a>
-                    <a href="<?php echo htmlspecialchars($backendUrl); ?>/template<?php echo (int)$t['id']; ?>-preview" target="_blank" rel="noopener" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 px-6 rounded-lg font-bold transition-colors text-center">Preview Demo</a>
+            <div class="flex-1 p-6 lg:p-10 flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-slate-900 mb-3"><?php echo htmlspecialchars($t['name']); ?></h3>
+                <p class="text-slate-600 leading-relaxed mb-6"><?php echo nl2br(htmlspecialchars($t['description'] ?: 'A professional digital menu template.')); ?></p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">Use This Template</a>
+                    <a href="<?php echo htmlspecialchars($previewPageUrl); ?>" target="_blank" rel="noopener" class="bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 px-6 rounded-lg font-bold transition-colors text-center">Preview Demo</a>
                 </div>
             </div>
         </div>
