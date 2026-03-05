@@ -95,13 +95,13 @@ $templates = array_slice($templates, 0, 5);
             $listingImg = !empty($t['listing_image']) ? $t['listing_image'] : (!empty($t['preview_bg']) ? $t['preview_bg'] : $baseUrl . '/assets/images/kabab-template.jpg');
             $isEven = ($index % 2) === 0;
         ?>
-        <div class="flex flex-col <?php echo $isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-8 lg:gap-12 items-center bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 p-0">
-            <div class="w-full lg:w-2/5 flex-shrink-0">
-                <div class="aspect-[4/3] lg:aspect-[3/2] bg-slate-100 rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
+        <div class="flex flex-col <?php echo $isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-0 items-stretch bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
+            <div class="w-full lg:w-[60%] flex-shrink-0">
+                <div class="aspect-[4/3] lg:aspect-auto lg:min-h-[280px] h-full bg-slate-100 rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
                     <img src="<?php echo htmlspecialchars($listingImg); ?>" alt="<?php echo htmlspecialchars($t['name']); ?>" class="w-full h-full object-cover">
                 </div>
             </div>
-            <div class="flex-1 p-6 lg:p-10 flex flex-col justify-center">
+            <div class="w-full lg:w-[40%] flex-shrink-0 p-6 lg:p-10 flex flex-col justify-center bg-white/80 backdrop-blur-md border-slate-200 <?php echo $isEven ? 'lg:border-l' : 'lg:border-r'; ?>">
                 <h3 class="text-2xl font-bold text-slate-900 mb-3"><?php echo htmlspecialchars($t['name']); ?></h3>
                 <p class="text-slate-600 leading-relaxed mb-6"><?php echo nl2br(htmlspecialchars($t['description'] ?: 'A professional digital menu template.')); ?></p>
                 <div class="flex flex-wrap gap-4">
@@ -117,13 +117,13 @@ $templates = array_slice($templates, 0, 5);
         $isEvenCustom = ($customIndex % 2) === 0;
         $customImage = $baseUrl . '/assets/images/kabab-template.jpg';
         ?>
-        <div class="flex flex-col <?php echo $isEvenCustom ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-8 lg:gap-12 items-center bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 p-0">
-            <div class="w-full lg:w-2/5 flex-shrink-0">
-                <div class="aspect-[4/3] lg:aspect-[3/2] bg-slate-100 rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
+        <div class="flex flex-col <?php echo $isEvenCustom ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-0 items-stretch bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
+            <div class="w-full lg:w-[60%] flex-shrink-0">
+                <div class="aspect-[4/3] lg:aspect-auto lg:min-h-[280px] h-full bg-slate-100 rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
                     <img src="<?php echo htmlspecialchars($customImage); ?>" alt="Custom Template" class="w-full h-full object-cover">
                 </div>
             </div>
-            <div class="flex-1 p-6 lg:p-10 flex flex-col justify-center">
+            <div class="w-full lg:w-[40%] flex-shrink-0 p-6 lg:p-10 flex flex-col justify-center bg-white/80 backdrop-blur-md border-slate-200 <?php echo $isEvenCustom ? 'lg:border-l' : 'lg:border-r'; ?>">
                 <h3 class="text-2xl font-bold text-slate-900 mb-3">Custom Template</h3>
                 <p class="text-slate-600 leading-relaxed mb-6">Restaurants can provide their own design or speak with our sales team to have a custom template designed for their restaurant menu. We’ll match your brand and layout so your digital menu looks exactly how you want it.</p>
                 <div class="flex flex-wrap gap-4">
