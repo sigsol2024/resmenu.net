@@ -28,12 +28,15 @@ if ($json !== false) {
 }
 if (empty($templates)) {
     $templates = [
-        ['id' => 1, 'name' => 'Template 1', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
-        ['id' => 2, 'name' => 'Template 2', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
-        ['id' => 3, 'name' => 'Template 3', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
         ['id' => 4, 'name' => 'Template 4', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
+        ['id' => 3, 'name' => 'Template 3', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
+        ['id' => 2, 'name' => 'Template 2', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
+        ['id' => 1, 'name' => 'Template 1', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
     ];
 }
+// Ensure most recent first and max 5
+usort($templates, function ($a, $b) { return ($b['id'] - $a['id']); });
+$templates = array_slice($templates, 0, 5);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +87,7 @@ if (empty($templates)) {
     </div>
 </section>
 
-<!-- Template timeline (listing image + title + description; no iframe) -->
+<!-- Template timeline: most recent 5 + Custom Template (image + title + description) -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="space-y-12">
         <?php foreach ($templates as $index => $t):
@@ -102,12 +105,32 @@ if (empty($templates)) {
                 <h3 class="text-2xl font-bold text-slate-900 mb-3"><?php echo htmlspecialchars($t['name']); ?></h3>
                 <p class="text-slate-600 leading-relaxed mb-6"><?php echo nl2br(htmlspecialchars($t['description'] ?: 'A professional digital menu template.')); ?></p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">Use This Template</a>
                     <a href="<?php echo htmlspecialchars($previewPageUrl); ?>" target="_blank" rel="noopener" class="bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 px-6 rounded-lg font-bold transition-colors text-center">Preview Demo</a>
                 </div>
             </div>
         </div>
         <?php endforeach; ?>
+
+        <!-- Custom Template (same timeline design, CTA Get Started Now) -->
+        <?php
+        $customIndex = count($templates);
+        $isEvenCustom = ($customIndex % 2) === 0;
+        $customImage = $baseUrl . '/assets/images/kabab-template.jpg';
+        ?>
+        <div class="flex flex-col <?php echo $isEvenCustom ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-8 lg:gap-12 items-center bg-white rounded-xl overflow-hidden shadow-sm border border-slate-100 p-0">
+            <div class="w-full lg:w-2/5 flex-shrink-0">
+                <div class="aspect-[4/3] lg:aspect-[3/2] bg-slate-100 rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
+                    <img src="<?php echo htmlspecialchars($customImage); ?>" alt="Custom Template" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <div class="flex-1 p-6 lg:p-10 flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-slate-900 mb-3">Custom Template</h3>
+                <p class="text-slate-600 leading-relaxed mb-6">Restaurants can provide their own design or speak with our sales team to have a custom template designed for their restaurant menu. We’ll match your brand and layout so your digital menu looks exactly how you want it.</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">Get Started Now</a>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
