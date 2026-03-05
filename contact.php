@@ -4,7 +4,7 @@
  */
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/includes/functions.php';
-require_once dirname(__DIR__) . '/Resmenu/includes/mail.php';
+require_once __DIR__ . '/includes/mail.php';
 
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
