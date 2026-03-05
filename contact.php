@@ -246,6 +246,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="absolute inset-0">
                             <?php echo $contactMapEmbed; ?>
                         </div>
+                        <?php elseif (!empty(trim($contactHqAddress))): ?>
+                        <iframe
+                            title="Location map"
+                            class="absolute inset-0 w-full h-full border-0"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="<?php echo 'https://www.google.com/maps?q=' . urlencode($contactHqAddress) . '&output=embed'; ?>">
+                        </iframe>
                         <?php else: ?>
                         <img alt="World map with office locations" class="w-full h-full object-cover opacity-80 mix-blend-multiply dark:mix-blend-overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCbvpqapYLxS_Cb2s2cqOETY64XRb9rP6UrEMGmtSOslOTrjJLrUeirvGXXuarByDtEfYW_Io8529PwRnejTeoGxZeC2ncwvo1Nn4_9YrlawDJmlM0k8xmN4ktk6kP3jmXz0eFsKcV2ggVNwImSm9y1ts2_ETLLH1963DCTMPsf-Xajt1XBtjXg2zeJqRmHtCnH4tTfjDwFvuVpJDEnpeHxTU91KZxrWkcr83yz8ltQLXCo5pnWXuNB-dTDZmD4yI261yesTXawkhv"/>
                         <div class="absolute top-1/2 left-1/3 group cursor-pointer">
