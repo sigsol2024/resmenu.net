@@ -15,42 +15,42 @@ $features = [
     [
         'title' => 'QR Menu Templates',
         'desc' => "Pick from modern templates built for speed and readability.\nUpdate items instantly and keep your menu consistent across devices.",
-        'image' => $baseUrl . '/assets/images/feature-qr-templates.svg',
+        'image' => $baseUrl . '/assets/images/qr_template.png',
         'icon' => 'dashboard_customize',
         'bullets' => ['Mobile-first layouts', 'Template previews', 'Fast loading pages'],
     ],
     [
         'title' => 'Food Ordering System',
         'desc' => "Let guests order from their phone with a smooth checkout flow.\nReduce wait time and increase order accuracy.",
-        'image' => $baseUrl . '/assets/images/feature-ordering.svg',
+        'image' => $baseUrl . '/assets/images/food_odering_system.png',
         'icon' => 'shopping_cart',
         'bullets' => ['Contactless ordering', 'Clear item options', 'Better guest experience'],
     ],
     [
         'title' => 'Reservations System',
         'desc' => "Manage bookings in one place and keep your team organized.\nGuests can reserve quickly while you control availability.",
-        'image' => $baseUrl . '/assets/images/feature-reservations.svg',
+        'image' => $baseUrl . '/assets/images/Table-Reservation.png',
         'icon' => 'event_available',
         'bullets' => ['Booking management', 'Mobile-friendly views', 'Faster confirmations'],
     ],
     [
         'title' => 'QR Code Generation',
         'desc' => "Generate QR codes for tables, flyers, and social media.\nLink directly to your menu and keep it always up to date.",
-        'image' => $baseUrl . '/assets/images/feature-qr-generator.svg',
+        'image' => $baseUrl . '/assets/images/QR-Code-generation.png',
         'icon' => 'qr_code_2',
         'bullets' => ['Table QR codes', 'Marketing QR codes', 'Instant updates'],
     ],
     [
         'title' => 'Menu Branding & Customization',
         'desc' => "Match your brand across every menu page.\nSet colors, logo, socials, address, footer content, and more.",
-        'image' => $baseUrl . '/assets/images/feature-branding.svg',
+        'image' => $baseUrl . '/assets/images/branding-custom.png',
         'icon' => 'palette',
         'bullets' => ['Colors & logo', 'Social links & address', 'Footer content'],
     ],
     [
         'title' => 'Currency Switcher',
         'desc' => "Serve guests from anywhere with multi-currency display.\nLet users switch currency while keeping pricing clear and consistent.",
-        'image' => $baseUrl . '/assets/images/feature-currency.svg',
+        'image' => $baseUrl . '/assets/images/3d-mobile-phone-mockup.jpg',
         'icon' => 'currency_exchange',
         'bullets' => ['Multi-currency support', 'Clear symbols', 'Better clarity for guests'],
     ],
@@ -95,7 +95,7 @@ $features = [
 <!-- Hero -->
 <section class="relative w-full h-[340px] md:h-[380px] flex items-center overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/80 to-primary/20"></div>
-    <div class="absolute inset-0 opacity-20" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/feature-branding.svg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+    <div class="absolute inset-0 opacity-25" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/features_heros.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <nav class="flex mb-4 text-sm font-medium text-slate-300">
             <a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
@@ -163,14 +163,14 @@ $features = [
 </section>
 
 <!-- CTA -->
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
     <div class="bg-primary rounded-3xl p-10 md:p-20 relative overflow-hidden">
-        <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/feature-qr-templates.svg'); background-repeat: repeat; background-size: 340px 340px;"></div>
+        <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/bh_pattern-black.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
         <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 relative z-10">Launch Your Digital Menu In Minutes</h2>
-        <p class="text-white/90 text-lg mb-10 max-w-2xl relative z-10">
+        <p class="text-white/90 text-lg mb-10 max-w-2xl mx-auto relative z-10">
             Create a branded menu, generate QR codes, and start taking orders — all from one dashboard.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 relative z-10">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
             <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-white text-primary hover:bg-slate-50 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg text-center">Get Started Now</a>
             <a href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php" class="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all text-center">View Templates</a>
         </div>

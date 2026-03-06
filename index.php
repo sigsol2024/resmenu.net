@@ -105,7 +105,7 @@ function formatPriceDisplay($amount) {
 <?php include __DIR__ . '/includes/header.php'; ?>
 <!-- Hero Section -->
 <section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 bg-white">
-<div class="absolute inset-0 pointer-events-none" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-repeat: repeat; background-size: 280px 280px; opacity: 0.08;"></div>
+<div class="absolute inset-0 pointer-events-none" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/bg_black.png'); background-repeat: repeat; background-size: 280px 280px; opacity: 0.08;"></div>
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex flex-col lg:flex-row items-center gap-16">
 <div class="w-full lg:w-1/2 space-y-8 order-2 lg:order-1">
@@ -468,7 +468,7 @@ foreach ($plans as $plan):
 </section>
 <!-- Final CTA -->
 <section class="py-24 bg-primary relative overflow-hidden">
-<div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('https://our-menu.online/templates/template4/bg_black.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
+<div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/bg_black.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 <h2 class="text-4xl lg:text-5xl font-black text-white mb-8 leading-tight">Ready to Transform Your <br/>Restaurant Menu?</h2>
 <div class="flex flex-wrap justify-center gap-4">
