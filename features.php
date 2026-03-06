@@ -94,19 +94,19 @@ $features = [
 <?php include __DIR__ . '/includes/header.php'; ?>
 
 <!-- Hero -->
-<section class="relative w-full h-[280px] md:h-[320px] flex flex-col justify-center overflow-hidden">
+<section class="relative w-full min-h-[320px] md:min-h-[340px] flex items-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/features_heros.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
     </div>
-    <div class="relative z-10 px-6 md:px-20 py-8">
-        <nav class="flex items-center gap-2 mb-4">
-            <a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+        <nav class="flex items-center gap-2 mb-3 text-sm font-medium">
+            <a class="text-slate-300 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
             <span class="text-slate-400 text-sm">/</span>
-            <span class="text-white">Features</span>
+            <span class="text-white text-sm">Features</span>
         </nav>
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 leading-tight max-w-3xl">Everything You Need To Power A Modern Digital Menu</h1>
-        <p class="text-slate-200 text-lg max-w-2xl leading-relaxed">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 leading-tight max-w-3xl">Everything You Need To Power A Modern Digital Menu</h1>
+        <p class="text-slate-200 text-base md:text-lg max-w-2xl leading-relaxed">
             From QR menus and branding to ordering and reservations — Resmenu gives restaurants a full suite of tools to serve guests faster.
         </p>
     </div>
