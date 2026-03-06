@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="Multi-currency and currency switcher">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <filter id="shadow6" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity=".25"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" rx="56" fill="url(#bg6)"/>
+  <g opacity=".14" fill="#fff">
+    <circle cx="260" cy="760" r="160"/>
+    <circle cx="1380" cy="240" r="110"/>
+  </g>
+  <g filter="url(#shadow6)">
+    <rect x="210" y="170" width="1180" height="660" rx="44" fill="#ffffff" opacity=".95"/>
+  </g>
+  <g transform="translate(290 255)">
+    <rect width="1020" height="90" rx="18" fill="#111827" opacity=".95"/>
+    <rect y="120" width="1020" height="470" rx="22" fill="#f9fafb"/>
+    <g transform="translate(36 154)">
+      <rect width="948" height="126" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+      <rect x="22" y="28" width="290" height="20" rx="10" fill="#111827" opacity=".85"/>
+      <rect x="22" y="62" width="420" height="16" rx="8" fill="#6b7280" opacity=".45"/>
+      <rect x="22" y="86" width="360" height="16" rx="8" fill="#6b7280" opacity=".35"/>
+      <rect x="700" y="34" width="220" height="58" rx="18" fill="#f3f4f6" stroke="#e5e7eb"/>
+      <rect x="720" y="52" width="110" height="22" rx="11" fill="#111827" opacity=".85"/>
+      <circle cx="890" cy="63" r="16" fill="#10b981"/>
+    </g>
+    <g transform="translate(36 310)">
+      <rect width="300" height="280" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+      <text x="42" y="86" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="900" fill="#111827">¦</text>
+      <text x="42" y="156" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="900" fill="#111827" opacity=".85">$</text>
+      <text x="42" y="226" font-family="Inter, Arial, sans-serif" font-size="66" font-weight="900" fill="#111827" opacity=".75">¬</text>
+      <rect x="152" y="52" width="116" height="44" rx="16" fill="#10b981"/>
+      <rect x="152" y="122" width="116" height="44" rx="16" fill="#e5e7eb"/>
+      <rect x="152" y="192" width="116" height="44" rx="16" fill="#e5e7eb"/>
+    </g>
+    <g transform="translate(360 310)">
+      <rect width="624" height="132" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+      <rect x="24" y="34" width="220" height="20" rx="10" fill="#111827" opacity=".85"/>
+      <rect x="24" y="68" width="360" height="16" rx="8" fill="#6b7280" opacity=".45"/>
+      <rect x="450" y="40" width="150" height="54" rx="18" fill="#f97415"/>
+    </g>
+    <g transform="translate(360 458)">
+      <rect width="624" height="132" rx="22" fill="#ffffff" stroke="#e5e7eb"/>
+      <rect x="24" y="34" width="260" height="20" rx="10" fill="#111827" opacity=".85"/>
+      <rect x="24" y="68" width="400" height="16" rx="8" fill="#6b7280" opacity=".45"/>
+      <rect x="450" y="40" width="150" height="54" rx="18" fill="#e5e7eb"/>
+    </g>
+  </g>
+  <g fill="#ffffff" opacity=".95">
+    <text x="290" y="318" font-family="Inter, Arial, sans-serif" font-weight="800" font-size="46">MultiCurrency</text>
+  </g>
+</svg>

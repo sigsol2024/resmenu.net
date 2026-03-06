@@ -48,6 +48,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 </div>
 <nav class="hidden md:flex items-center gap-8">
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
+<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/features.php">Features</a>
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list.php">Restaurants</a>
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php">Templates</a>
 <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing.php">Pricing</a>
@@ -78,6 +79,7 @@ Get Started
 </div>
 <nav class="flex flex-col p-4 gap-1">
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
+<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/features.php">Features</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list.php">Restaurants</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php">Templates</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing.php">Pricing</a>
