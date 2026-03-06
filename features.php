@@ -94,18 +94,18 @@ $features = [
 <?php include __DIR__ . '/includes/header.php'; ?>
 
 <!-- Hero -->
-<section class="relative w-full h-[340px] md:h-[380px] flex items-center overflow-hidden">
+<section class="relative w-full h-[280px] md:h-[320px] flex flex-col justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/features_heros.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
     </div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <nav class="flex mb-4 text-sm font-medium text-slate-300">
+    <div class="relative z-10 px-6 md:px-20 py-8">
+        <nav class="flex items-center gap-2 mb-4">
             <a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
-            <span class="mx-2">/</span>
+            <span class="text-slate-400 text-sm">/</span>
             <span class="text-white">Features</span>
         </nav>
-        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight max-w-3xl">Everything You Need To Power A Modern Digital Menu</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-3 leading-tight max-w-3xl">Everything You Need To Power A Modern Digital Menu</h1>
         <p class="text-slate-200 text-lg max-w-2xl leading-relaxed">
             From QR menus and branding to ordering and reservations — Resmenu gives restaurants a full suite of tools to serve guests faster.
         </p>
