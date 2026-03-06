@@ -87,6 +87,7 @@ $features = [
         body { font-family: 'Inter', sans-serif; }
         h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hero-gradient { background: linear-gradient(90deg, rgba(35, 23, 15, 0.92) 0%, rgba(249, 116, 21, 0.35) 100%); }
     </style>
 </head>
 <body class="bg-background-light text-slate-900">
@@ -94,8 +95,10 @@ $features = [
 
 <!-- Hero -->
 <section class="relative w-full h-[340px] md:h-[380px] flex items-center overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/80 to-primary/20"></div>
-    <div class="absolute inset-0 opacity-25" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/features_heros.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;"></div>
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/features_heros.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+    </div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <nav class="flex mb-4 text-sm font-medium text-slate-300">
             <a class="hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
@@ -128,8 +131,14 @@ $features = [
         ?>
         <div class="flex flex-col <?php echo $isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-0 items-stretch bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
             <div class="w-full lg:w-[60%] flex-shrink-0">
-                <div class="aspect-[4/3] lg:aspect-auto lg:min-h-[300px] h-full bg-slate-100 overflow-hidden">
-                    <img src="<?php echo htmlspecialchars($f['image']); ?>" alt="<?php echo htmlspecialchars($f['title']); ?>" class="w-full h-full object-cover">
+                <div class="h-[250px] sm:h-[300px] lg:h-full lg:min-h-[320px] bg-slate-100 overflow-hidden p-4 md:p-6">
+                    <img
+                        src="<?php echo htmlspecialchars($f['image']); ?>"
+                        alt="<?php echo htmlspecialchars($f['title']); ?>"
+                        class="w-full h-full object-contain object-center"
+                        loading="lazy"
+                        decoding="async"
+                    >
                 </div>
             </div>
             <div class="w-full lg:w-[40%] flex-shrink-0 p-6 lg:p-10 flex flex-col justify-center bg-white/80 backdrop-blur-md border-slate-200 <?php echo $isEven ? 'lg:border-l' : 'lg:border-r'; ?>">
