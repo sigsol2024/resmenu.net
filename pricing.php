@@ -94,6 +94,7 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                         $isEnterprise = $slug === 'enterprise';
                         $monthlyPrice = (float)($plan['monthly_price'] ?? 0);
                         $annualPrice = (float)($plan['annual_price'] ?? 0);
+                        $yearlyDiscountPercent = (int)($plan['yearly_discount_percent'] ?? 20);
                         $yearlyEquivalent = $monthlyPrice > 0 ? ($monthlyPrice * 12) : 0;
                         $yearlySavings = ($monthlyPrice > 0 && $annualPrice > 0) ? max(0, $yearlyEquivalent - $annualPrice) : 0;
                         $maxCat = (int)($plan['max_categories'] ?? 0);
@@ -118,15 +119,11 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                             <?php else: ?>
                             <span class="text-3xl font-black text-slate-900 dark:text-white pricing-amount" data-monthly="<?php echo htmlspecialchars(formatPriceDisplayPricing($monthlyPrice)); ?>" data-annual="<?php echo htmlspecialchars(formatPriceDisplayPricing($annualPrice)); ?>"><?php echo formatPriceDisplayPricing($monthlyPrice); ?></span>
                             <span class="text-slate-500 dark:text-slate-400 pricing-period">/month</span>
-                            <?php if ($annualPrice > 0): ?>
+                            <?php if ($annualPrice > 0 || $monthlyPrice > 0): ?>
                                 <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">
                                     <span class="hidden" data-cycle-hint="monthly">Billed monthly</span>
                                     <span class="hidden" data-cycle-hint="annual">
-                                        Billed annually
-                                        <?php if ($yearlySavings > 0): ?>
-                                            · Save <span class="font-bold text-red-600"><?php echo htmlspecialchars(formatNairaPlain($yearlySavings)); ?></span>
-                                            <span class="text-red-600 line-through ml-1"><?php echo htmlspecialchars(formatNairaPlain($yearlyEquivalent)); ?></span>
-                                        <?php endif; ?>
+                                        Save <?php echo $yearlyDiscountPercent; ?>% off
                                     </span>
                                 </p>
                             <?php endif; ?>
@@ -184,7 +181,8 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                     </div>
                 </div>
                 <?php endif; ?>
-                <p class="text-center text-slate-500 dark:text-slate-400 text-sm mt-10">All plans include a free trial. No credit card required. Annual billing saves 20%.</p>
+                <?php $pricingFootnotePct = !empty($plans) ? (int)(reset($plans)['yearly_discount_percent'] ?? 20) : 20; ?>
+                <p class="text-center text-slate-500 dark:text-slate-400 text-sm mt-10">All plans include a free trial. No credit card required. Annual billing saves <?php echo $pricingFootnotePct; ?>%.</p>
             </div>
         </section>
 

@@ -356,6 +356,7 @@ foreach ($plans as $plan):
     $isFeatured = ($plan['slug'] ?? '') === 'professional';
     $monthlyPrice = (float)($plan['monthly_price'] ?? 0);
     $annualPrice = (float)($plan['annual_price'] ?? 0);
+    $yearlyDiscountPercent = (int)($plan['yearly_discount_percent'] ?? 20);
     $maxCategories = (int)($plan['max_categories'] ?? 0);
     $maxMenuItems = (int)($plan['max_menu_items'] ?? 0);
     $maxQrStyles = (int)($plan['max_qr_styles'] ?? 0);
@@ -377,6 +378,9 @@ foreach ($plans as $plan):
 <span class="text-4xl font-black text-dark-slate plan-price-amount" data-monthly="<?php echo htmlspecialchars(formatPriceDisplay($monthlyPrice)); ?>" data-annual="<?php echo htmlspecialchars(formatPriceDisplay($annualPrice)); ?>"><?php echo formatPriceDisplay($monthlyPrice); ?></span>
 <span class="text-slate-500 plan-price-period">/mo</span>
 </div>
+<?php if ($yearlyDiscountPercent > 0 && $annualPrice > 0): ?>
+<p class="plan-save-percent text-slate-500 text-sm mt-1 mb-0" style="display:none;">Save <?php echo $yearlyDiscountPercent; ?>% off</p>
+<?php endif; ?>
 <ul class="space-y-4 mb-8 text-slate-600 flex-grow">
 <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> <?php echo $catDisplay; ?> Categories</li>
 <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> <?php echo $itemsDisplay; ?> Menu Items</li>
@@ -560,6 +564,10 @@ foreach ($plans as $plan):
             buttons[m].classList.toggle('text-dark-slate', isActive);
             buttons[m].classList.toggle('shadow-sm', isActive);
             buttons[m].classList.toggle('text-slate-600', !isActive);
+        }
+        var savePercents = document.querySelectorAll('#pricing .plan-save-percent');
+        for (var s = 0; s < savePercents.length; s++) {
+            savePercents[s].style.display = currentCycle === 'annual' ? '' : 'none';
         }
     }
 
