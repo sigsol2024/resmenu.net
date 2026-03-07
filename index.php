@@ -8,7 +8,6 @@ require_once __DIR__ . '/includes/subscription.php';
 $siteSettings = getSiteSettings();
 $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
-$authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
 $registerBaseUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/register.php' : 'https://our-menu.online/register.php';
 
 global $pdo;
@@ -136,7 +135,7 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
                         Trusted by restaurants, cafés, and hospitality brands. Streamline your operations with our professional digital menu solution.
                     </p>
 <div class="flex flex-wrap gap-4">
-<a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all shadow-xl shadow-primary/20">
+<a href="<?php echo htmlspecialchars($registerBaseUrl); ?>" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all shadow-xl shadow-primary/20">
                             Get Started Free
                         </a>
 <a href="<?php echo $baseUrl; ?>/templates.php" class="bg-slate-100 hover:bg-slate-200 text-dark-slate px-8 py-4 rounded-xl text-lg font-bold transition-all">
@@ -488,10 +487,10 @@ foreach ($plans as $plan):
 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 <h2 class="text-4xl lg:text-5xl font-black text-white mb-8 leading-tight">Ready to Transform Your <br/>Restaurant Menu?</h2>
 <div class="flex flex-wrap justify-center gap-4">
-<a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl">
+<a href="<?php echo htmlspecialchars($registerBaseUrl); ?>" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl">
                     Get Started Now
                 </a>
-                    <a href="<?php echo htmlspecialchars(rtrim(BACKEND_URL, '/') . '/register.php'); ?>" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all">
+                    <a href="<?php echo htmlspecialchars($registerBaseUrl); ?>" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all">
                         Start Free Trial
                 </a>
 </div>

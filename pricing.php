@@ -8,7 +8,6 @@ require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/subscription.php';
 
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
-$authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
 $registerBaseUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/register.php' : 'https://our-menu.online/register.php';
 $siteSettings = getSiteSettings();
 $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'Resmenu');
@@ -18,6 +17,10 @@ $pdo = getDBConnection();
 $plans = getSubscriptionPlans(true);
 
 function formatPriceDisplayPricing($amount) {
+    return '₦' . number_format((float)$amount, 0);
+}
+
+function formatNairaPlain($amount) {
     return '₦' . number_format((float)$amount, 0);
 }
 
@@ -91,6 +94,8 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                         $isEnterprise = $slug === 'enterprise';
                         $monthlyPrice = (float)($plan['monthly_price'] ?? 0);
                         $annualPrice = (float)($plan['annual_price'] ?? 0);
+                        $yearlyEquivalent = $monthlyPrice > 0 ? ($monthlyPrice * 12) : 0;
+                        $yearlySavings = ($monthlyPrice > 0 && $annualPrice > 0) ? max(0, $yearlyEquivalent - $annualPrice) : 0;
                         $maxCat = (int)($plan['max_categories'] ?? 0);
                         $maxItems = (int)($plan['max_menu_items'] ?? 0);
                         $maxQr = (int)($plan['max_qr_styles'] ?? 0);
@@ -113,7 +118,18 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                             <?php else: ?>
                             <span class="text-3xl font-black text-slate-900 dark:text-white pricing-amount" data-monthly="<?php echo htmlspecialchars(formatPriceDisplayPricing($monthlyPrice)); ?>" data-annual="<?php echo htmlspecialchars(formatPriceDisplayPricing($annualPrice)); ?>"><?php echo formatPriceDisplayPricing($monthlyPrice); ?></span>
                             <span class="text-slate-500 dark:text-slate-400 pricing-period">/month</span>
-                            <?php if ($annualPrice > 0): ?><p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Billed annually available</p><?php endif; ?>
+                            <?php if ($annualPrice > 0): ?>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">
+                                    <span class="hidden" data-cycle-hint="monthly">Billed monthly</span>
+                                    <span class="hidden" data-cycle-hint="annual">
+                                        Billed annually
+                                        <?php if ($yearlySavings > 0): ?>
+                                            · Save <span class="font-bold text-red-600"><?php echo htmlspecialchars(formatNairaPlain($yearlySavings)); ?></span>
+                                            <span class="text-red-600 line-through ml-1"><?php echo htmlspecialchars(formatNairaPlain($yearlyEquivalent)); ?></span>
+                                        <?php endif; ?>
+                                    </span>
+                                </p>
+                            <?php endif; ?>
                             <?php endif; ?>
                         </div>
                         <ul class="space-y-3 text-slate-600 dark:text-slate-400 text-sm mb-8 flex-grow">
@@ -315,7 +331,7 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                 <h2 class="text-4xl lg:text-5xl font-heading font-black text-white mb-6">Ready to get started?</h2>
                 <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">Join restaurants already using <?php echo htmlspecialchars($siteName); ?> to power their digital menus. No credit card required.</p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl inline-flex items-center gap-3">
+                    <a href="<?php echo htmlspecialchars($registerBaseUrl); ?>" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl inline-flex items-center gap-3">
                         <span class="material-symbols-outlined">rocket_launch</span> Start free trial
                     </a>
                     <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all inline-flex items-center gap-3">
@@ -343,6 +359,8 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
         var periods = document.querySelectorAll('.pricing-period');
         var links = document.querySelectorAll('.pricing-plan-link');
         var compareCells = document.querySelectorAll('.compare-price');
+        var hintsMonthly = document.querySelectorAll('[data-cycle-hint=\"monthly\"]');
+        var hintsAnnual = document.querySelectorAll('[data-cycle-hint=\"annual\"]');
 
         for (var i = 0; i < amounts.length; i++) {
             var value = amounts[i].getAttribute('data-' + currentCycle);
@@ -363,6 +381,13 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
         for (var m = 0; m < compareCells.length; m++) {
             var compareValue = compareCells[m].getAttribute('data-' + currentCycle);
             if (compareValue) compareCells[m].textContent = compareValue;
+        }
+
+        for (var h1 = 0; h1 < hintsMonthly.length; h1++) {
+            hintsMonthly[h1].classList.toggle('hidden', currentCycle !== 'monthly');
+        }
+        for (var h2 = 0; h2 < hintsAnnual.length; h2++) {
+            hintsAnnual[h2].classList.toggle('hidden', currentCycle !== 'annual');
         }
 
         for (var n = 0; n < buttons.length; n++) {

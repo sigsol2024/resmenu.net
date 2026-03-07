@@ -5,6 +5,7 @@
  */
 require_once __DIR__ . '/config/config.php';
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
+$registerUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/register.php' : 'https://our-menu.online/register.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -155,10 +156,10 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
                     Transform your guest experience today. Join hundreds of restaurants already using SigSol Resmenu to grow their business.
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="<?php echo htmlspecialchars($authUrl ?? (defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/')); ?>" class="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/30 transition-all text-center">
+                    <a href="<?php echo htmlspecialchars($registerUrl); ?>" class="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/30 transition-all text-center">
                         Become a Partner
                     </a>
-                    <a href="<?php echo htmlspecialchars(rtrim(BACKEND_URL, '/') . '/register.php'); ?>" class="w-full sm:w-auto px-10 py-4 border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white hover:text-slate-900 transition-all text-center">
+                    <a href="<?php echo htmlspecialchars($registerUrl); ?>" class="w-full sm:w-auto px-10 py-4 border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white hover:text-slate-900 transition-all text-center">
                         Start Free Trial
                     </a>
                 </div>

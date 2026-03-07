@@ -7,7 +7,7 @@ require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/includes/functions.php';
 
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
-$authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
+$registerUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/register.php' : 'https://our-menu.online/register.php';
 $siteSettings = getSiteSettings();
 $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 
@@ -119,10 +119,6 @@ $features = [
             <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Platform Features</h2>
             <p class="text-slate-600 mt-3">Explore the core features restaurants use daily to manage menus, improve guest experience, and increase efficiency.</p>
         </div>
-        <a href="<?php echo htmlspecialchars($authUrl); ?>" class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors shadow-lg shadow-primary/20">
-            Get Started
-            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-        </a>
     </div>
 
     <div class="space-y-12">
@@ -161,9 +157,6 @@ $features = [
                 </ul>
                 <?php endif; ?>
 
-                <div class="flex flex-wrap gap-3">
-                    <a href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">View Template</a>
-                </div>
             </div>
         </div>
         <?php endforeach; ?>
@@ -179,7 +172,7 @@ $features = [
             Create a branded menu, generate QR codes, and start taking orders — all from one dashboard.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-            <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-white text-primary hover:bg-slate-50 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg text-center">Get Started Now</a>
+            <a href="<?php echo htmlspecialchars($registerUrl); ?>" class="bg-white text-primary hover:bg-slate-50 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg text-center">Get Started Now</a>
             <a href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php" class="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all text-center">View Templates</a>
         </div>
     </div>

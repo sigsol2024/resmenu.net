@@ -5,8 +5,8 @@
  */
 require_once __DIR__ . '/config/config.php';
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
-$authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
 $backendUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') : 'https://our-menu.online';
+$registerUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/register.php' : 'https://our-menu.online/register.php';
 
 $templates = [];
 $apiUrl = $backendUrl . '/api/templates.php';
@@ -129,7 +129,7 @@ $templates = array_slice($templates, 0, 10);
                 <h3 class="text-2xl font-bold text-slate-900 mb-3">Custom Template</h3>
                 <p class="text-slate-600 leading-relaxed mb-6">Restaurants can provide their own design or speak with our sales team to have a custom template designed for their restaurant menu. We’ll match your brand and layout so your digital menu looks exactly how you want it.</p>
                 <div class="flex flex-wrap gap-4">
-                    <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">Get Started Now</a>
+                    <a href="<?php echo htmlspecialchars($registerUrl); ?>" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">Get Started Now</a>
                 </div>
             </div>
         </div>
@@ -184,8 +184,8 @@ $templates = array_slice($templates, 0, 10);
             Join thousands of restaurants worldwide that are modernizing their guest experience with SigSol Resmenu.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-            <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-white text-primary hover:bg-slate-50 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg text-center">Get Started Now</a>
-            <a href="<?php echo htmlspecialchars(rtrim(BACKEND_URL, '/') . '/register.php'); ?>" class="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all text-center">Start Free Trial</a>
+            <a href="<?php echo htmlspecialchars($registerUrl); ?>" class="bg-white text-primary hover:bg-slate-50 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg text-center">Get Started Now</a>
+            <a href="<?php echo htmlspecialchars($registerUrl); ?>" class="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all text-center">Start Free Trial</a>
         </div>
     </div>
 </section>
