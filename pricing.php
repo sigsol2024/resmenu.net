@@ -103,7 +103,7 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                         $monthlySignupUrl = buildPricingPlanSignupUrl($registerBaseUrl, $slug, 'monthly');
                         $annualSignupUrl = buildPricingPlanSignupUrl($registerBaseUrl, $slug, 'annual');
                     ?>
-                    <div class="border rounded-2xl p-8 flex flex-col bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all <?php echo $isFeatured ? 'border-2 border-primary shadow-xl relative md:-mt-2 md:mb-2' : ''; ?>">
+                    <div class="border rounded-2xl p-8 flex flex-col h-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all <?php echo $isFeatured ? 'border-2 border-primary shadow-xl relative md:-mt-2 md:mb-2' : ''; ?>">
                         <?php if ($isFeatured): ?><span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span><?php endif; ?>
                         <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-2"><?php echo htmlspecialchars($plan['name']); ?></h3>
                         <p class="text-slate-600 dark:text-slate-400 text-sm mb-6"><?php echo htmlspecialchars($desc); ?></p>
@@ -124,13 +124,13 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                             <?php if ($isFeatured || $isEnterprise): ?><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Food ordering</li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Priority support</li><?php else: ?><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Email support</li><?php endif; ?>
                             <?php if ($isEnterprise): ?><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Custom domain</li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Dedicated support</li><?php endif; ?>
                         </ul>
-                        <a href="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-monthly-url="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-annual-url="<?php echo htmlspecialchars($annualSignupUrl); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 rounded-xl font-bold transition-all <?php echo $isFeatured ? 'bg-primary text-white hover:bg-primary/90' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'; ?>">Choose <?php echo htmlspecialchars($plan['name']); ?></a>
+                        <a href="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-monthly-url="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-annual-url="<?php echo htmlspecialchars($annualSignupUrl); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 rounded-xl font-bold transition-all mt-auto <?php echo $isFeatured ? 'bg-primary text-white hover:bg-primary/90' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'; ?>">Choose <?php echo htmlspecialchars($plan['name']); ?></a>
                     </div>
                     <?php endforeach; ?>
                 </div>
                 <?php else: ?>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-8 flex flex-col bg-white dark:bg-slate-900 shadow-sm">
+                    <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-8 flex flex-col h-full bg-white dark:bg-slate-900 shadow-sm">
                         <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Starter</h3>
                         <p class="text-slate-600 dark:text-slate-400 text-sm mb-6">Perfect for small cafés and single-location restaurants.</p>
                         <div class="mb-6"><span class="text-3xl font-black text-slate-900 dark:text-white pricing-amount" data-monthly="₦9,999" data-annual="₦95,990">₦9,999</span><span class="text-slate-500 pricing-period">/month</span></div>
@@ -140,9 +140,9 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> 1 template</li>
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> QR code &amp; Email support</li>
                         </ul>
-                        <a href="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'starter', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'starter', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'starter', 'annual')); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all">Choose Starter</a>
+                        <a href="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'starter', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'starter', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'starter', 'annual')); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all mt-auto">Choose Starter</a>
                     </div>
-                    <div class="border-2 border-primary rounded-2xl p-8 flex flex-col bg-white dark:bg-slate-900 shadow-xl relative md:-mt-2 md:mb-2">
+                    <div class="border-2 border-primary rounded-2xl p-8 flex flex-col h-full bg-white dark:bg-slate-900 shadow-xl relative md:-mt-2 md:mb-2">
                         <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span>
                         <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Professional</h3>
                         <p class="text-slate-600 dark:text-slate-400 text-sm mb-6">For growing restaurants and multi-location brands.</p>
@@ -153,9 +153,9 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> All templates</li>
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Food ordering &amp; Priority support</li>
                         </ul>
-                        <a href="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'professional', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'professional', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'professional', 'annual')); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all">Choose Professional</a>
+                        <a href="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'professional', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'professional', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'professional', 'annual')); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all mt-auto">Choose Professional</a>
                     </div>
-                    <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-8 flex flex-col bg-white dark:bg-slate-900 shadow-sm">
+                    <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-8 flex flex-col h-full bg-white dark:bg-slate-900 shadow-sm">
                         <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Enterprise</h3>
                         <p class="text-slate-600 dark:text-slate-400 text-sm mb-6">For large operations and custom needs.</p>
                         <div class="mb-6"><span class="text-3xl font-black text-slate-900 dark:text-white pricing-amount" data-monthly="Custom" data-annual="Custom">Custom</span><span class="text-slate-500 pricing-period"></span></div>
@@ -164,7 +164,7 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Custom domain</li>
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Dedicated support</li>
                         </ul>
-                        <a href="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'enterprise', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'enterprise', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'enterprise', 'annual')); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">Choose Enterprise</a>
+                        <a href="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'enterprise', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'enterprise', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPricingPlanSignupUrl($registerBaseUrl, 'enterprise', 'annual')); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all mt-auto">Choose Enterprise</a>
                     </div>
                 </div>
                 <?php endif; ?>
