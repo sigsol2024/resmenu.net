@@ -12,6 +12,7 @@ if (!function_exists('getSiteSettings')) {
 }
 $authUrl = rtrim(BACKEND_URL, '/') . '/';
 $registerUrl = rtrim(BACKEND_URL, '/') . '/register.php';
+$loginUrl = rtrim(BACKEND_URL, '/') . '/';
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $siteSettings = getSiteSettings();
 $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
@@ -60,6 +61,9 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 <button type="button" id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl text-dark-slate hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/30" aria-label="Open menu">
 <span class="material-symbols-outlined text-3xl">menu</span>
 </button>
+<a href="<?php echo htmlspecialchars($loginUrl); ?>" class="hidden md:inline-flex items-center text-sm font-semibold text-slate-600 hover:text-primary transition-colors">
+Login
+</a>
 <a href="<?php echo htmlspecialchars($registerUrl); ?>" class="hidden md:inline-block bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
 Get Started
 </a>
@@ -86,6 +90,7 @@ Get Started
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing.php">Pricing</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/faq.php">FAQ</a>
 <a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php">Contact</a>
+<a class="mobile-menu-link mt-2 px-4 py-3.5 rounded-xl text-slate-700 font-bold text-center border border-slate-200 hover:bg-slate-50 transition-colors" href="<?php echo htmlspecialchars($loginUrl); ?>">Login</a>
 <a class="mobile-menu-link mt-2 px-4 py-3.5 rounded-xl bg-primary text-white font-bold text-center hover:bg-primary/90 transition-colors" href="<?php echo htmlspecialchars($registerUrl); ?>">Get Started</a>
 </nav>
 </div>
