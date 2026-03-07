@@ -194,7 +194,7 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
 <section class="py-24 bg-slate-50 border-y border-slate-100">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16">
 <div class="w-full lg:w-1/2">
-<img src="<?php echo $baseUrl; ?>/assets/images/Dashboard-image-view.png" alt="Dashboard view" class="w-full h-auto max-w-xl lg:max-w-2xl mx-auto about-image-entrance"/>
+            <img src="<?php echo $baseUrl; ?>/assets/images/tablet_mockup.png" alt="Dashboard on tablet" class="w-full h-auto max-w-xl lg:max-w-2xl mx-auto about-image-entrance"/>
 </div>
 <div class="w-full lg:w-1/2 space-y-6">
 <h2 class="text-4xl font-black text-dark-slate leading-tight">Built for Restaurants. <br/><span class="text-primary">Designed for Growth.</span></h2>

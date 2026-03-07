@@ -34,9 +34,9 @@ if (empty($templates)) {
         ['id' => 1, 'name' => 'Template 1', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
     ];
 }
-// Ensure most recent first and max 5
+// Ensure most recent first and max 10
 usort($templates, function ($a, $b) { return ($b['id'] - $a['id']); });
-$templates = array_slice($templates, 0, 5);
+$templates = array_slice($templates, 0, 10);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,29 +87,31 @@ $templates = array_slice($templates, 0, 5);
     </div>
 </section>
 
-<!-- Template timeline: most recent 5 + Custom Template (image + title + description) -->
+<!-- Templates grid: latest 10 (no images) + Custom Template (keep as-is with image) -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="space-y-12">
-        <?php foreach ($templates as $index => $t):
+    <div class="mb-10 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Latest Templates</h2>
+        <p class="mt-3 text-slate-600 max-w-2xl mx-auto">Browse our most recent designs. Preview any template instantly.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <?php foreach ($templates as $t):
             $previewPageUrl = $backendUrl . '/template' . (int)$t['id'] . '-preview';
-            $listingImg = !empty($t['listing_image']) ? $t['listing_image'] : (!empty($t['preview_bg']) ? $t['preview_bg'] : $baseUrl . '/assets/images/kabab-template.jpg');
-            $isEven = ($index % 2) === 0;
         ?>
-        <div class="flex flex-col <?php echo $isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-0 items-stretch bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
-            <div class="w-full lg:w-[60%] flex-shrink-0">
-                <div class="aspect-[4/3] lg:aspect-auto lg:min-h-[280px] h-full bg-slate-100 rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
-                    <img src="<?php echo htmlspecialchars($listingImg); ?>" alt="<?php echo htmlspecialchars($t['name']); ?>" class="w-full h-full object-cover">
-                </div>
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col">
+            <div class="flex items-start justify-between gap-4">
+                <h3 class="text-lg font-bold text-slate-900"><?php echo htmlspecialchars($t['name']); ?></h3>
+                <span class="text-xs font-semibold text-slate-500">#<?php echo (int)$t['id']; ?></span>
             </div>
-            <div class="w-full lg:w-[40%] flex-shrink-0 p-6 lg:p-10 flex flex-col justify-center bg-white/80 backdrop-blur-md border-slate-200 <?php echo $isEven ? 'lg:border-l' : 'lg:border-r'; ?>">
-                <h3 class="text-2xl font-bold text-slate-900 mb-3"><?php echo htmlspecialchars($t['name']); ?></h3>
-                <p class="text-slate-600 leading-relaxed mb-6"><?php echo nl2br(htmlspecialchars($t['description'] ?: 'A professional digital menu template.')); ?></p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="<?php echo htmlspecialchars($previewPageUrl); ?>" target="_blank" rel="noopener" class="bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 px-6 rounded-lg font-bold transition-colors text-center">Preview Demo</a>
-                </div>
+            <p class="mt-3 text-slate-600 leading-relaxed flex-1">
+                <?php echo htmlspecialchars($t['description'] ?: 'A professional digital menu template.'); ?>
+            </p>
+            <div class="mt-5">
+                <a href="<?php echo htmlspecialchars($previewPageUrl); ?>" target="_blank" rel="noopener" class="inline-flex w-full items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 px-4 rounded-lg font-bold transition-colors text-center">Preview Demo</a>
             </div>
         </div>
         <?php endforeach; ?>
+    </div>
 
         <!-- Custom Template (same timeline design, CTA Get Started Now) -->
         <?php
@@ -117,7 +119,7 @@ $templates = array_slice($templates, 0, 5);
         $isEvenCustom = ($customIndex % 2) === 0;
         $customImage = $baseUrl . '/assets/images/kabab-template.jpg';
         ?>
-        <div class="flex flex-col <?php echo $isEvenCustom ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-0 items-stretch bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
+        <div class="mt-12 flex flex-col <?php echo $isEvenCustom ? 'lg:flex-row' : 'lg:flex-row-reverse'; ?> gap-0 items-stretch bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200">
             <div class="w-full lg:w-[60%] flex-shrink-0">
                 <div class="aspect-[4/3] lg:aspect-auto lg:min-h-[280px] h-full bg-slate-100 rounded-t-xl lg:rounded-l-xl lg:rounded-tr-none overflow-hidden">
                     <img src="<?php echo htmlspecialchars($customImage); ?>" alt="Custom Template" class="w-full h-full object-cover">
@@ -131,7 +133,6 @@ $templates = array_slice($templates, 0, 5);
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 <!-- Why Our Templates Stand Out -->
