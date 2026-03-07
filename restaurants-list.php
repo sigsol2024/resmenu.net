@@ -158,8 +158,8 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
                     <a href="<?php echo htmlspecialchars($authUrl ?? (defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/')); ?>" class="w-full sm:w-auto px-10 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-primary/30 transition-all text-center">
                         Become a Partner
                     </a>
-                    <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="w-full sm:w-auto px-10 py-4 border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white hover:text-slate-900 transition-all text-center">
-                        Request a Demo
+                    <a href="<?php echo htmlspecialchars(rtrim(BACKEND_URL, '/') . '/register.php'); ?>" class="w-full sm:w-auto px-10 py-4 border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white hover:text-slate-900 transition-all text-center">
+                        Start Free Trial
                     </a>
                 </div>
             </div>

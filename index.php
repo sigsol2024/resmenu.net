@@ -475,8 +475,8 @@ foreach ($plans as $plan):
 <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl">
                     Get Started Now
                 </a>
-<a href="<?php echo $baseUrl; ?>/contact.php" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all">
-                    Request a Demo
+                    <a href="<?php echo htmlspecialchars(rtrim(BACKEND_URL, '/') . '/register.php'); ?>" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all">
+                        Start Free Trial
                 </a>
 </div>
 <p class="mt-8 text-white/80 font-medium">No credit card required. Cancel anytime.</p>

@@ -184,7 +184,7 @@ $templates = array_slice($templates, 0, 5);
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
             <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-white text-primary hover:bg-slate-50 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg text-center">Get Started Now</a>
-            <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all text-center">Request a Demo</a>
+            <a href="<?php echo htmlspecialchars(rtrim(BACKEND_URL, '/') . '/register.php'); ?>" class="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all text-center">Start Free Trial</a>
         </div>
     </div>
 </section>

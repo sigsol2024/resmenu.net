@@ -11,6 +11,7 @@ if (!function_exists('getSiteSettings')) {
     require_once __DIR__ . '/functions.php';
 }
 $authUrl = rtrim(BACKEND_URL, '/') . '/';
+$registerUrl = rtrim(BACKEND_URL, '/') . '/register.php';
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $siteSettings = getSiteSettings();
 $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
@@ -56,7 +57,7 @@ Leading the digital transformation of the hospitality industry with innovative, 
 <div>
 <h4 class="text-lg font-bold mb-6">Get Started</h4>
 <p class="text-slate-400 text-sm mb-4">Ready to create your digital menu?</p>
-<a href="<?php echo htmlspecialchars($authUrl); ?>" class="inline-block bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold transition-colors">Sign Up Free</a>
+<a href="<?php echo htmlspecialchars($registerUrl); ?>" class="inline-block bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold transition-colors">Sign Up Free</a>
 </div>
 </div>
 <div class="pt-8 border-t border-white/10 text-center text-slate-500 text-sm">
