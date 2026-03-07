@@ -43,14 +43,14 @@ $features = [
     [
         'title' => 'Menu Branding & Customization',
         'desc' => "Match your brand across every menu page.\nSet colors, logo, socials, address, footer content, and more.",
-        'image' => $baseUrl . '/assets/images/branding-custom.png',
+        'image' => $baseUrl . '/assets/images/3d-mobile-phone-mockup.jpg',
         'icon' => 'palette',
         'bullets' => ['Colors & logo', 'Social links & address', 'Footer content'],
     ],
     [
         'title' => 'Currency Switcher',
         'desc' => "Serve guests from anywhere with multi-currency display.\nLet users switch currency while keeping pricing clear and consistent.",
-        'image' => $baseUrl . '/assets/images/3d-mobile-phone-mockup.jpg',
+        'image' => $baseUrl . '/assets/images/branding-custom.png',
         'icon' => 'currency_exchange',
         'bullets' => ['Multi-currency support', 'Clear symbols', 'Better clarity for guests'],
     ],
@@ -162,8 +162,7 @@ $features = [
                 <?php endif; ?>
 
                 <div class="flex flex-wrap gap-3">
-                    <a href="<?php echo htmlspecialchars($authUrl); ?>" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">Start Now</a>
-                    <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="bg-slate-100 hover:bg-slate-200 text-slate-900 py-3 px-6 rounded-lg font-bold transition-colors text-center">Request a Demo</a>
+                    <a href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php" class="bg-primary hover:bg-primary/90 text-white py-3 px-6 rounded-lg font-bold transition-colors text-center">View Template</a>
                 </div>
             </div>
         </div>
