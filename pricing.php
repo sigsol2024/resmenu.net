@@ -113,18 +113,18 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                         <?php if ($isFeatured): ?><span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span><?php endif; ?>
                         <h3 class="text-xl font-heading font-bold text-slate-900 dark:text-white mb-2"><?php echo htmlspecialchars($plan['name']); ?></h3>
                         <p class="text-slate-600 dark:text-slate-400 text-sm mb-6"><?php echo htmlspecialchars($desc); ?></p>
-                        <div class="mb-6">
+                        <div class="mb-8">
                             <?php if ($monthlyPrice <= 0 && $annualPrice <= 0): ?>
                             <span class="text-3xl font-black text-slate-900 dark:text-white">Custom</span>
                             <?php else: ?>
-                            <span class="text-3xl font-black text-slate-900 dark:text-white pricing-amount" data-monthly="<?php echo htmlspecialchars(formatPriceDisplayPricing($monthlyPrice)); ?>" data-annual="<?php echo htmlspecialchars(formatPriceDisplayPricing($annualPrice)); ?>"><?php echo formatPriceDisplayPricing($monthlyPrice); ?></span>
-                            <span class="text-slate-500 dark:text-slate-400 pricing-period">/month</span>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-3xl font-black text-slate-900 dark:text-white pricing-amount" data-monthly="<?php echo htmlspecialchars(formatPriceDisplayPricing($monthlyPrice)); ?>" data-annual="<?php echo htmlspecialchars(formatPriceDisplayPricing($annualPrice)); ?>"><?php echo formatPriceDisplayPricing($monthlyPrice); ?></span>
+                                <span class="text-slate-500 dark:text-slate-400 pricing-period">/month</span>
+                            </div>
                             <?php if ($annualPrice > 0 || $monthlyPrice > 0): ?>
-                                <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">
-                                    <span class="hidden" data-cycle-hint="monthly">Billed monthly</span>
-                                    <span class="hidden" data-cycle-hint="annual">
-                                        Save <?php echo $yearlyDiscountPercent; ?>% off
-                                    </span>
+                                <p class="text-sm mt-1 mb-0" style="min-height:1.25rem;">
+                                    <span class="hidden text-slate-500 dark:text-slate-400" data-cycle-hint="monthly">Billed monthly</span>
+                                    <span class="hidden text-green-600 dark:text-green-400 font-medium" data-cycle-hint="annual">Save <?php echo $yearlyDiscountPercent; ?>% off</span>
                                 </p>
                             <?php endif; ?>
                             <?php endif; ?>

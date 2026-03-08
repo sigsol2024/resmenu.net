@@ -374,12 +374,12 @@ foreach ($plans as $plan):
 <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Most Popular</div>
 <?php endif; ?>
 <div class="text-dark-slate font-bold uppercase tracking-widest text-sm mb-4"><?php echo htmlspecialchars($plan['name']); ?></div>
-<div class="flex items-baseline gap-1 mb-6">
+<div class="flex items-baseline gap-1 mb-1">
 <span class="text-4xl font-black text-dark-slate plan-price-amount" data-monthly="<?php echo htmlspecialchars(formatPriceDisplay($monthlyPrice)); ?>" data-annual="<?php echo htmlspecialchars(formatPriceDisplay($annualPrice)); ?>"><?php echo formatPriceDisplay($monthlyPrice); ?></span>
 <span class="text-slate-500 plan-price-period">/mo</span>
 </div>
 <?php if ($yearlyDiscountPercent > 0 && $annualPrice > 0): ?>
-<p class="plan-save-percent text-slate-500 text-sm mt-1 mb-0" style="display:none;">Save <?php echo $yearlyDiscountPercent; ?>% off</p>
+<p class="plan-save-percent text-green-600 text-sm font-medium mt-1 mb-5" style="display:none;">Save <?php echo $yearlyDiscountPercent; ?>% off</p>
 <?php endif; ?>
 <ul class="space-y-4 mb-8 text-slate-600 flex-grow">
 <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> <?php echo $catDisplay; ?> Categories</li>
