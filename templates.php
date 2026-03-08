@@ -9,7 +9,7 @@ $backendUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') : 'https://our-me
 $registerUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/register.php' : 'https://our-menu.online/register.php';
 
 $templates = [];
-$apiUrl = $backendUrl . '/api/templates.php';
+$apiUrl = $backendUrl . '/api/templates.php?limit=20';
 $ctx = stream_context_create(['http' => ['timeout' => 5]]);
 $json = @file_get_contents($apiUrl, false, $ctx);
 if ($json !== false) {
@@ -34,9 +34,9 @@ if (empty($templates)) {
         ['id' => 1, 'name' => 'Template 1', 'description' => '', 'preview_bg' => '', 'listing_image' => ''],
     ];
 }
-// Ensure most recent first and max 10
+// Ensure most recent first and max 20
 usort($templates, function ($a, $b) { return ($b['id'] - $a['id']); });
-$templates = array_slice($templates, 0, 10);
+$templates = array_slice($templates, 0, 20);
 ?>
 <!DOCTYPE html>
 <html lang="en">
