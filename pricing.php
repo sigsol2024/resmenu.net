@@ -16,6 +16,15 @@ global $pdo;
 $pdo = getDBConnection();
 $plans = getSubscriptionPlans(true);
 
+// Feature keys and display labels (must match subscription_plans.features JSON keys)
+$planFeatureLabels = [
+    'priority_support' => 'Priority support',
+    'custom_domain' => 'Custom domain',
+    'analytics_advanced' => 'Advanced analytics',
+    'food_ordering' => 'Food ordering',
+    'table_reservations' => 'Table reservations',
+];
+
 function formatPriceDisplayPricing($amount) {
     return '₦' . number_format((float)$amount, 0);
 }
@@ -134,8 +143,12 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> <?php echo $itemsD; ?> menu items</li>
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> <?php echo $qrD; ?> QR theme<?php echo (int)$maxQr !== 1 ? 's' : ''; ?></li>
                             <li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> <?php echo $tplD; ?> template<?php echo (int)$maxTpl !== 1 ? 's' : ''; ?></li>
-                            <?php if ($isFeatured || $isEnterprise): ?><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Food ordering</li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Priority support</li><?php else: ?><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Email support</li><?php endif; ?>
-                            <?php if ($isEnterprise): ?><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Custom domain</li><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Dedicated support</li><?php endif; ?>
+                            <?php
+                            $feats = $plan['features'] ?? [];
+                            foreach ($planFeatureLabels as $key => $label):
+                                $enabled = !empty($feats[$key]);
+                            ?><li class="flex items-center gap-2"><?php if ($enabled): ?><span class="material-symbols-outlined text-primary text-lg">check_circle</span><?php else: ?><span class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-lg">check_circle</span><?php endif; ?> <?php echo htmlspecialchars($label); ?></li><?php endforeach; ?>
+                            <?php if (empty($feats['priority_support'])): ?><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Email support</li><?php endif; ?>
                         </ul>
                         <a href="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-monthly-url="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-annual-url="<?php echo htmlspecialchars($annualSignupUrl); ?>" class="pricing-plan-link block w-full text-center py-3 px-6 rounded-xl font-bold transition-all mt-auto <?php echo $isFeatured ? 'bg-primary text-white hover:bg-primary/90' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'; ?>">Choose <?php echo htmlspecialchars($plan['name']); ?></a>
                     </div>
@@ -249,40 +262,22 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                                 <td class="py-3 px-4 md:px-6">1</td><td class="py-3 px-4 md:px-6">All</td><td class="py-3 px-4 md:px-6">All</td>
                                 <?php endif; ?>
                             </tr>
+                            <?php foreach ($planFeatureLabels as $fKey => $fLabel): ?>
                             <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
-                                <td class="py-3 px-4 md:px-6 font-medium text-slate-900 dark:text-white">Food ordering</td>
-                                <?php if (!empty($plans)): foreach ($plans as $p): $s = $p['slug'] ?? ''; ?>
-                                <td class="py-3 px-4 md:px-6"><?php echo ($s === 'professional' || $s === 'enterprise') ? '<span class="material-symbols-outlined text-primary align-middle">check_circle</span>' : '<span class="text-slate-400">—</span>'; ?></td>
+                                <td class="py-3 px-4 md:px-6 font-medium text-slate-900 dark:text-white"><?php echo htmlspecialchars($fLabel); ?></td>
+                                <?php if (!empty($plans)): foreach ($plans as $p): $pf = $p['features'] ?? []; $has = !empty($pf[$fKey]); ?>
+                                <td class="py-3 px-4 md:px-6"><?php echo $has ? '<span class="material-symbols-outlined text-primary align-middle">check_circle</span>' : '<span class="text-slate-400">—</span>'; ?></td>
                                 <?php endforeach; else: ?>
                                 <td class="py-3 px-4 md:px-6"><span class="text-slate-400">—</span></td>
                                 <td class="py-3 px-4 md:px-6"><span class="material-symbols-outlined text-primary align-middle">check_circle</span></td>
                                 <td class="py-3 px-4 md:px-6"><span class="material-symbols-outlined text-primary align-middle">check_circle</span></td>
                                 <?php endif; ?>
                             </tr>
-                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
-                                <td class="py-3 px-4 md:px-6 font-medium text-slate-900 dark:text-white">Table reservations</td>
-                                <?php if (!empty($plans)): foreach ($plans as $p): $s = $p['slug'] ?? ''; ?>
-                                <td class="py-3 px-4 md:px-6"><?php echo ($s === 'professional' || $s === 'enterprise') ? '<span class="material-symbols-outlined text-primary align-middle">check_circle</span>' : '<span class="material-symbols-outlined text-primary align-middle text-slate-300 dark:text-slate-600">check_circle</span>'; ?></td>
-                                <?php endforeach; else: ?>
-                                <td class="py-3 px-4 md:px-6"><span class="material-symbols-outlined text-primary text-slate-300 align-middle">check_circle</span></td>
-                                <td class="py-3 px-4 md:px-6"><span class="material-symbols-outlined text-primary align-middle">check_circle</span></td>
-                                <td class="py-3 px-4 md:px-6"><span class="material-symbols-outlined text-primary align-middle">check_circle</span></td>
-                                <?php endif; ?>
-                            </tr>
-                            <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
-                                <td class="py-3 px-4 md:px-6 font-medium text-slate-900 dark:text-white">Custom domain</td>
-                                <?php if (!empty($plans)): foreach ($plans as $p): $s = $p['slug'] ?? ''; ?>
-                                <td class="py-3 px-4 md:px-6"><?php echo $s === 'enterprise' ? '<span class="material-symbols-outlined text-primary align-middle">check_circle</span>' : '<span class="text-slate-400">—</span>'; ?></td>
-                                <?php endforeach; else: ?>
-                                <td class="py-3 px-4 md:px-6"><span class="text-slate-400">—</span></td>
-                                <td class="py-3 px-4 md:px-6"><span class="text-slate-400">—</span></td>
-                                <td class="py-3 px-4 md:px-6"><span class="material-symbols-outlined text-primary align-middle">check_circle</span></td>
-                                <?php endif; ?>
-                            </tr>
+                            <?php endforeach; ?>
                             <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
                                 <td class="py-3 px-4 md:px-6 font-medium text-slate-900 dark:text-white">Support</td>
-                                <?php if (!empty($plans)): foreach ($plans as $p): $s = $p['slug'] ?? ''; ?>
-                                <td class="py-3 px-4 md:px-6"><?php echo $s === 'enterprise' ? 'Dedicated' : ($s === 'professional' ? 'Priority' : 'Email'); ?></td>
+                                <?php if (!empty($plans)): foreach ($plans as $p): $pf = $p['features'] ?? []; $pri = !empty($pf['priority_support']); $s = $p['slug'] ?? ''; ?>
+                                <td class="py-3 px-4 md:px-6"><?php echo ($s === 'enterprise') ? 'Dedicated' : ($pri ? 'Priority' : 'Email'); ?></td>
                                 <?php endforeach; else: ?>
                                 <td class="py-3 px-4 md:px-6">Email</td>
                                 <td class="py-3 px-4 md:px-6">Priority</td>

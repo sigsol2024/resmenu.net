@@ -19,6 +19,14 @@ $brandLast = array_pop($brandParts);
 $brandFirst = implode(' ', $brandParts) ?: '';
 
 $plans = getSubscriptionPlans(true);
+// Feature keys and display labels (must match subscription_plans.features JSON)
+$planFeatureLabels = [
+    'priority_support' => 'Priority support',
+    'custom_domain' => 'Custom domain',
+    'analytics_advanced' => 'Advanced analytics',
+    'food_ordering' => 'Food ordering',
+    'table_reservations' => 'Table reservations',
+];
 $restaurantCount = 0;
 if ($pdo) {
     $stmt = $pdo->query("SELECT COUNT(*) FROM restaurants WHERE is_active = 1");
@@ -337,115 +345,120 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
 </div>
 </div>
 </section>
-<!-- Pricing Section -->
-<section id="pricing" class="py-24 bg-white">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
-<h2 class="text-4xl font-bold text-dark-slate mb-4">Simple, Transparent Pricing</h2>
+<!-- Pricing Section (same layout and design as pricing page) -->
+<section id="pricing" class="py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-white">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-10">
+<h2 class="text-4xl font-heading font-bold text-dark-slate mb-4">Simple, Transparent Pricing</h2>
 <p class="text-slate-600">No hidden fees. Choose the plan that fits your business needs.</p>
-<div class="mt-8 inline-flex items-center rounded-xl bg-slate-100 p-1 shadow-sm" id="homePricingToggle">
-    <button type="button" class="pricing-cycle-toggle-btn rounded-lg bg-white px-5 py-2 text-sm font-bold text-dark-slate shadow-sm" data-cycle="monthly">Monthly</button>
-    <button type="button" class="pricing-cycle-toggle-btn rounded-lg px-5 py-2 text-sm font-bold text-slate-600" data-cycle="annual">Yearly</button>
+<div class="mt-8 flex justify-center">
+<div class="inline-flex items-center rounded-xl bg-slate-100 p-1 shadow-sm" id="homePricingToggle">
+<button type="button" class="pricing-cycle-toggle-btn rounded-lg bg-white px-5 py-2 text-sm font-bold text-dark-slate shadow-sm" data-cycle="monthly">Monthly</button>
+<button type="button" class="pricing-cycle-toggle-btn rounded-lg px-5 py-2 text-sm font-bold text-slate-600" data-cycle="annual">Yearly</button>
 </div>
 </div>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="grid lg:grid-cols-3 gap-8">
-<?php
-$planIndex = 0;
-foreach ($plans as $plan):
-    $planIndex++;
-    $isFeatured = ($plan['slug'] ?? '') === 'professional';
+</div>
+<?php if (!empty($plans)): ?>
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+<?php foreach ($plans as $plan):
+    $slug = $plan['slug'] ?? '';
+    $isFeatured = $slug === 'professional';
+    $isEnterprise = $slug === 'enterprise';
     $monthlyPrice = (float)($plan['monthly_price'] ?? 0);
     $annualPrice = (float)($plan['annual_price'] ?? 0);
     $yearlyDiscountPercent = (int)($plan['yearly_discount_percent'] ?? 20);
-    $maxCategories = (int)($plan['max_categories'] ?? 0);
-    $maxMenuItems = (int)($plan['max_menu_items'] ?? 0);
-    $maxQrStyles = (int)($plan['max_qr_styles'] ?? 0);
-    $maxTemplates = (int)($plan['max_templates'] ?? 0);
-    $catDisplay = $maxCategories == -1 ? 'Unlimited' : $maxCategories;
-    $itemsDisplay = $maxMenuItems == -1 ? 'Unlimited' : $maxMenuItems;
-    $qrDisplay = $maxQrStyles == -1 ? 'Unlimited' : $maxQrStyles;
-    $tplDisplay = $maxTemplates == -1 ? 'All' : $maxTemplates;
-    $planSlug = $plan['slug'] ?? '';
-    $monthlySignupUrl = buildPlanSignupUrl($registerBaseUrl, $planSlug, 'monthly');
-    $annualSignupUrl = buildPlanSignupUrl($registerBaseUrl, $planSlug, 'annual');
+    $maxCat = (int)($plan['max_categories'] ?? 0);
+    $maxItems = (int)($plan['max_menu_items'] ?? 0);
+    $maxQr = (int)($plan['max_qr_styles'] ?? 0);
+    $maxTpl = (int)($plan['max_templates'] ?? 0);
+    $catD = $maxCat === -1 ? 'Unlimited' : $maxCat;
+    $itemsD = $maxItems === -1 ? 'Unlimited' : number_format($maxItems);
+    $qrD = $maxQr === -1 ? 'Unlimited' : $maxQr;
+    $tplD = $maxTpl === -1 ? 'All' : $maxTpl;
+    $desc = $plan['description'] ?? ($isEnterprise ? 'For large operations and custom needs.' : ($isFeatured ? 'For growing restaurants and multi-location brands.' : 'Perfect for small cafés and single-location restaurants.'));
+    $monthlySignupUrl = buildPlanSignupUrl($registerBaseUrl, $slug, 'monthly');
+    $annualSignupUrl = buildPlanSignupUrl($registerBaseUrl, $slug, 'annual');
 ?>
-<div class="p-10 rounded-3xl border <?php echo $isFeatured ? 'border-2 border-primary shadow-2xl scale-105 relative z-10' : 'border-slate-200'; ?> bg-white hover:shadow-xl transition-all plan-price-card flex flex-col h-full">
-<?php if ($isFeatured): ?>
-<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Most Popular</div>
-<?php endif; ?>
-<div class="text-dark-slate font-bold uppercase tracking-widest text-sm mb-4"><?php echo htmlspecialchars($plan['name']); ?></div>
-<div class="flex items-baseline gap-1 mb-1">
-<span class="text-4xl font-black text-dark-slate plan-price-amount" data-monthly="<?php echo htmlspecialchars(formatPriceDisplay($monthlyPrice)); ?>" data-annual="<?php echo htmlspecialchars(formatPriceDisplay($annualPrice)); ?>"><?php echo formatPriceDisplay($monthlyPrice); ?></span>
-<span class="text-slate-500 plan-price-period">/mo</span>
+<div class="border rounded-2xl p-8 flex flex-col h-full bg-white border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-lg transition-all <?php echo $isFeatured ? 'border-2 border-primary shadow-xl relative md:-mt-2 md:mb-2' : ''; ?>">
+<?php if ($isFeatured): ?><span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span><?php endif; ?>
+<h3 class="text-xl font-heading font-bold text-dark-slate dark:text-white mb-2"><?php echo htmlspecialchars($plan['name']); ?></h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm mb-6"><?php echo htmlspecialchars($desc); ?></p>
+<div class="mb-8">
+<?php if ($monthlyPrice <= 0 && $annualPrice <= 0): ?>
+<span class="text-3xl font-black text-dark-slate dark:text-white">Custom</span>
+<?php else: ?>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-black text-dark-slate dark:text-white plan-price-amount" data-monthly="<?php echo htmlspecialchars(formatPriceDisplay($monthlyPrice)); ?>" data-annual="<?php echo htmlspecialchars(formatPriceDisplay($annualPrice)); ?>"><?php echo formatPriceDisplay($monthlyPrice); ?></span>
+<span class="text-slate-500 dark:text-slate-400 plan-price-period">/month</span>
 </div>
-<?php if ($yearlyDiscountPercent > 0 && $annualPrice > 0): ?>
-<p class="plan-save-percent text-green-600 text-sm font-medium mt-1 mb-5" style="display:none;">Save <?php echo $yearlyDiscountPercent; ?>% off</p>
+<?php if ($annualPrice > 0 || $monthlyPrice > 0): ?>
+<p class="text-sm mt-1 mb-0" style="min-height:1.25rem;">
+<span class="hidden text-slate-500" data-cycle-hint="monthly">Billed monthly</span>
+<span class="hidden text-green-600 font-medium plan-save-percent" data-cycle-hint="annual">Save <?php echo $yearlyDiscountPercent; ?>% off</span>
+</p>
 <?php endif; ?>
-<ul class="space-y-4 mb-8 text-slate-600 flex-grow">
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> <?php echo $catDisplay; ?> Categories</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> <?php echo $itemsDisplay; ?> Menu Items</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> <?php echo $qrDisplay; ?> QR Code Themes</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> <?php echo $tplDisplay; ?> Templates</li>
-<?php if ($isFeatured): ?>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Priority Support</li>
 <?php endif; ?>
-<?php if (($plan['slug'] ?? '') === 'enterprise'): ?>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Custom API Access</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Dedicated Manager</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Custom Branding</li>
-<?php endif; ?>
+</div>
+<ul class="space-y-3 text-slate-600 dark:text-slate-400 text-sm mb-8 flex-grow">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> <?php echo $catD; ?> categories</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> <?php echo $itemsD; ?> menu items</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> <?php echo $qrD; ?> QR theme<?php echo (int)$maxQr !== 1 ? 's' : ''; ?></li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> <?php echo $tplD; ?> template<?php echo (int)$maxTpl !== 1 ? 's' : ''; ?></li>
+<?php $feats = $plan['features'] ?? []; foreach ($planFeatureLabels as $key => $label): $enabled = !empty($feats[$key]); ?>
+<li class="flex items-center gap-2"><?php if ($enabled): ?><span class="material-symbols-outlined text-primary text-lg">check_circle</span><?php else: ?><span class="material-symbols-outlined text-slate-300 dark:text-slate-600 text-lg">check_circle</span><?php endif; ?> <?php echo htmlspecialchars($label); ?></li>
+<?php endforeach; ?>
+<?php if (empty($feats['priority_support'])): ?><li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Email support</li><?php endif; ?>
 </ul>
-<a href="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-monthly-url="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-annual-url="<?php echo htmlspecialchars($annualSignupUrl); ?>" class="choose-plan-link w-full py-4 px-6 rounded-xl <?php echo $isFeatured ? 'bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20' : 'border-2 border-slate-200 text-dark-slate font-bold hover:bg-slate-50 transition-colors'; ?> block text-center mt-auto">Choose <?php echo htmlspecialchars($plan['name']); ?></a>
+<a href="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-monthly-url="<?php echo htmlspecialchars($monthlySignupUrl); ?>" data-annual-url="<?php echo htmlspecialchars($annualSignupUrl); ?>" class="choose-plan-link block w-full text-center py-3 px-6 rounded-xl font-bold transition-all mt-auto <?php echo $isFeatured ? 'bg-primary text-white hover:bg-primary/90' : 'border-2 border-primary text-primary hover:bg-primary hover:text-white'; ?>">Choose <?php echo htmlspecialchars($plan['name']); ?></a>
 </div>
 <?php endforeach; ?>
-<?php if (empty($plans)): ?>
+</div>
+<?php else: ?>
 <!-- Fallback when no plans in DB -->
-<div class="p-10 rounded-3xl border border-slate-200 bg-white hover:shadow-xl transition-all flex flex-col h-full">
-<div class="text-dark-slate font-bold uppercase tracking-widest text-sm mb-4">Starter</div>
-<div class="flex items-baseline gap-1 mb-6">
-<span class="text-4xl font-black text-dark-slate plan-price-amount" data-monthly="₦9,999" data-annual="₦95,990">₦9,999</span>
-<span class="text-slate-500 plan-price-period">/mo</span>
-</div>
-<ul class="space-y-4 mb-8 text-slate-600 flex-grow">
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 1 Branch</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 50 Menu Items</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 2 QR Code Themes</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Basic Analytics</li>
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="border border-slate-200 rounded-2xl p-8 flex flex-col h-full bg-white shadow-sm">
+<h3 class="text-xl font-bold text-dark-slate mb-2">Starter</h3>
+<p class="text-slate-600 text-sm mb-6">Perfect for small cafés and single-location restaurants.</p>
+<div class="mb-6"><span class="text-3xl font-black text-dark-slate plan-price-amount" data-monthly="₦9,999" data-annual="₦95,990">₦9,999</span><span class="text-slate-500 plan-price-period">/month</span></div>
+<ul class="space-y-3 text-slate-600 text-sm mb-8 flex-grow">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> 5 categories</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> 50 menu items</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> 1 QR theme</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> 3 templates</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Email support</li>
 </ul>
-<a href="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'starter', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'starter', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'starter', 'annual')); ?>" class="choose-plan-link w-full py-4 px-6 rounded-xl border-2 border-slate-200 text-dark-slate font-bold hover:bg-slate-50 transition-colors block text-center mt-auto">Choose Starter</a>
+<a href="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'starter', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'starter', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'starter', 'annual')); ?>" class="choose-plan-link block w-full text-center py-3 px-6 border-2 border-primary text-primary font-bold rounded-xl hover:bg-primary hover:text-white transition-all mt-auto">Choose Starter</a>
 </div>
-<div class="p-10 rounded-3xl border-2 border-primary bg-white shadow-2xl scale-105 relative z-10 flex flex-col h-full">
-<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Most Popular</div>
-<div class="text-dark-slate font-bold uppercase tracking-widest text-sm mb-4">Professional</div>
-<div class="flex items-baseline gap-1 mb-6">
-<span class="text-4xl font-black text-dark-slate plan-price-amount" data-monthly="₦24,999" data-annual="₦239,990">₦24,999</span>
-<span class="text-slate-500 plan-price-period">/mo</span>
-</div>
-<ul class="space-y-4 mb-8 text-slate-600 flex-grow">
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Up to 5 Branches</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Unlimited Items</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> All Pro Templates</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Advanced Analytics</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Priority Support</li>
+<div class="border-2 border-primary rounded-2xl p-8 flex flex-col h-full bg-white shadow-xl relative md:-mt-2 md:mb-2">
+<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">Most Popular</span>
+<h3 class="text-xl font-bold text-dark-slate mb-2">Professional</h3>
+<p class="text-slate-600 text-sm mb-6">For growing restaurants and multi-location brands.</p>
+<div class="mb-6"><span class="text-3xl font-black text-dark-slate plan-price-amount" data-monthly="₦24,999" data-annual="₦239,990">₦24,999</span><span class="text-slate-500 plan-price-period">/month</span></div>
+<ul class="space-y-3 text-slate-600 text-sm mb-8 flex-grow">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> 20 categories</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> 300 menu items</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> All QR themes</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> All templates</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Food ordering</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Priority support</li>
 </ul>
-<a href="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'professional', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'professional', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'professional', 'annual')); ?>" class="choose-plan-link w-full py-4 px-6 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 block text-center mt-auto">Choose Professional</a>
+<a href="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'professional', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'professional', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'professional', 'annual')); ?>" class="choose-plan-link block w-full text-center py-3 px-6 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-all mt-auto">Choose Professional</a>
 </div>
-<div class="p-10 rounded-3xl border border-slate-200 bg-white hover:shadow-xl transition-all flex flex-col h-full">
-<div class="text-dark-slate font-bold uppercase tracking-widest text-sm mb-4">Enterprise</div>
-<div class="flex items-baseline gap-1 mb-6">
-<span class="text-4xl font-black text-dark-slate plan-price-amount" data-monthly="₦49,999" data-annual="₦479,990">₦49,999</span>
-<span class="text-slate-500 plan-price-period">/mo</span>
-</div>
-<ul class="space-y-4 mb-8 text-slate-600 flex-grow">
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Unlimited Branches</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Custom API Access</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Dedicated Manager</li>
-<li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Custom Branding</li>
+<div class="border border-slate-200 rounded-2xl p-8 flex flex-col h-full bg-white shadow-sm">
+<h3 class="text-xl font-bold text-dark-slate mb-2">Enterprise</h3>
+<p class="text-slate-600 text-sm mb-6">For large operations and custom needs.</p>
+<div class="mb-6"><span class="text-3xl font-black text-dark-slate plan-price-amount" data-monthly="Custom" data-annual="Custom">Custom</span><span class="text-slate-500 plan-price-period"></span></div>
+<ul class="space-y-3 text-slate-600 text-sm mb-8 flex-grow">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Unlimited categories</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Unlimited menu items</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Custom domain</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-lg">check_circle</span> Dedicated support</li>
 </ul>
-<a href="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'enterprise', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'enterprise', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'enterprise', 'annual')); ?>" class="choose-plan-link w-full py-4 px-6 rounded-xl border-2 border-slate-200 text-dark-slate font-bold hover:bg-slate-50 transition-colors block text-center mt-auto">Choose Enterprise</a>
+<a href="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'enterprise', 'monthly')); ?>" data-monthly-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'enterprise', 'monthly')); ?>" data-annual-url="<?php echo htmlspecialchars(buildPlanSignupUrl($registerBaseUrl, 'enterprise', 'annual')); ?>" class="choose-plan-link block w-full text-center py-3 px-6 border-2 border-slate-200 text-dark-slate font-bold rounded-xl hover:bg-slate-50 transition-all mt-auto">Choose Enterprise</a>
+</div>
 </div>
 <?php endif; ?>
-</div>
+<p class="text-center text-slate-500 text-sm mt-10">All plans include a free trial. No credit card required. Annual billing saves up to 20%.</p>
 </div>
 </section>
 <!-- Testimonials -->
@@ -569,6 +582,10 @@ foreach ($plans as $plan):
         for (var s = 0; s < savePercents.length; s++) {
             savePercents[s].style.display = currentCycle === 'annual' ? '' : 'none';
         }
+        var hintsMonthly = document.querySelectorAll('#pricing [data-cycle-hint="monthly"]');
+        var hintsAnnual = document.querySelectorAll('#pricing [data-cycle-hint="annual"]');
+        for (var h1 = 0; h1 < hintsMonthly.length; h1++) hintsMonthly[h1].classList.toggle('hidden', currentCycle !== 'monthly');
+        for (var h2 = 0; h2 < hintsAnnual.length; h2++) hintsAnnual[h2].classList.toggle('hidden', currentCycle !== 'annual');
     }
 
     for (var n = 0; n < buttons.length; n++) {
