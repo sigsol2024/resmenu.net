@@ -4,6 +4,11 @@
  * Same DB as Resmenu (our-menu.online); BACKEND_URL for auth and API links.
  */
 
+// Local overrides (gitignored): set DB/SMTP/keys here or via environment variables.
+if (file_exists(__DIR__ . '/config.local.php')) {
+    require __DIR__ . '/config.local.php';
+}
+
 // Site URL - Dynamically detect protocol and domain (marketing site)
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
@@ -19,7 +24,7 @@ $basePath = ($basePath === '/' || $basePath === '\\' || $basePath === '.') ? '' 
 define('SITE_URL', $protocol . $host . $basePath);
 
 // Backend (our-menu.online) - for Login, Register, API, restaurant menu links
-define('BACKEND_URL', 'https://our-menu.online');
+if (!defined('BACKEND_URL')) define('BACKEND_URL', getenv('BACKEND_URL') ?: 'https://our-menu.online');
 
 // Paths
 define('BASE_PATH', dirname(__DIR__));
@@ -40,14 +45,14 @@ define('ALLOWED_IMAGE_TYPES', ['image/jpeg', 'image/png', 'image/gif', 'image/we
 date_default_timezone_set('UTC');
 
 // Email (SMTP)
-define('MAIL_ENABLED', true);
-define('MAIL_FROM_EMAIL', 'services@our-menu.online');
-define('MAIL_FROM_NAME', 'Resmenu');
-define('SMTP_HOST', 'server1.signaturewebhosting.space');
-define('SMTP_PORT', 465);
-define('SMTP_SECURE', 'ssl');
-define('SMTP_USERNAME', '');
-define('SMTP_PASSWORD', 'Sigsol1234!//@');
+if (!defined('MAIL_ENABLED')) define('MAIL_ENABLED', true);
+if (!defined('MAIL_FROM_EMAIL')) define('MAIL_FROM_EMAIL', getenv('MAIL_FROM_EMAIL') ?: 'noreply@resmenu.net');
+if (!defined('MAIL_FROM_NAME')) define('MAIL_FROM_NAME', getenv('MAIL_FROM_NAME') ?: 'Resmenu');
+if (!defined('SMTP_HOST')) define('SMTP_HOST', getenv('SMTP_HOST') ?: '');
+if (!defined('SMTP_PORT')) define('SMTP_PORT', (int)(getenv('SMTP_PORT') ?: 465));
+if (!defined('SMTP_SECURE')) define('SMTP_SECURE', getenv('SMTP_SECURE') ?: 'ssl');
+if (!defined('SMTP_USERNAME')) define('SMTP_USERNAME', getenv('SMTP_USERNAME') ?: '');
+if (!defined('SMTP_PASSWORD')) define('SMTP_PASSWORD', getenv('SMTP_PASSWORD') ?: '');
 
 // Error reporting
 error_reporting(E_ALL);
@@ -56,11 +61,17 @@ ini_set('log_errors', 1);
 ini_set('error_log', BASE_PATH . '/logs/php_errors.log');
 
 // Database Configuration - same as Resmenu (shared DB)
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'sigsolmenu_resmenu');
-define('DB_USER', 'sigsolmenu_resmenu');
-define('DB_PASS', 'Secretpass0931//');
-define('DB_CHARSET', 'utf8mb4');
+if (!defined('DB_HOST')) define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+if (!defined('DB_NAME')) define('DB_NAME', getenv('DB_NAME') ?: 'sigsolmenu_resmenu');
+if (!defined('DB_USER')) define('DB_USER', getenv('DB_USER') ?: '');
+if (!defined('DB_PASS')) define('DB_PASS', getenv('DB_PASS') ?: '');
+if (!defined('DB_CHARSET')) define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8mb4');
+
+// Marketing site extras
+// SmartSupp key. Leave blank to disable the widget.
+if (!defined('SMARTSUPP_KEY')) define('SMARTSUPP_KEY', getenv('SMARTSUPP_KEY') ?: '');
+// Knowledge base Tutorials tab (YouTube URL; supports normal watch links with ?v=... and optional &t=...).
+if (!defined('KB_TUTORIALS_YOUTUBE_URL')) define('KB_TUTORIALS_YOUTUBE_URL', getenv('KB_TUTORIALS_YOUTUBE_URL') ?: 'https://www.youtube.com/watch?v=WQjwnsXXirg&t=35s');
 
 /**
  * Get database connection

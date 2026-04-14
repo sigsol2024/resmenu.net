@@ -4,7 +4,6 @@
  */
 require_once __DIR__ . '/config/config.php';
 require_once __DIR__ . '/includes/functions.php';
-require_once __DIR__ . '/includes/mail.php';
 
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
@@ -16,58 +15,12 @@ $contactSalesPhone = $siteSettings['contact_sales_phone'] ?? '+234 (0) 812 345 6
 $contactSupportEmail = $siteSettings['contact_support_email'] ?? 'support@sigsolresmenu.com';
 $contactSupportPhone = $siteSettings['contact_support_phone'] ?? '+234 (0) 701 987 6543';
 $contactPartnersEmail = $siteSettings['contact_partners_email'] ?? 'partners@sigsolresmenu.com';
-$contactFormRecipient = $siteSettings['contact_form_recipient'] ?? ($contactSupportEmail ?: $contactSalesEmail);
 $contactHqTitle = $siteSettings['contact_hq_title'] ?? 'Lagos HQ';
 $contactHqAddress = $siteSettings['contact_hq_address'] ?? "12 Adeola Odeku Street, Victoria Island,\nLagos 101241, Nigeria";
 $contactMapEmbed = $siteSettings['contact_map_embed'] ?? '';
 $contactFacebook = $siteSettings['contact_social_facebook'] ?? '#';
 $contactTwitter = $siteSettings['contact_social_twitter'] ?? '#';
 $contactInstagram = $siteSettings['contact_social_instagram'] ?? '#';
-
-$formStatus = ['type' => null, 'message' => ''];
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name'] ?? '');
-    $restaurantName = trim($_POST['restaurant_name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $phone = trim($_POST['phone'] ?? '');
-    $subject = trim($_POST['subject'] ?? 'General Inquiry');
-    $messageBody = trim($_POST['message'] ?? '');
-
-    if (empty($name) || empty($email) || empty($messageBody)) {
-        $formStatus = ['type' => 'error', 'message' => 'Please fill in your name, email, and message.'];
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $formStatus = ['type' => 'error', 'message' => 'Please enter a valid email address.'];
-    } elseif (empty($contactFormRecipient) || !filter_var($contactFormRecipient, FILTER_VALIDATE_EMAIL)) {
-        $formStatus = ['type' => 'error', 'message' => 'Contact form recipient email is not configured.'];
-    } else {
-        $plainSubject = $siteSettings['site_name'] ?? 'Resmenu';
-        $emailSubject = 'New Contact Message - ' . $plainSubject;
-        $body = '<p style="margin:0 0 8px;"><strong>Name:</strong> ' . htmlspecialchars($name) . '</p>';
-        if ($restaurantName !== '') {
-            $body .= '<p style="margin:0 0 8px;"><strong>Restaurant:</strong> ' . htmlspecialchars($restaurantName) . '</p>';
-        }
-        $body .= '<p style="margin:0 0 8px;"><strong>Email:</strong> ' . htmlspecialchars($email) . '</p>';
-        if ($phone !== '') {
-            $body .= '<p style="margin:0 0 8px;"><strong>Phone:</strong> ' . htmlspecialchars($phone) . '</p>';
-        }
-        $body .= '<p style="margin:0 0 8px;"><strong>Subject:</strong> ' . htmlspecialchars($subject) . '</p>';
-        $body .= '<p style="margin:12px 0 0;"><strong>Message:</strong></p>';
-        $body .= '<p style="white-space:pre-line;margin:4px 0 0;">' . nl2br(htmlspecialchars($messageBody)) . '</p>';
-
-        $html = getSiteEmailTemplate('New Contact Message', $body, $siteSettings);
-        $options = [
-            'reply_to' => $email,
-            'reply_to_name' => $name,
-        ];
-
-        if (sendEmail($contactFormRecipient, '', $emailSubject, $html, $options)) {
-            $formStatus = ['type' => 'success', 'message' => "Thank you for your message! We'll get back to you soon."];
-        } else {
-            $formStatus = ['type' => 'error', 'message' => 'Failed to send your message. Please try again later.'];
-        }
-    }
-}
 ?>
 <!DOCTYPE html>
 <html class="light" lang="en">
@@ -76,6 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Contact Us - <?php echo $siteName; ?></title>
     <meta name="description" content="Get in touch with <?php echo $siteName; ?> support team"/>
+    <?php
+        $favicon = (string)($siteSettings['favicon'] ?? '');
+        $faviconUrl = $favicon !== '' ? ($baseUrl . '/uploads/site/' . rawurlencode($favicon)) : ($baseUrl . '/favicon.ico');
+        $fallbackIcon = $baseUrl . '/assets/images/resmen_logo.png';
+        $iconHref = $faviconUrl ?: $fallbackIcon;
+    ?>
+    <link rel="icon" href="<?php echo htmlspecialchars($iconHref); ?>">
+    <link rel="apple-touch-icon" href="<?php echo htmlspecialchars($iconHref ?: $fallbackIcon); ?>">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -134,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main class="max-w-[1400px] mx-auto px-6 py-16 md:py-24">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
             <!-- Structured Support -->
-            <div class="lg:col-span-3 h-full flex flex-col min-h-0">
+            <div class="lg:col-span-4 h-full flex flex-col min-h-0">
                 <h3 class="text-xl font-bold mb-6 text-slate-900 dark:text-white flex-shrink-0">Structured Support</h3>
                 <div class="flex-1 flex flex-col gap-6 min-h-0">
                     <div class="flex-1 min-h-0 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm flex flex-col">
@@ -170,60 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
 
-            <!-- Send us a Message -->
-            <div class="lg:col-span-5 flex flex-col min-h-0">
-                <div class="bg-white dark:bg-slate-900 p-8 md:p-10 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 h-full flex flex-col min-h-0">
-                    <h3 class="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Send us a Message</h3>
-                    <form id="contactForm" method="POST" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="flex flex-col gap-1.5">
-                                <label for="name" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name</label>
-                                <input id="name" name="name" type="text" required class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-sm" placeholder="John Doe"/>
-                            </div>
-                            <div class="flex flex-col gap-1.5">
-                                <label for="restaurant_name" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Restaurant Name</label>
-                                <input id="restaurant_name" name="restaurant_name" type="text" class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-sm" placeholder="The Tasty Grill"/>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="flex flex-col gap-1.5">
-                                <label for="email" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</label>
-                                <input id="email" name="email" type="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-sm" placeholder="john@example.com"/>
-                            </div>
-                            <div class="flex flex-col gap-1.5">
-                                <label for="phone" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Phone Number</label>
-                                <input id="phone" name="phone" type="tel" class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-sm" placeholder="+234 800 000 0000"/>
-                            </div>
-                        </div>
-                        <div class="flex flex-col gap-1.5">
-                            <label for="subject" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Subject</label>
-                            <select id="subject" name="subject" class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none appearance-none text-sm">
-                                <option value="General Inquiry">General Inquiry</option>
-                                <option value="Sales & Pricing">Sales &amp; Pricing</option>
-                                <option value="Technical Support">Technical Support</option>
-                                <option value="Partnership">Partnership</option>
-                            </select>
-                        </div>
-                        <div class="flex flex-col gap-1.5">
-                            <label for="message" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Message</label>
-                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none text-sm" placeholder="How can we help you today?"></textarea>
-                        </div>
-                        <?php if ($formStatus['type']): ?>
-                        <div id="formMessage" class="p-4 rounded-lg text-sm <?php echo $formStatus['type'] === 'success' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200' : 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-200'; ?>">
-                            <?php echo htmlspecialchars($formStatus['message']); ?>
-                        </div>
-                        <?php else: ?>
-                        <div id="formMessage" class="hidden p-4 rounded-lg text-sm"></div>
-                        <?php endif; ?>
-                        <button type="submit" class="w-full py-4 bg-primary text-white font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all transform hover:-translate-y-0.5 active:translate-y-0">
-                            Send Message
-                        </button>
-                    </form>
-                </div>
-            </div>
-
             <!-- Right: Map box + Follow us box (equal height row with left & form) -->
-            <div class="lg:col-span-4 h-full flex flex-col gap-6 min-h-0">
+            <div class="lg:col-span-8 h-full flex flex-col gap-6 min-h-0">
                 <!-- Global Presence + Map (own card, reduced map height) -->
                 <div class="flex-1 min-h-0 flex flex-col bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
                     <div class="p-6 flex-shrink-0">
@@ -307,19 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
     <?php include __DIR__ . '/includes/footer.php'; ?>
+    <?php include __DIR__ . '/includes/livechat.php'; ?>
 </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var form = document.getElementById('contactForm');
-    var msg = document.getElementById('formMessage');
-    if (!form || !msg) return;
-    if (msg.classList.contains('hidden')) {
-        form.addEventListener('submit', function() {
-            // Server handles submission; this is just a small UX guard.
-            form.querySelector('button[type=\"submit\"]').disabled = true;
-        });
-    }
-});
-</script>
 </body>
 </html>

@@ -52,6 +52,14 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Pricing - <?php echo $siteName; ?></title>
     <meta name="description" content="Pricing plans for <?php echo $siteName; ?> digital menu platform"/>
+    <?php
+        $favicon = (string)($siteSettings['favicon'] ?? '');
+        $faviconUrl = $favicon !== '' ? ($baseUrl . '/uploads/site/' . rawurlencode($favicon)) : ($baseUrl . '/favicon.ico');
+        $fallbackIcon = $baseUrl . '/assets/images/resmen_logo.png';
+        $iconHref = $faviconUrl ?: $fallbackIcon;
+    ?>
+    <link rel="icon" href="<?php echo htmlspecialchars($iconHref); ?>">
+    <link rel="apple-touch-icon" href="<?php echo htmlspecialchars($iconHref ?: $fallbackIcon); ?>">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>

@@ -63,6 +63,14 @@ $features = [
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Features - <?php echo $siteName; ?></title>
     <meta name="description" content="Explore SigSol Resmenu features: QR menu templates, food ordering, reservations, QR generation, branding, and currency switcher.">
+    <?php
+        $favicon = (string)($siteSettings['favicon'] ?? '');
+        $faviconUrl = $favicon !== '' ? ($baseUrl . '/uploads/site/' . rawurlencode($favicon)) : ($baseUrl . '/favicon.ico');
+        $fallbackIcon = $baseUrl . '/assets/images/resmen_logo.png';
+        $iconHref = $faviconUrl ?: $fallbackIcon;
+    ?>
+    <link rel="icon" href="<?php echo htmlspecialchars($iconHref); ?>">
+    <link rel="apple-touch-icon" href="<?php echo htmlspecialchars($iconHref ?: $fallbackIcon); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">

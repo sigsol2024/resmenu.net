@@ -57,6 +57,14 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title><?php echo htmlspecialchars($siteName); ?> | Modern Digital Menus</title>
 <meta name="description" content="Create beautiful digital menus for your restaurant. Easy to use, customizable templates, and powerful features.">
+<?php
+    $favicon = (string)($siteSettings['favicon'] ?? '');
+    $faviconUrl = $favicon !== '' ? ($baseUrl . '/uploads/site/' . rawurlencode($favicon)) : ($baseUrl . '/favicon.ico');
+    $fallbackIcon = $baseUrl . '/assets/images/resmen_logo.png';
+    $iconHref = $faviconUrl ?: $fallbackIcon;
+?>
+<link rel="icon" href="<?php echo htmlspecialchars($iconHref); ?>">
+<link rel="apple-touch-icon" href="<?php echo htmlspecialchars($iconHref ?: $fallbackIcon); ?>">
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -516,6 +524,7 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
 </div>
 </section>
 <?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/includes/livechat.php'; ?>
 <script>
 (function() {
     var animatedSelectors = '.hero-image-entrance, .product-card-entrance, .about-image-entrance';

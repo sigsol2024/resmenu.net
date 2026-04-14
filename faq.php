@@ -11,6 +11,50 @@ $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $authUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/' : 'https://our-menu.online/';
 $siteSettings = getSiteSettings();
 $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
+
+function kbParseYoutubeStartSeconds(string $t): int {
+    $t = trim($t);
+    if ($t === '') return 0;
+    if (ctype_digit($t)) return (int)$t;
+    $total = 0;
+    if (preg_match('/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/i', $t, $m)) {
+        $h = (int)($m[1] ?? 0);
+        $min = (int)($m[2] ?? 0);
+        $sec = (int)($m[3] ?? 0);
+        $total = ($h * 3600) + ($min * 60) + $sec;
+    }
+    return max(0, $total);
+}
+
+function kbYoutubeEmbedUrl(string $url): string {
+    $url = trim($url);
+    if ($url === '') return '';
+    $parts = parse_url($url);
+    if (!is_array($parts)) return '';
+    $host = strtolower((string)($parts['host'] ?? ''));
+    $path = (string)($parts['path'] ?? '');
+    parse_str((string)($parts['query'] ?? ''), $q);
+
+    $videoId = '';
+    if (strpos($host, 'youtu.be') !== false) {
+        $videoId = ltrim($path, '/');
+    } else {
+        $videoId = (string)($q['v'] ?? '');
+    }
+    $videoId = preg_replace('/[^a-zA-Z0-9_-]/', '', $videoId);
+    if ($videoId === '') return '';
+
+    $start = 0;
+    if (!empty($q['t'])) $start = kbParseYoutubeStartSeconds((string)$q['t']);
+    if (!empty($q['start']) && ctype_digit((string)$q['start'])) $start = (int)$q['start'];
+
+    $embed = 'https://www.youtube.com/embed/' . $videoId;
+    if ($start > 0) $embed .= '?start=' . (int)$start;
+    return $embed;
+}
+
+$tutorialUrlRaw = defined('KB_TUTORIALS_YOUTUBE_URL') ? (string)KB_TUTORIALS_YOUTUBE_URL : '';
+$tutorialEmbedUrl = kbYoutubeEmbedUrl($tutorialUrlRaw);
 ?>
 <!DOCTYPE html>
 <html class="light" lang="en">
@@ -19,6 +63,14 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><?php echo $siteName; ?> - Knowledge Base</title>
     <meta name="description" content="Merchant help center and frequently asked questions for <?php echo $siteName; ?> digital menu platform"/>
+    <?php
+        $favicon = (string)($siteSettings['favicon'] ?? '');
+        $faviconUrl = $favicon !== '' ? ($baseUrl . '/uploads/site/' . rawurlencode($favicon)) : ($baseUrl . '/favicon.ico');
+        $fallbackIcon = $baseUrl . '/assets/images/resmen_logo.png';
+        $iconHref = $faviconUrl ?: $fallbackIcon;
+    ?>
+    <link rel="icon" href="<?php echo htmlspecialchars($iconHref); ?>">
+    <link rel="apple-touch-icon" href="<?php echo htmlspecialchars($iconHref ?: $fallbackIcon); ?>">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -93,6 +145,9 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
                         </a>
                         <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#account">
                             <span class="material-symbols-outlined text-xl">manage_accounts</span> Account Management
+                        </a>
+                        <a class="knowledge-sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary hover:bg-primary/5 transition-all" href="#tutorials">
+                            <span class="material-symbols-outlined text-xl">smart_display</span> Tutorials
                         </a>
                     </nav>
                 </div>
@@ -190,6 +245,44 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
                                 <div class="faq-answer"><div class="px-5 pb-4 pt-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-700">Multi-user and role-based access are available on select plans. Contact us or check your plan details in the dashboard to see if your account supports inviting staff.</div></div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-mt-40 mb-16" id="tutorials">
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+                    <div class="p-6 md:p-8">
+                        <div class="flex items-center gap-3 mb-6 group">
+                            <span class="material-symbols-outlined text-primary text-4xl block group-hover:scale-110 transition-transform">smart_display</span>
+                            <h2 class="text-3xl font-heading font-bold text-slate-900 dark:text-white">Tutorials</h2>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 mb-6 max-w-3xl">
+                            Watch quick walkthroughs to get the most out of your Resmenu dashboard.
+                        </p>
+                        <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+                            <div class="text-sm font-semibold text-slate-700 dark:text-slate-200">Getting started video</div>
+                            <?php if (!empty($tutorialUrlRaw)): ?>
+                                <a class="text-sm font-semibold text-primary hover:underline" href="<?php echo htmlspecialchars($tutorialUrlRaw); ?>" target="_blank" rel="noopener noreferrer">Open on YouTube</a>
+                            <?php endif; ?>
+                        </div>
+                        <?php if (!empty($tutorialEmbedUrl)): ?>
+                            <div class="relative w-full overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700" style="padding-top: 56.25%;">
+                                <iframe
+                                    class="absolute inset-0 w-full h-full"
+                                    src="<?php echo htmlspecialchars($tutorialEmbedUrl); ?>"
+                                    title="Tutorial video"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen
+                                    loading="lazy"
+                                    referrerpolicy="strict-origin-when-cross-origin"
+                                ></iframe>
+                            </div>
+                        <?php else: ?>
+                            <div class="rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 p-5 text-sm text-slate-600 dark:text-slate-300">
+                                Tutorial video is not configured yet.
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -376,12 +469,9 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-4xl lg:text-5xl font-black text-white mb-8 leading-tight">Can't find what you're looking for?</h2>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="bg-[#111827] text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-[#111827]/90 transition-all shadow-2xl flex items-center justify-center gap-3">
-                    <span class="material-symbols-outlined">mail</span> Contact Support
+                <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact" class="bg-[#111827] text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-[#111827]/90 transition-all shadow-2xl flex items-center justify-center gap-3">
+                    <span class="material-symbols-outlined">support_agent</span> Contact Live Support
                 </a>
-                <button type="button" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all flex items-center justify-center gap-3">
-                    <span class="material-symbols-outlined">chat</span> Live Chat
-                </button>
             </div>
             <p class="mt-8 text-white/80 font-medium">Our dedicated success team is available to help you optimize your digital experience.</p>
         </div>
@@ -392,7 +482,7 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 <script>
 (function() {
     var sidebarLinks = document.querySelectorAll('.knowledge-sidebar-link');
-    var sectionIds = ['general','account','design','items','modifiers','hardware','integrations','payments'];
+    var sectionIds = ['general','account','tutorials','design','items','modifiers','hardware','integrations','payments'];
     function updateActiveLink() {
         var trigger = window.scrollY + 120;
         var current = '';

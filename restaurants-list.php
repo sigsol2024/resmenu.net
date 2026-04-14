@@ -14,6 +14,8 @@ $registerUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/register.php
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Partner Restaurants - SigSol Resmenu</title>
     <meta name="description" content="Browse all restaurants using SigSol Resmenu platform">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.ico">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

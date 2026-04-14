@@ -4,9 +4,12 @@
  * Fetches template data from backend API. Preview links to backend templateN-preview.
  */
 require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/includes/functions.php';
 $baseUrl = defined('SITE_URL') ? rtrim(SITE_URL, '/') : '';
 $backendUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') : 'https://our-menu.online';
 $registerUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') . '/register.php' : 'https://our-menu.online/register.php';
+$siteSettings = getSiteSettings();
+$siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 
 $templates = [];
 $apiUrl = $backendUrl . '/api/templates.php?limit=20';
@@ -43,8 +46,16 @@ $templates = array_slice($templates, 0, 20);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Templates - SigSol Resmenu</title>
+    <title>Templates - <?php echo $siteName; ?></title>
     <meta name="description" content="Choose your perfect digital menu template. Modern Classic, Dark Luxury, Café Minimal, Rustic Charm.">
+    <?php
+        $favicon = (string)($siteSettings['favicon'] ?? '');
+        $faviconUrl = $favicon !== '' ? ($baseUrl . '/uploads/site/' . rawurlencode($favicon)) : ($baseUrl . '/favicon.ico');
+        $fallbackIcon = $baseUrl . '/assets/images/resmen_logo.png';
+        $iconHref = $faviconUrl ?: $fallbackIcon;
+    ?>
+    <link rel="icon" href="<?php echo htmlspecialchars($iconHref); ?>">
+    <link rel="apple-touch-icon" href="<?php echo htmlspecialchars($iconHref ?: $fallbackIcon); ?>">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo htmlspecialchars($baseUrl); ?>/assets/css/marketing.css">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
