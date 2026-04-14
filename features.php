@@ -181,7 +181,7 @@ $features = [
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
             <a href="<?php echo htmlspecialchars($registerUrl); ?>" class="bg-white text-primary hover:bg-slate-50 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg text-center">Get Started Now</a>
-            <a href="<?php echo htmlspecialchars($baseUrl); ?>/templates.php" class="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all text-center">View Templates</a>
+            <a href="<?php echo htmlspecialchars($baseUrl); ?>/templates" class="bg-transparent border-2 border-white/40 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-all text-center">View Templates</a>
         </div>
     </div>
 </section>

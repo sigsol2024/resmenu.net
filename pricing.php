@@ -318,7 +318,7 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                             <li>• Start with a free trial—no credit card required.</li>
                             <li>• You can upgrade, downgrade, or cancel from your account settings.</li>
                             <li>• Cancel anytime; no long-term commitment.</li>
-                            <li>• Questions? <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="text-primary font-medium hover:underline">Contact us</a> or see the <a href="<?php echo htmlspecialchars($baseUrl); ?>/faq.php" class="text-primary font-medium hover:underline">FAQ</a>.</li>
+                            <li>• Questions? <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact" class="text-primary font-medium hover:underline">Contact us</a> or see the <a href="<?php echo htmlspecialchars($baseUrl); ?>/faq" class="text-primary font-medium hover:underline">FAQ</a>.</li>
                         </ul>
                     </div>
                 </div>
@@ -335,7 +335,7 @@ function buildPricingPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthl
                     <a href="<?php echo htmlspecialchars($registerBaseUrl); ?>" class="bg-dark-slate text-white px-10 py-5 rounded-xl text-lg font-bold hover:bg-dark-slate/90 transition-all shadow-2xl inline-flex items-center gap-3">
                         <span class="material-symbols-outlined">rocket_launch</span> Start free trial
                     </a>
-                    <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact.php" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all inline-flex items-center gap-3">
+                    <a href="<?php echo htmlspecialchars($baseUrl); ?>/contact" class="bg-white/10 text-white border border-white/30 px-10 py-5 rounded-xl text-lg font-bold hover:bg-white/20 transition-all inline-flex items-center gap-3">
                         <span class="material-symbols-outlined">mail</span> Contact sales
                     </a>
                 </div>
