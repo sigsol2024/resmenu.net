@@ -41,30 +41,30 @@ $siteName = htmlspecialchars($siteSettings['site_name'] ?? 'SigSol Resmenu');
 </style>
 <!-- Header (same as home page) -->
 <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-200">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex justify-between items-center h-20">
-<div class="flex items-center gap-2">
-<a href="<?php echo htmlspecialchars($baseUrl); ?>/" class="flex items-center gap-2">
-<img src="<?php echo htmlspecialchars($baseUrl); ?>/assets/images/resmen_logo.png" alt="<?php echo $siteName; ?> logo" class="h-10 w-auto object-contain"/>
+<div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14 sm:h-16 md:h-20 gap-2">
+<div class="flex items-center gap-1.5 sm:gap-2 min-w-0">
+<a href="<?php echo htmlspecialchars($baseUrl); ?>/" class="flex items-center gap-2 shrink-0">
+<img src="<?php echo htmlspecialchars($baseUrl); ?>/assets/images/resmen_logo.png" alt="<?php echo $siteName; ?> logo" class="h-7 w-auto object-contain sm:h-8 md:h-10"/>
 </a>
 </div>
-<nav class="hidden md:flex items-center gap-8">
-<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
-<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/features">Features</a>
-<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list">Restaurants</a>
-<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/templates">Templates</a>
-<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing">Pricing</a>
-<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/faq">FAQ</a>
-<a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/contact">Contact</a>
+<nav class="hidden md:flex items-center gap-3 lg:gap-6 xl:gap-8 shrink min-w-0">
+<a class="text-xs lg:text-sm font-medium text-slate-600 hover:text-primary transition-colors whitespace-nowrap" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
+<a class="text-xs lg:text-sm font-medium text-slate-600 hover:text-primary transition-colors whitespace-nowrap" href="<?php echo htmlspecialchars($baseUrl); ?>/features">Features</a>
+<a class="text-xs lg:text-sm font-medium text-slate-600 hover:text-primary transition-colors whitespace-nowrap" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list">Restaurants</a>
+<a class="text-xs lg:text-sm font-medium text-slate-600 hover:text-primary transition-colors whitespace-nowrap" href="<?php echo htmlspecialchars($baseUrl); ?>/templates">Templates</a>
+<a class="text-xs lg:text-sm font-medium text-slate-600 hover:text-primary transition-colors whitespace-nowrap" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing">Pricing</a>
+<a class="text-xs lg:text-sm font-medium text-slate-600 hover:text-primary transition-colors whitespace-nowrap" href="<?php echo htmlspecialchars($baseUrl); ?>/faq">FAQ</a>
+<a class="text-xs lg:text-sm font-medium text-slate-600 hover:text-primary transition-colors whitespace-nowrap" href="<?php echo htmlspecialchars($baseUrl); ?>/contact">Contact</a>
 </nav>
-<div class="flex items-center gap-4">
-<button type="button" id="mobileMenuBtn" class="md:hidden p-2.5 rounded-xl text-dark-slate hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/30" aria-label="Open menu">
-<span class="material-symbols-outlined text-3xl">menu</span>
+<div class="flex items-center gap-1.5 sm:gap-2 md:gap-4 shrink-0">
+<button type="button" id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-dark-slate hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-primary/30" aria-label="Open menu">
+<span class="material-symbols-outlined text-2xl sm:text-3xl">menu</span>
 </button>
-<a href="<?php echo htmlspecialchars($loginUrl); ?>" class="hidden md:inline-flex items-center text-sm font-semibold text-slate-600 hover:text-primary transition-colors">
+<a href="<?php echo htmlspecialchars($loginUrl); ?>" class="hidden md:inline-flex items-center text-xs lg:text-sm font-semibold text-slate-600 hover:text-primary transition-colors">
 Login
 </a>
-<a href="<?php echo htmlspecialchars($registerUrl); ?>" class="hidden md:inline-block bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
+<a href="<?php echo htmlspecialchars($registerUrl); ?>" class="hidden md:inline-block bg-primary hover:bg-primary/90 text-white px-3 py-2 sm:px-5 sm:py-2.5 lg:px-6 rounded-md sm:rounded-lg text-xs sm:text-sm font-bold transition-all shadow-md sm:shadow-lg shadow-primary/20 whitespace-nowrap">
 Get Started
 </a>
 </div>
@@ -83,15 +83,15 @@ Get Started
 </button>
 </div>
 <nav class="flex flex-col p-4 gap-1">
-<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
-<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/features">Features</a>
-<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list">Restaurants</a>
-<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/templates">Templates</a>
-<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing">Pricing</a>
-<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/faq">FAQ</a>
-<a class="mobile-menu-link px-4 py-3.5 rounded-xl text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/contact">Contact</a>
-<a class="mobile-menu-link mt-2 px-4 py-3.5 rounded-xl text-slate-700 font-bold text-center border border-slate-200 hover:bg-slate-50 transition-colors" href="<?php echo htmlspecialchars($loginUrl); ?>">Login</a>
-<a class="mobile-menu-link mt-2 px-4 py-3.5 rounded-xl bg-primary text-white font-bold text-center hover:bg-primary/90 transition-colors" href="<?php echo htmlspecialchars($registerUrl); ?>">Get Started</a>
+<a class="mobile-menu-link px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-sm text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/">Home</a>
+<a class="mobile-menu-link px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-sm text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/features">Features</a>
+<a class="mobile-menu-link px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-sm text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/restaurants-list">Restaurants</a>
+<a class="mobile-menu-link px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-sm text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/templates">Templates</a>
+<a class="mobile-menu-link px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-sm text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/pricing">Pricing</a>
+<a class="mobile-menu-link px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-sm text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/faq">FAQ</a>
+<a class="mobile-menu-link px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-sm text-slate-700 font-medium hover:bg-primary/10 hover:text-primary transition-colors" href="<?php echo htmlspecialchars($baseUrl); ?>/contact">Contact</a>
+<a class="mobile-menu-link mt-1 px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl text-sm text-slate-700 font-bold text-center border border-slate-200 hover:bg-slate-50 transition-colors" href="<?php echo htmlspecialchars($loginUrl); ?>">Login</a>
+<a class="mobile-menu-link mt-1 px-3 py-2.5 sm:px-4 sm:py-3 rounded-xl bg-primary text-white text-sm font-bold text-center hover:bg-primary/90 transition-colors" href="<?php echo htmlspecialchars($registerUrl); ?>">Get Started</a>
 </nav>
 </div>
 </div>

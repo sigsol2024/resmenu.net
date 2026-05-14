@@ -106,6 +106,14 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
             opacity: 1;
             transform: translateX(0);
         }
+        @media (max-width: 1023px) {
+            .hero-image-entrance {
+                transform: translateY(0.75rem);
+            }
+            .hero-image-entrance.is-visible {
+                transform: translateY(0);
+            }
+        }
         .product-card-entrance {
             opacity: 0;
             transform: translateY(28px);
@@ -132,33 +140,26 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
 <body class="bg-background-light text-slate-900 selection:bg-primary/30">
 <?php include __DIR__ . '/includes/header.php'; ?>
 <!-- Hero Section -->
-<section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 bg-white">
+<section class="relative overflow-hidden pt-12 pb-16 sm:pt-16 sm:pb-20 md:pt-20 md:pb-24 lg:pt-32 lg:pb-40 bg-white">
 <div class="absolute inset-0 pointer-events-none" style="background-image: url('<?php echo htmlspecialchars($baseUrl); ?>/assets/images/bg_black.png'); background-repeat: repeat; background-size: 280px 280px; opacity: 0.08;"></div>
 <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="flex flex-col lg:flex-row items-center gap-16">
-<div class="w-full lg:w-1/2 space-y-8 order-2 lg:order-1">
-<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-<span class="relative flex h-2 w-2">
-<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-</span>
-                        New: Contactless Ordering 2.0
-                    </div>
-<h1 class="text-3xl lg:text-5xl font-black leading-tight text-dark-slate tracking-tight">
+<div class="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 md:gap-14 lg:gap-16">
+<div class="w-full lg:w-1/2 space-y-5 sm:space-y-6 md:space-y-8 order-2 lg:order-1">
+<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-dark-slate tracking-tight">
                         Beautiful Digital Menus That <span class="text-primary underline decoration-primary/20">Elevate</span> Your Restaurant
                     </h1>
-<p class="text-xl text-slate-600 leading-relaxed max-w-xl">
+<p class="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-xl">
                         Trusted by restaurants, cafés, and hospitality brands. Streamline your operations with our professional digital menu solution.
                     </p>
-<div class="flex flex-wrap gap-4">
-<a href="<?php echo htmlspecialchars($registerBaseUrl); ?>" class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl text-lg font-bold transition-all shadow-xl shadow-primary/20">
+<div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
+<a href="<?php echo htmlspecialchars($registerBaseUrl); ?>" class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 sm:px-6 sm:py-3 md:px-7 md:py-3.5 lg:px-8 lg:py-4 rounded-lg sm:rounded-xl text-sm sm:text-base lg:text-lg font-bold transition-all shadow-xl shadow-primary/20 w-full min-[400px]:w-auto text-center">
                             Get Started Free
                         </a>
-<a href="<?php echo $baseUrl; ?>/templates" class="bg-slate-100 hover:bg-slate-200 text-dark-slate px-8 py-4 rounded-xl text-lg font-bold transition-all">
+<a href="<?php echo $baseUrl; ?>/templates" class="bg-slate-100 hover:bg-slate-200 text-dark-slate px-5 py-2.5 sm:px-6 sm:py-3 md:px-7 md:py-3.5 lg:px-8 lg:py-4 rounded-lg sm:rounded-xl text-sm sm:text-base lg:text-lg font-bold transition-all w-full min-[400px]:w-auto text-center">
                             View Demo
                         </a>
 </div>
-<div class="pt-4 flex items-center gap-4 text-sm text-slate-500 font-medium border-t border-slate-100">
+<div class="pt-3 sm:pt-4 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-xs sm:text-sm text-slate-500 font-medium border-t border-slate-100">
 <div class="flex -space-x-2">
 <div class="w-8 h-8 rounded-full border-2 border-white bg-primary overflow-hidden flex items-center justify-center">
 <img src="https://our-menu.online/uploads/logos/698ee78360beb.jpg" alt="Restaurant logo 1" class="w-full h-full object-contain"/>
@@ -173,47 +174,47 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
                         Join <?php echo $restaurantCountDisplay; ?>+ restaurants growing with <?php echo htmlspecialchars($brandLast); ?>
                     </div>
 </div>
-<div class="w-full lg:w-1/2 relative order-1 lg:order-2">
-<img src="<?php echo $baseUrl; ?>/assets/images/3-devices-black.png" alt="Digital menu on multiple devices" class="w-full h-auto hero-image-entrance"/>
+<div class="w-full lg:w-1/2 relative order-1 lg:order-2 flex justify-center lg:justify-end">
+<img src="<?php echo $baseUrl; ?>/assets/images/3-devices-black.png" alt="Digital menu on multiple devices" class="w-full max-w-[min(100%,420px)] sm:max-w-[min(100%,520px)] md:max-w-xl lg:max-w-none h-auto max-h-[260px] sm:max-h-[320px] md:max-h-[400px] lg:max-h-none object-contain hero-image-entrance mx-auto lg:mx-0"/>
 </div>
 </div>
 </div>
 </section>
 <!-- Product Overview -->
-<section class="py-24 bg-background-light">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
-<h2 class="text-4xl font-bold text-dark-slate mb-4">Everything You Need to Run a Modern Menu</h2>
-<p class="text-lg text-slate-600 max-w-2xl mx-auto">Our platform provides all the tools necessary to create and manage a high-end digital dining experience that delights customers.</p>
+<section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-background-light">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10 sm:mb-12 md:mb-16">
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-slate mb-3 sm:mb-4">Everything You Need to Run a Modern Menu</h2>
+<p class="text-sm sm:text-base md:text-lg text-slate-600 max-w-2xl mx-auto px-1">Our platform provides all the tools necessary to create and manage a high-end digital dining experience that delights customers.</p>
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="grid md:grid-cols-3 gap-8">
-<div class="product-card-entrance bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">palette</span>
-<h3 class="text-xl font-bold text-dark-slate mb-4">Create Stunning Menus</h3>
-<p class="text-slate-600 leading-relaxed">Choose from professional templates designed specifically for gastronomy. Customize to match your brand identity.</p>
+<div class="grid md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+<div class="product-card-entrance bg-white p-6 sm:p-8 lg:p-10 rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-3 sm:mb-4 block group-hover:scale-110 transition-transform">palette</span>
+<h3 class="text-lg sm:text-xl font-bold text-dark-slate mb-2 sm:mb-4">Create Stunning Menus</h3>
+<p class="text-sm sm:text-base text-slate-600 leading-relaxed">Choose from professional templates designed specifically for gastronomy. Customize to match your brand identity.</p>
 </div>
-<div class="product-card-entrance bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">sync</span>
-<h3 class="text-xl font-bold text-dark-slate mb-4">Update Instantly</h3>
-<p class="text-slate-600 leading-relaxed">Change prices, update daily specials, and mark items as "sold out" in real-time without costly reprints.</p>
+<div class="product-card-entrance bg-white p-6 sm:p-8 lg:p-10 rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-3 sm:mb-4 block group-hover:scale-110 transition-transform">sync</span>
+<h3 class="text-lg sm:text-xl font-bold text-dark-slate mb-2 sm:mb-4">Update Instantly</h3>
+<p class="text-sm sm:text-base text-slate-600 leading-relaxed">Change prices, update daily specials, and mark items as "sold out" in real-time without costly reprints.</p>
 </div>
-<div class="product-card-entrance bg-white p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">smartphone</span>
-<h3 class="text-xl font-bold text-dark-slate mb-4">Mobile-First Experience</h3>
-<p class="text-slate-600 leading-relaxed">Perfectly optimized for every smartphone screen. No app download required for your hungry guests.</p>
+<div class="product-card-entrance bg-white p-6 sm:p-8 lg:p-10 rounded-xl sm:rounded-2xl shadow-sm hover:shadow-xl transition-all border border-slate-100 group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-3 sm:mb-4 block group-hover:scale-110 transition-transform">smartphone</span>
+<h3 class="text-lg sm:text-xl font-bold text-dark-slate mb-2 sm:mb-4">Mobile-First Experience</h3>
+<p class="text-sm sm:text-base text-slate-600 leading-relaxed">Perfectly optimized for every smartphone screen. No app download required for your hungry guests.</p>
 </div>
 </div>
 </div>
 </section>
 <!-- About Section -->
-<section class="py-24 bg-slate-50 border-y border-slate-100">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16">
+<section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-slate-50 border-y border-slate-100">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-8 sm:gap-12 md:gap-16">
 <div class="w-full lg:w-1/2">
-            <img src="<?php echo $baseUrl; ?>/assets/images/tablet_mockup.png" alt="Dashboard on tablet" class="w-full h-auto max-w-xl lg:max-w-2xl mx-auto about-image-entrance"/>
+            <img src="<?php echo $baseUrl; ?>/assets/images/tablet_mockup.png" alt="Dashboard on tablet" class="w-full h-auto max-w-md sm:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto about-image-entrance"/>
 </div>
-<div class="w-full lg:w-1/2 space-y-6">
-<h2 class="text-4xl font-black text-dark-slate leading-tight">Built for Restaurants. <br/><span class="text-primary">Designed for Growth.</span></h2>
-<p class="text-lg text-slate-600">
+<div class="w-full lg:w-1/2 space-y-4 sm:space-y-5 md:space-y-6">
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-dark-slate leading-tight">Built for Restaurants. <br/><span class="text-primary">Designed for Growth.</span></h2>
+<p class="text-sm sm:text-base md:text-lg text-slate-600">
                     We understand the fast-paced nature of the hospitality industry. <?php echo htmlspecialchars($siteName); ?> was built from the ground up to simplify your daily operations, letting you focus on what matters most: the food and the guests.
                 </p>
 <div class="space-y-4">
@@ -236,117 +237,117 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
 </div>
 </section>
 <!-- Features Grid -->
-<section class="py-24 bg-white">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-16">
-<h2 class="text-4xl font-bold text-dark-slate mb-4">Powerful Features for Your Success</h2>
+<section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10 sm:mb-12 md:mb-16">
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-dark-slate mb-3 sm:mb-4">Powerful Features for Your Success</h2>
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">shopping_bag</span>
-<h3 class="font-bold text-dark-slate mb-2">Food Ordering System</h3>
-<p class="text-sm text-slate-600">Let guests order directly from your digital menu. Streamlined ordering and kitchen flow.</p>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">shopping_bag</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Food Ordering System</h3>
+<p class="text-xs sm:text-sm text-slate-600">Let guests order directly from your digital menu. Streamlined ordering and kitchen flow.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">event_available</span>
-<h3 class="font-bold text-dark-slate mb-2">Reservation System</h3>
-<p class="text-sm text-slate-600">Accept table reservations online. Reduce no-shows and manage your floor with ease.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">event_available</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Reservation System</h3>
+<p class="text-xs sm:text-sm text-slate-600">Accept table reservations online. Reduce no-shows and manage your floor with ease.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">mail</span>
-<h3 class="font-bold text-dark-slate mb-2">Real-Time Email Notification</h3>
-<p class="text-sm text-slate-600">Get instant email alerts for new orders, reservations, and important updates.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">mail</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Real-Time Email Notification</h3>
+<p class="text-xs sm:text-sm text-slate-600">Get instant email alerts for new orders, reservations, and important updates.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">dashboard_customize</span>
-<h3 class="font-bold text-dark-slate mb-2">Beautiful Templates</h3>
-<p class="text-sm text-slate-600">Custom designs that fit your restaurant's unique vibe.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">dashboard_customize</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Beautiful Templates</h3>
+<p class="text-xs sm:text-sm text-slate-600">Custom designs that fit your restaurant's unique vibe.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">admin_panel_settings</span>
-<h3 class="font-bold text-dark-slate mb-2">Easy Dashboard</h3>
-<p class="text-sm text-slate-600">Centralized control for all your menu settings.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">admin_panel_settings</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Easy Dashboard</h3>
+<p class="text-xs sm:text-sm text-slate-600">Centralized control for all your menu settings.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">account_tree</span>
-<h3 class="font-bold text-dark-slate mb-2">Multi-Branch Support</h3>
-<p class="text-sm text-slate-600">Manage all your locations from a single account.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">account_tree</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Multi-Branch Support</h3>
+<p class="text-xs sm:text-sm text-slate-600">Manage all your locations from a single account.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">category</span>
-<h3 class="font-bold text-dark-slate mb-2">Item Management</h3>
-<p class="text-sm text-slate-600">Organize dishes into categories with ease.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">category</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Item Management</h3>
+<p class="text-xs sm:text-sm text-slate-600">Organize dishes into categories with ease.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">image</span>
-<h3 class="font-bold text-dark-slate mb-2">Image Support</h3>
-<p class="text-sm text-slate-600">High-resolution visuals to make mouths water.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">image</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Image Support</h3>
+<p class="text-xs sm:text-sm text-slate-600">High-resolution visuals to make mouths water.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">qr_code</span>
-<h3 class="font-bold text-dark-slate mb-2">QR Code Integration</h3>
-<p class="text-sm text-slate-600">Custom branded QR codes for your tables.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">qr_code</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">QR Code Integration</h3>
+<p class="text-xs sm:text-sm text-slate-600">Custom branded QR codes for your tables.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">bolt</span>
-<h3 class="font-bold text-dark-slate mb-2">Real-Time Updates</h3>
-<p class="text-sm text-slate-600">Changes reflect instantly on your customers' devices.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">bolt</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Real-Time Updates</h3>
+<p class="text-xs sm:text-sm text-slate-600">Changes reflect instantly on your customers' devices.</p>
 </div>
-<div class="p-8 rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
-<span class="material-symbols-outlined text-primary text-4xl mb-4 block group-hover:scale-110 transition-transform">security</span>
-<h3 class="font-bold text-dark-slate mb-2">Secure &amp; Reliable</h3>
-<p class="text-sm text-slate-600">Enterprise-grade security and 99.9% uptime.</p>
+<div class="p-4 sm:p-5 md:p-6 lg:p-8 rounded-xl sm:rounded-2xl border border-slate-100 hover:border-primary/20 hover:bg-primary/5 transition-all group">
+<span class="material-symbols-outlined text-primary text-3xl sm:text-4xl mb-2 sm:mb-3 md:mb-4 block group-hover:scale-110 transition-transform">security</span>
+<h3 class="text-sm sm:text-base font-bold text-dark-slate mb-1 sm:mb-2">Secure &amp; Reliable</h3>
+<p class="text-xs sm:text-sm text-slate-600">Enterprise-grade security and 99.9% uptime.</p>
 </div>
 </div>
 </div>
 </section>
 <!-- Why Choose Us -->
-<section class="py-24 bg-background-light">
+<section class="py-12 sm:py-16 md:py-20 lg:py-24 bg-background-light">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-<div class="relative bg-dark-slate rounded-[2rem] p-12 lg:p-20 flex flex-col lg:flex-row gap-12 items-center overflow-hidden">
+<div class="relative bg-dark-slate rounded-2xl sm:rounded-[1.75rem] lg:rounded-[2rem] p-6 sm:p-10 md:p-12 lg:p-20 flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 items-center overflow-hidden">
 <div class="pointer-events-none absolute inset-0 opacity-10" style="background-image: url('<?php echo $baseUrl; ?>/assets/images/bh_pattern-orange.png'); background-repeat: repeat; background-size: 280px 280px;"></div>
-<div class="relative z-10 flex flex-col lg:flex-row gap-12 items-center w-full">
+<div class="relative z-10 flex flex-col lg:flex-row gap-8 sm:gap-10 md:gap-12 items-center w-full">
 <div class="lg:w-1/2 text-white">
-<h2 class="text-4xl font-bold mb-8">Why Restaurants Choose <br/>Our Platform</h2>
-<div class="space-y-6">
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-white">check</span>
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-5 sm:mb-6 md:mb-8">Why Restaurants Choose <br/>Our Platform</h2>
+<div class="space-y-4 sm:space-y-5 md:space-y-6">
+<div class="flex items-start sm:items-center gap-3 sm:gap-4">
+<div class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg sm:text-xl">check</span>
 </div>
-<span class="text-lg font-medium">Reduce menu printing costs by 90%</span>
+<span class="text-sm sm:text-base md:text-lg font-medium leading-snug">Reduce menu printing costs by 90%</span>
 </div>
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-white">check</span>
+<div class="flex items-start sm:items-center gap-3 sm:gap-4">
+<div class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg sm:text-xl">check</span>
 </div>
-<span class="text-lg font-medium">Improve customer dining experience</span>
+<span class="text-sm sm:text-base md:text-lg font-medium leading-snug">Improve customer dining experience</span>
 </div>
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-white">check</span>
+<div class="flex items-start sm:items-center gap-3 sm:gap-4">
+<div class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg sm:text-xl">check</span>
 </div>
-<span class="text-lg font-medium">Faster menu updates and seasonal changes</span>
+<span class="text-sm sm:text-base md:text-lg font-medium leading-snug">Faster menu updates and seasonal changes</span>
 </div>
-<div class="flex items-center gap-4">
-<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-white">check</span>
+<div class="flex items-start sm:items-center gap-3 sm:gap-4">
+<div class="w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg sm:text-xl">check</span>
 </div>
-<span class="text-lg font-medium">Eco-friendly digital-first approach</span>
+<span class="text-sm sm:text-base md:text-lg font-medium leading-snug">Eco-friendly digital-first approach</span>
 </div>
 </div>
 </div>
-<div class="lg:w-1/2 grid grid-cols-2 gap-4">
-<div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10 text-center">
-<div class="text-4xl font-black text-primary mb-1">30%</div>
-<div class="text-sm text-white/70 uppercase tracking-widest font-bold">Increase in Sales</div>
+<div class="lg:w-1/2 grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 w-full max-w-md lg:max-w-none mx-auto lg:mx-0">
+<div class="bg-white/10 backdrop-blur-sm p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl border border-white/10 text-center">
+<div class="text-2xl sm:text-3xl md:text-4xl font-black text-primary mb-1">30%</div>
+<div class="text-[10px] sm:text-xs text-white/70 uppercase tracking-widest font-bold">Increase in Sales</div>
 </div>
-<div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10 text-center">
-<div class="text-4xl font-black text-primary mb-1">15m</div>
-<div class="text-sm text-white/70 uppercase tracking-widest font-bold">Setup Time</div>
+<div class="bg-white/10 backdrop-blur-sm p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl border border-white/10 text-center">
+<div class="text-2xl sm:text-3xl md:text-4xl font-black text-primary mb-1">15m</div>
+<div class="text-[10px] sm:text-xs text-white/70 uppercase tracking-widest font-bold">Setup Time</div>
 </div>
-<div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/10 text-center col-span-2">
-<div class="text-4xl font-black text-primary mb-1"><?php echo $restaurantCountDisplay; ?>+</div>
-<div class="text-sm text-white/70 uppercase tracking-widest font-bold">Active Venues</div>
+<div class="bg-white/10 backdrop-blur-sm p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl border border-white/10 text-center col-span-2">
+<div class="text-2xl sm:text-3xl md:text-4xl font-black text-primary mb-1"><?php echo $restaurantCountDisplay; ?>+</div>
+<div class="text-[10px] sm:text-xs text-white/70 uppercase tracking-widest font-bold">Active Venues</div>
 </div>
 </div>
 </div>
@@ -354,15 +355,15 @@ function buildPlanSignupUrl($registerBaseUrl, $planSlug, $cycle = 'monthly') {
 </div>
 </section>
 <!-- Pricing Section (same layout and design as pricing page) -->
-<section id="pricing" class="py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-white">
+<section id="pricing" class="py-10 sm:py-14 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white">
 <div class="max-w-7xl mx-auto">
-<div class="text-center mb-10">
-<h2 class="text-4xl font-heading font-bold text-dark-slate mb-4">Simple, Transparent Pricing</h2>
-<p class="text-slate-600">No hidden fees. Choose the plan that fits your business needs.</p>
-<div class="mt-8 flex justify-center">
-<div class="inline-flex items-center rounded-xl bg-slate-100 p-1 shadow-sm" id="homePricingToggle">
-<button type="button" class="pricing-cycle-toggle-btn rounded-lg bg-white px-5 py-2 text-sm font-bold text-dark-slate shadow-sm" data-cycle="monthly">Monthly</button>
-<button type="button" class="pricing-cycle-toggle-btn rounded-lg px-5 py-2 text-sm font-bold text-slate-600" data-cycle="annual">Yearly</button>
+<div class="text-center mb-8 sm:mb-10">
+<h2 class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-dark-slate mb-3 sm:mb-4">Simple, Transparent Pricing</h2>
+<p class="text-sm sm:text-base text-slate-600 px-2">No hidden fees. Choose the plan that fits your business needs.</p>
+<div class="mt-6 sm:mt-8 flex justify-center px-2">
+<div class="inline-flex items-center rounded-lg sm:rounded-xl bg-slate-100 p-0.5 sm:p-1 shadow-sm" id="homePricingToggle">
+<button type="button" class="pricing-cycle-toggle-btn rounded-md sm:rounded-lg bg-white px-3 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-bold text-dark-slate shadow-sm" data-cycle="monthly">Monthly</button>
+<button type="button" class="pricing-cycle-toggle-btn rounded-md sm:rounded-lg px-3 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm font-bold text-slate-600" data-cycle="annual">Yearly</button>
 </div>
 </div>
 </div>
