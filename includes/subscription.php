@@ -49,6 +49,59 @@ function getRestaurantSubscription($restaurantId) {
 }
 
 /**
+ * Normalize plan features JSON to an associative array.
+ *
+ * @param array $plan
+ * @return array
+ */
+function normalizeSubscriptionPlanRow(array $plan) {
+    $features = $plan['features'] ?? [];
+    if (is_string($features) && $features !== '') {
+        $decoded = json_decode($features, true);
+        $plan['features'] = is_array($decoded) ? $decoded : [];
+    } elseif (!is_array($features)) {
+        $plan['features'] = [];
+    }
+    return $plan;
+}
+
+/**
+ * Fetch subscription plans from the backend API (our-menu.online).
+ * Used when the marketing site has no local DB credentials (same pattern as templates.php).
+ *
+ * @param bool $activeOnly
+ * @return array
+ */
+function fetchSubscriptionPlansFromBackend($activeOnly = true) {
+    $backendUrl = defined('BACKEND_URL') ? rtrim(BACKEND_URL, '/') : 'https://our-menu.online';
+    $url = $backendUrl . '/api/subscription-plans.php';
+    if (!$activeOnly) {
+        $url .= '?active_only=0';
+    }
+
+    $ctx = stream_context_create(['http' => ['timeout' => 8]]);
+    $json = @file_get_contents($url, false, $ctx);
+    if ($json === false) {
+        error_log('fetchSubscriptionPlansFromBackend: request failed for ' . $url);
+        return [];
+    }
+
+    $decoded = json_decode($json, true);
+    if (empty($decoded['success']) || !is_array($decoded['data'] ?? null)) {
+        return [];
+    }
+
+    $plans = [];
+    foreach ($decoded['data'] as $row) {
+        if (!is_array($row)) {
+            continue;
+        }
+        $plans[] = normalizeSubscriptionPlanRow($row);
+    }
+    return $plans;
+}
+
+/**
  * Get all available subscription plans
  * 
  * @param bool $activeOnly Only return active plans
@@ -56,30 +109,36 @@ function getRestaurantSubscription($restaurantId) {
  */
 function getSubscriptionPlans($activeOnly = true) {
     global $pdo;
-    
-    if (!$pdo) return [];
-    
-    try {
-        $sql = "SELECT * FROM subscription_plans";
-        if ($activeOnly) {
-            $sql .= " WHERE is_active = 1";
-        }
-        $sql .= " ORDER BY display_order ASC";
-        
-        $stmt = $pdo->query($sql);
-        $plans = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        foreach ($plans as &$plan) {
-            if ($plan['features']) {
-                $plan['features'] = json_decode($plan['features'], true);
-            }
-        }
-        
-        return $plans;
-    } catch (PDOException $e) {
-        error_log("Error getting plans: " . $e->getMessage());
-        return [];
+
+    if (!$pdo) {
+        $pdo = getDBConnection();
     }
+
+    if ($pdo) {
+        try {
+            $sql = "SELECT * FROM subscription_plans";
+            if ($activeOnly) {
+                $sql .= " WHERE is_active = 1";
+            }
+            $sql .= " ORDER BY display_order ASC";
+
+            $stmt = $pdo->query($sql);
+            $plans = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($plans as &$plan) {
+                $plan = normalizeSubscriptionPlanRow($plan);
+            }
+            unset($plan);
+
+            if (!empty($plans)) {
+                return $plans;
+            }
+        } catch (PDOException $e) {
+            error_log("Error getting plans: " . $e->getMessage());
+        }
+    }
+
+    return fetchSubscriptionPlansFromBackend($activeOnly);
 }
 
 /**
